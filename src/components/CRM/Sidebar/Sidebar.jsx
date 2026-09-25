@@ -238,13 +238,12 @@ const puedeVer = (item, rol, user) => {
 	return !item.roles || item.roles.includes(rol);
 };
 
-const getDisplayName = (user, rol) => {
-	if (rol === ROLES.ADMIN) return "Joaquín";
+const getDisplayName = (user) => {
 	if (!user?.name) return "Usuario";
 	return user.name.split(" ")[0];
 };
 
-const getInitial = (user, rol) => getDisplayName(user, rol).charAt(0).toUpperCase();
+const getInitial = (user) => getDisplayName(user).charAt(0).toUpperCase();
 
 // ─── Item con tooltip ─────────────────────────────────────────────────────────
 function SidebarItem({ item, onClick }) {
@@ -419,9 +418,9 @@ export default function Sidebar() {
 					))}
 
 					<div className="crm-sidebar__user">
-						<div className="crm-sidebar__user-avatar">{getInitial(user, userRol)}</div>
+						<div className="crm-sidebar__user-avatar">{getInitial(user)}</div>
 						<div className="crm-sidebar__user-info">
-							<span className="crm-sidebar__user-name">{getDisplayName(user, userRol)}</span>
+							<span className="crm-sidebar__user-name">{getDisplayName(user)}</span>
 							<span className="crm-sidebar__user-role">{ROL_LABELS[userRol] ?? userRol}</span>
 						</div>
 					</div>

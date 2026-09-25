@@ -1,0 +1,45 @@
+name: Deploy front
+
+# Build estático + subida por SCP a Hostinger — sin usar ningún slot de Node
+# (es un sitio PHP/HTML común, servido por Apache). Ya validado con el mismo
+# mecanismo en sportquatro_front antes de aplicarlo acá directo a producción.
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Instalar dependencias
+        run: npm ci
+
+      - name: Build
+        run: npm run build
+        env:
+          VITE_API_URL: ${{ secrets.VITE_API_URL }}
+          VITE_API_GOOGLE_MAPS: ${{ secrets.VITE_API_GOOGLE_MAPS }}
+
+      - name: Subir build a Hostinger
+        # rm: true → vacía la carpeta de destino antes de subir el build nuevo,
+        # así no se acumulan assets viejos con hash de builds anteriores.
+        uses: appleboy/scp-action@v0.1.7
+        with:
+          host: ${{ secrets.HOSTINGER_SSH_HOST }}
+          port: ${{ secrets.HOSTINGER_SSH_PORT }}
+          username: ${{ secrets.HOSTINGER_SSH_USER }}
+          password: ${{ secrets.HOSTINGER_SSH_PASSWORD }}
+          source: "dist/*"
+          target: ${{ secrets.HOSTINGER_PROD_PATH }}
+          strip_components: 1
+          rm: true

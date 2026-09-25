@@ -6,3 +6,27 @@
     RewriteCond %{REQUEST_FILENAME} !-d
     RewriteRule . /index.html [L]
 </IfModule>
+
+# Comprimir JS/CSS/HTML antes de mandarlos — los chunks de cada ruta lazy
+# pesan varios cientos de KB sin comprimir (ver tamaño gzip en el build de Vite).
+<IfModule mod_deflate.c>
+    AddOutputFilterByType DEFLATE text/html text/css application/javascript text/javascript application/json image/svg+xml
+</IfModule>
+
+# Los archivos dentro de /assets llevan hash en el nombre (ej. index-QjVrKR3j.js),
+# así que un cambio de contenido siempre es una URL nueva — se puede cachear
+# "para siempre" sin riesgo de servir una versión vieja después de un deploy.
+<IfModule mod_expires.c>
+    ExpiresActive On
+    ExpiresByType text/css "access plus 1 year"
+    ExpiresByType application/javascript "access plus 1 year"
+    ExpiresByType text/javascript "access plus 1 year"
+    ExpiresByType image/webp "access plus 1 year"
+    ExpiresByType image/png "access plus 1 year"
+    ExpiresByType image/jpeg "access plus 1 year"
+    ExpiresByType image/svg+xml "access plus 1 year"
+
+    # index.html no lleva hash — no lo cacheamos, si no un deploy nuevo puede
+    # no verse hasta que expire el cache del navegador.
+    ExpiresByType text/html "access plus 0 seconds"
+</IfModule>

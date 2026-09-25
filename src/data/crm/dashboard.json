@@ -1,0 +1,123 @@
+{
+	"metricas": {
+		"consultasNuevas": { "valor": 128, "variacion": 16, "tendencia": "up", "contexto": "vs. mes anterior" },
+		"enSeguimiento": { "valor": 87, "variacion": 12, "tendencia": "up", "contexto": "vs. mes anterior" },
+		"conOferta": { "valor": 35, "variacion": -8, "tendencia": "down", "contexto": "vs. mes anterior" },
+		"ventasCerradas": { "valor": 23, "variacion": 15, "tendencia": "up", "contexto": "vs. mes anterior" }
+	},
+	"consultasPorSemana": [
+		{ "dia": "Lun", "consultas": 18, "ventas": 2 },
+		{ "dia": "Mar", "consultas": 32, "ventas": 4 },
+		{ "dia": "Mié", "consultas": 27, "ventas": 3 },
+		{ "dia": "Jue", "consultas": 41, "ventas": 6 },
+		{ "dia": "Vie", "consultas": 38, "ventas": 5 },
+		{ "dia": "Sáb", "consultas": 52, "ventas": 8 },
+		{ "dia": "Dom", "consultas": 29, "ventas": 3 }
+	],
+	"ventasPorSemana": [
+		{ "semana": "Sem 1", "ventas": 5 },
+		{ "semana": "Sem 2", "ventas": 8 },
+		{ "semana": "Sem 3", "ventas": 6 },
+		{ "semana": "Sem 4", "ventas": 9 }
+	],
+	"consultasPorOrigen": [
+		{ "origen": "WhatsApp", "cantidad": 87, "porcentaje": 57, "color": "#25D366" },
+		{ "origen": "Web", "cantidad": 22, "porcentaje": 14, "color": "#cc0000" },
+		{ "origen": "Mercado Libre", "cantidad": 18, "porcentaje": 12, "color": "#FFE600" },
+		{ "origen": "Instagram", "cantidad": 13, "porcentaje": 9, "color": "#E1306C" },
+		{ "origen": "Facebook", "cantidad": 6, "porcentaje": 4, "color": "#1877F2" },
+		{ "origen": "Otro", "cantidad": 6, "porcentaje": 4, "color": "#94a3b8" }
+	],
+	"tiempoCierre": {
+		"diasPromedio": 11,
+		"meta": 14,
+		"variacion": -2,
+		"tendencia": "up",
+		"contexto": "2 días menos que el mes anterior"
+	},
+	"actividadReciente": [
+		{
+			"id": 1,
+			"tipo": "nueva_consulta",
+			"texto": "Nueva consulta de WhatsApp",
+			"detalle": "Juan Pérez — Amarok 4x2",
+			"tiempo": "Hace 2 min"
+		},
+		{
+			"id": 2,
+			"tipo": "movimiento",
+			"texto": "Consulta movida a Con Oferta",
+			"detalle": "Diego Ramírez — VW Taos",
+			"tiempo": "Hace 15 min"
+		},
+		{
+			"id": 3,
+			"tipo": "recordatorio",
+			"texto": "Recordatorio de seguimiento",
+			"detalle": "María López — Ford Ranger",
+			"tiempo": "Hace 30 min"
+		},
+		{
+			"id": 4,
+			"tipo": "nuevo_chat",
+			"texto": "Nueva conversación iniciada",
+			"detalle": "Lucas Fernández — Fiat Toro",
+			"tiempo": "Hace 45 min"
+		},
+		{ "id": 5, "tipo": "venta", "texto": "Venta cerrada", "detalle": "Sofía Martínez — Ford Territory", "tiempo": "Hace 1 h" },
+		{
+			"id": 6,
+			"tipo": "nueva_consulta",
+			"texto": "Nueva consulta de Instagram",
+			"detalle": "Carlos Díaz — Chevrolet Tracker",
+			"tiempo": "Hace 1 h 20 min"
+		}
+	],
+	"recordatorios": [
+		{
+			"id": 1,
+			"cliente": "Juan Pérez",
+			"vehiculo": "VW Amarok 4x2",
+			"accion": "Llamar para confirmar visita",
+			"diasRestantes": 0,
+			"fecha": "Hoy",
+			"tipo": "llamada"
+		},
+		{
+			"id": 2,
+			"cliente": "Roberto Campos",
+			"vehiculo": "Jeep Renegade",
+			"accion": "Enviar cotización actualizada",
+			"diasRestantes": 1,
+			"fecha": "Mañana",
+			"tipo": "seguimiento"
+		},
+		{
+			"id": 3,
+			"cliente": "Sofía Martínez",
+			"vehiculo": "Ford Territory",
+			"accion": "Segunda visita coordinada",
+			"diasRestantes": 1,
+			"fecha": "Mañana",
+			"tipo": "visita"
+		},
+		{
+			"id": 4,
+			"cliente": "Ariel Suárez",
+			"vehiculo": "Nissan Frontier",
+			"accion": "Seguimiento post-oferta",
+			"diasRestantes": 2,
+			"fecha": "En 2 días",
+			"tipo": "seguimiento"
+		},
+		{
+			"id": 5,
+			"cliente": "María López",
+			"vehiculo": "Ford Ranger XLS",
+			"accion": "Confirmar disponibilidad",
+			"diasRestantes": 2,
+			"fecha": "En 2 días",
+			"tipo": "llamada"
+		}
+	]
+}

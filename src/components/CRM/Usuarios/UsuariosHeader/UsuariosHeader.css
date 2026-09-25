@@ -1,0 +1,125 @@
+@import url('https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600&family=Barlow+Condensed:wght@600;700&display=swap');
+
+.usuarios-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 20px 28px 18px;
+  border-bottom: 1px solid #161616;
+  background: #0a0a0a;
+  flex-shrink: 0;
+  flex-wrap: wrap;
+}
+
+.usuarios-header__left {
+  display: flex;
+  align-items: baseline;
+  gap: 14px;
+}
+
+.usuarios-header__title {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 22px;
+  font-weight: 700;
+  color: #f0f0f0;
+  letter-spacing: 0.5px;
+  margin: 0;
+  text-transform: uppercase;
+}
+
+.usuarios-header__meta {
+  display: flex;
+  align-items: baseline;
+  gap: 5px;
+  color: #444
+}
+
+.usuarios-header__metric {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 20px;
+  font-weight: 700;
+  color: #cc0000;
+  line-height: 1;
+}
+
+.usuarios-header__right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.usuarios-header__search-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.usuarios-header__search-icon {
+  position: absolute;
+  left: 10px;
+  width: 15px;
+  height: 15px;
+  pointer-events: none;
+}
+
+.usuarios-header__search {
+  background: #0d0d0d;
+  border: 1px solid #222;
+  border-radius: 6px;
+  font-family: 'Barlow', sans-serif;
+  font-size: 13px;
+  color: #ccc;
+  padding: 8px 12px 8px 32px;
+  width: 240px;
+  outline: none;
+  transition: border-color 0.18s;
+}
+
+.usuarios-header__search::placeholder {
+  color: #333;
+}
+
+.usuarios-header__search:focus {
+  border-color: #cc0000;
+}
+
+.usuarios-header__btn-nuevo {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  background: #cc0000;
+  border: none;
+  border-radius: 6px;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  color: #fff;
+  padding: 8px 14px;
+  cursor: pointer;
+  transition: background 0.18s, opacity 0.18s;
+  white-space: nowrap;
+}
+
+.usuarios-header__btn-nuevo:hover {
+  background: #aa0000;
+}
+
+.usuarios-header__btn-icon {
+  width: 14px;
+  height: 14px;
+  flex-shrink: 0;
+}
+
+@media (max-width: 640px) {
+  .usuarios-header {
+    padding: 14px 16px 12px;
+  }
+
+  .usuarios-header__search {
+    width: 180px;
+  }
+}

@@ -1,0 +1,207 @@
+/* components/shared/PageState/PageState.css */
+
+/* ── Contenedor base ─────────────────────────────────────────── */
+.page-state {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	min-height: 60vh;
+	width: 100%;
+	gap: 16px;
+}
+
+/* ══ LOADING ══════════════════════════════════════════════════ */
+.page-state--loading {
+	gap: 20px;
+}
+
+.page-state__spinner-wrap {
+	position: relative;
+	width: 48px;
+	height: 48px;
+}
+
+/* Anillo interior */
+.page-state__spinner {
+	display: block;
+	position: absolute;
+	inset: 0;
+	border-radius: 50%;
+	border: 2.5px solid transparent;
+	border-top-color: #cc0000;
+	animation: page-spin 0.75s linear infinite;
+}
+
+/* Anillo exterior más lento */
+.page-state__spinner--outer {
+	inset: -8px;
+	border-top-color: rgba(204, 0, 0, 0.25);
+	border-right-color: rgba(204, 0, 0, 0.1);
+	animation-duration: 1.4s;
+	animation-direction: reverse;
+}
+
+@keyframes page-spin {
+	to {
+		transform: rotate(360deg);
+	}
+}
+
+.page-state__msg {
+	font-size: 13px;
+	color: rgba(255, 255, 255, 0.35);
+	font-family: "Barlow", sans-serif;
+	letter-spacing: 0.02em;
+}
+
+/* ══ ERROR CARD ═══════════════════════════════════════════════ */
+.page-state--error {
+	padding: 24px;
+}
+
+.page-state__error-card {
+	background: #0f0f0f;
+	border: 1px solid rgba(204, 0, 0, 0.25);
+	border-radius: 16px;
+	padding: 36px 40px;
+	max-width: 380px;
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 12px;
+	text-align: center;
+	box-shadow:
+		0 0 40px rgba(204, 0, 0, 0.08),
+		0 8px 32px rgba(0, 0, 0, 0.4);
+
+	/* animación de entrada */
+	opacity: 0;
+	transform: translateY(12px) scale(0.97);
+	transition:
+		opacity 0.35s ease,
+		transform 0.35s ease;
+}
+
+.page-state__error-card--visible {
+	opacity: 1;
+	transform: translateY(0) scale(1);
+}
+
+.page-state__error-icon {
+	width: 52px;
+	height: 52px;
+	border-radius: 50%;
+	background: rgba(204, 0, 0, 0.1);
+	border: 1px solid rgba(204, 0, 0, 0.2);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	color: #cc0000;
+	margin-bottom: 4px;
+}
+
+.page-state__error-icon svg {
+	width: 24px;
+	height: 24px;
+}
+
+.page-state__error-titulo {
+	font-size: 17px;
+	font-weight: 600;
+	color: rgba(255, 255, 255, 0.9);
+	font-family: "Barlow", sans-serif;
+	margin: 0;
+}
+
+.page-state__error-msg {
+	font-size: 13px;
+	color: rgba(255, 255, 255, 0.4);
+	font-family: "Barlow", sans-serif;
+	line-height: 1.5;
+	margin: 0;
+}
+
+.page-state__retry-btn {
+	display: flex;
+	align-items: center;
+	gap: 7px;
+	margin-top: 8px;
+	padding: 9px 20px;
+	background: #cc0000;
+	color: #fff;
+	border: none;
+	border-radius: 8px;
+	font-size: 13px;
+	font-family: "Barlow", sans-serif;
+	font-weight: 500;
+	cursor: pointer;
+	transition:
+		background 0.15s,
+		transform 0.1s;
+}
+
+.page-state__retry-btn:hover {
+	background: #e60000;
+	transform: translateY(-1px);
+}
+
+.page-state__retry-btn:active {
+	transform: translateY(0);
+}
+
+/* ══ TOAST (error no fatal) ═══════════════════════════════════ */
+.page-state__toast {
+	position: fixed;
+	bottom: 28px;
+	left: 50%;
+	transform: translateX(-50%) translateY(16px);
+	display: flex;
+	align-items: center;
+	gap: 10px;
+	background: #1a1a1a;
+	border: 1px solid rgba(204, 0, 0, 0.3);
+	color: rgba(255, 255, 255, 0.85);
+	font-size: 13px;
+	font-family: "Barlow", sans-serif;
+	padding: 12px 18px 12px 14px;
+	border-radius: 10px;
+	box-shadow:
+		0 4px 24px rgba(0, 0, 0, 0.5),
+		0 0 0 1px rgba(204, 0, 0, 0.1);
+	z-index: 9999;
+	opacity: 0;
+	pointer-events: none;
+	transition:
+		opacity 0.25s ease,
+		transform 0.25s ease;
+	max-width: 420px;
+	width: max-content;
+}
+
+.page-state__toast svg {
+	color: #cc0000;
+	flex-shrink: 0;
+}
+
+.page-state__toast--visible {
+	opacity: 1;
+	transform: translateX(-50%) translateY(0);
+	pointer-events: auto;
+}
+
+.page-state__toast-close {
+	background: none;
+	border: none;
+	color: rgba(255, 255, 255, 0.3);
+	cursor: pointer;
+	font-size: 11px;
+	padding: 0 0 0 6px;
+	line-height: 1;
+	transition: color 0.15s;
+}
+
+.page-state__toast-close:hover {
+	color: rgba(255, 255, 255, 0.7);
+}

@@ -1,0 +1,629 @@
+/* Nosotros.css */
+
+.pagina-nosotros {
+	--rojo: #cc0000;
+	--oscuro: #111;
+	--fondo-claro: #f5f5f5;
+	--blanco: #ffffff;
+	--font-display: "Barlow Condensed", sans-serif;
+	--font-body: "Barlow", sans-serif;
+	overflow-x: hidden;
+}
+
+/* ════════════════════════════════════════
+   UTILIDADES
+════════════════════════════════════════ */
+.acento-linea {
+	width: 44px;
+	height: 4px;
+	background: var(--rojo);
+	margin: 0 auto;
+	border-radius: 2px;
+}
+
+.texto-rojo {
+	color: var(--rojo);
+}
+
+/* ════════════════════════════════════════
+   FILOSOFÍA
+════════════════════════════════════════ */
+.filosofia-seccion {
+	position: relative;
+	padding: 60px 40px 80px;
+
+	background: linear-gradient(
+		to bottom,
+		rgba(255, 255, 255, 1) 0%,
+		rgba(255, 255, 255, 0.98) 8%,
+		rgba(248, 248, 248, 0.96) 18%,
+		rgba(241, 241, 241, 1) 32%,
+		rgba(236, 236, 236, 1) 55%,
+		rgba(232, 232, 232, 1) 100%
+	);
+}
+
+.filosofia-seccion::after {
+	content: "";
+	position: absolute;
+	inset: auto 0 0 0;
+	height: 100px;
+	background: linear-gradient(to bottom, transparent, var(--fondo-claro));
+	pointer-events: none;
+}
+
+.filosofia-encabezado {
+	text-align: center;
+	margin: 0 0 52px;
+}
+
+.filosofia-titulo {
+	font-family: var(--font-display);
+	font-size: clamp(1.6rem, 3vw, 2.2rem);
+	font-weight: 900;
+	color: var(--oscuro);
+	text-transform: uppercase;
+	letter-spacing: 1px;
+	margin: 0 0 12px;
+}
+
+.filosofia-contenedor {
+	max-width: 960px;
+	margin: 0 auto;
+	box-sizing: border-box;
+	width: 100%;
+}
+
+.filosofia-panel {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: 56px;
+	align-items: center;
+	width: 100%;
+	box-sizing: border-box;
+}
+
+.filosofia-imagen-col {
+	position: relative;
+	border-radius: 16px;
+	overflow: hidden;
+	box-shadow: 0 10px 40px rgba(0, 0, 0, 0.13);
+	width: 100%;
+	box-sizing: border-box;
+}
+
+.filosofia-imagen {
+	width: 100%;
+	height: 500px;
+	object-fit: cover;
+	display: block;
+}
+
+/* ── Carrusel fade ── */
+.filosofia-imagen-carousel {
+	transition: opacity 0.3s ease-in-out;
+}
+
+.carousel-fade-in {
+	opacity: 1;
+}
+
+.carousel-fade-out {
+	opacity: 0;
+}
+
+.filosofia-badge {
+	position: absolute;
+	bottom: 20px;
+	left: 20px;
+	background: var(--rojo);
+	color: #fff;
+	border-radius: 10px;
+	padding: 10px 16px;
+	display: flex;
+	align-items: center;
+	gap: 10px;
+	box-shadow: 0 4px 16px rgba(204, 0, 0, 0.4);
+	z-index: 3;
+}
+
+.filosofia-badge-numero {
+	font-family: var(--font-display);
+	font-size: 2rem;
+	font-weight: 900;
+	line-height: 1;
+}
+
+.filosofia-badge-texto {
+	font-family: var(--font-body);
+	font-size: 0.75rem;
+	font-weight: 600;
+	text-transform: uppercase;
+	letter-spacing: 0.5px;
+	line-height: 1.3;
+	opacity: 0.9;
+}
+
+.filosofia-texto-col {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	width: 100%;
+	box-sizing: border-box;
+}
+
+.filosofia-subtitulo {
+	font-family: var(--font-display);
+	font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+	font-weight: 900;
+	color: var(--oscuro);
+	text-transform: uppercase;
+	line-height: 1.05;
+	margin: 0 0 16px;
+	letter-spacing: 0.3px;
+}
+
+.filosofia-subtitulo .texto-rojo {
+	font-size: 2.2rem;
+}
+
+.filosofia-parrafo {
+	font-family: var(--font-body);
+	font-size: 1rem;
+	color: #555;
+	line-height: 1.75;
+	margin: 0 0 16px;
+}
+
+/* ════════════════════════════════════════
+   PANEL ADMIN — CARRUSEL
+════════════════════════════════════════ */
+.carousel-admin {
+	margin-top: 20px;
+	display: flex;
+	flex-direction: column;
+	gap: 12px;
+}
+
+/* Thumbnails */
+.carousel-admin-thumbs {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 8px;
+}
+
+.carousel-thumb {
+	position: relative;
+	width: 68px;
+	height: 52px;
+	border-radius: 8px;
+	overflow: hidden;
+	border: 2px solid #ddd;
+	cursor: grab;
+	flex-shrink: 0;
+	transition:
+		border-color 0.2s,
+		transform 0.15s,
+		box-shadow 0.2s;
+	user-select: none;
+}
+
+.carousel-thumb:active {
+	cursor: grabbing;
+}
+
+.carousel-thumb img {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	display: block;
+	pointer-events: none;
+}
+
+.carousel-thumb--active {
+	border-color: var(--rojo);
+	box-shadow: 0 0 0 1px var(--rojo);
+}
+
+.carousel-thumb--dragover {
+	transform: scale(1.08);
+	border-color: var(--rojo);
+	box-shadow: 0 4px 16px rgba(204, 0, 0, 0.25);
+}
+
+/* ícono drag (esquina inferior izquierda) */
+.carousel-thumb-drag {
+	position: absolute;
+	bottom: 3px;
+	left: 4px;
+	color: rgba(255, 255, 255, 0.85);
+	pointer-events: none;
+	filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.6));
+}
+
+/* botón X (esquina superior derecha) */
+.carousel-thumb-remove {
+	position: absolute;
+	top: 2px;
+	right: 2px;
+	width: 20px;
+	height: 20px;
+	background: rgba(0, 0, 0, 0.55);
+	border: none;
+	border-radius: 50%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	cursor: pointer;
+	padding: 0;
+	transition: background 0.2s;
+	z-index: 2;
+}
+
+.carousel-thumb-remove:hover {
+	background: var(--rojo);
+}
+
+.carousel-thumb-remove svg {
+	width: 10px;
+	height: 10px;
+	color: #fff;
+}
+
+/* Botón de carga */
+.carousel-upload-wrap {
+	display: flex;
+}
+
+.carousel-upload-btn {
+	display: inline-flex;
+	align-items: center;
+	gap: 8px;
+	padding: 9px 18px;
+	background: var(--rojo);
+	color: #fff;
+	border-radius: 8px;
+	cursor: pointer;
+	font-family: var(--font-body);
+	font-size: 0.875rem;
+	font-weight: 600;
+	transition:
+		background 0.2s,
+		transform 0.15s;
+	white-space: nowrap;
+}
+
+.carousel-upload-btn:hover {
+	background: #b31515;
+	transform: translateY(-1px);
+}
+
+.carousel-upload-btn--disabled {
+	background: #bbb;
+	cursor: not-allowed;
+	transform: none;
+}
+
+.carousel-upload-btn--disabled:hover {
+	background: #bbb;
+	transform: none;
+}
+
+/* spinner inline */
+.carousel-upload-spinner {
+	display: inline-block;
+	width: 14px;
+	height: 14px;
+	border: 2px solid rgba(255, 255, 255, 0.4);
+	border-top-color: #fff;
+	border-radius: 50%;
+	animation: carousel-spin 0.7s linear infinite;
+	flex-shrink: 0;
+}
+
+@keyframes carousel-spin {
+	to {
+		transform: rotate(360deg);
+	}
+}
+
+/* ════════════════════════════════════════
+   CONTACTO — fondo #f5f5f5
+════════════════════════════════════════ */
+.contacto-seccion {
+	background: var(--fondo-claro);
+	position: relative;
+	overflow: hidden;
+	scroll-margin-top: 80px;
+}
+
+.contacto-pin-decorativo {
+	position: absolute;
+	right: -20px;
+	top: 60px;
+	width: 340px;
+	pointer-events: none;
+	z-index: 0;
+}
+
+.contacto-pin-decorativo svg {
+	width: 100%;
+	height: auto;
+}
+
+.contacto-contenedor {
+	max-width: 900px;
+	margin: 0 auto;
+	padding: 72px 24px 64px;
+	position: relative;
+	z-index: 1;
+}
+
+.contacto-encabezado {
+	margin-bottom: 52px;
+}
+
+.contacto-etiqueta {
+	display: block;
+	font-family: var(--font-display);
+	font-size: 1rem;
+	font-weight: 700;
+	letter-spacing: 3px;
+	text-transform: uppercase;
+	color: var(--rojo);
+	margin-bottom: 16px;
+}
+
+.contacto-etiqueta::after {
+	content: "";
+	display: block;
+	width: 36px;
+	height: 3px;
+	background: var(--rojo);
+	margin-top: 8px;
+	border-radius: 2px;
+}
+
+.contacto-titulo {
+	font-family: var(--font-display);
+	font-size: clamp(2.4rem, 6vw, 4rem);
+	font-weight: 900;
+	color: var(--oscuro);
+	line-height: 1.05;
+	margin: 0 0 16px;
+	letter-spacing: -0.5px;
+}
+
+.contacto-subtitulo {
+	font-family: var(--font-body);
+	font-size: 0.97rem;
+	color: #666;
+	line-height: 1.6;
+	margin: 0;
+	max-width: 380px;
+}
+
+/* Tarjetas */
+.contacto-tarjetas {
+	display: flex;
+	flex-direction: column;
+	gap: 16px;
+	max-width: 640px;
+}
+
+.contacto-tarjeta {
+	display: flex;
+	align-items: center;
+	background: var(--blanco);
+	border: 1px solid #e0e0e0;
+	border-radius: 14px;
+	padding: 20px 24px;
+	transition:
+		border-color 0.2s,
+		box-shadow 0.2s;
+}
+
+.contacto-tarjeta:hover {
+	border-color: rgba(204, 0, 0, 0.35);
+	box-shadow: 0 4px 20px rgba(204, 0, 0, 0.07);
+}
+
+.contacto-tarjeta-icono {
+	width: 52px;
+	height: 52px;
+	border-radius: 50%;
+	background: rgba(204, 0, 0, 0.07);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-shrink: 0;
+}
+
+.contacto-tarjeta-icono svg {
+	width: 22px;
+	height: 22px;
+	color: var(--rojo);
+}
+
+.contacto-tarjeta-divisor {
+	width: 2px;
+	height: 40px;
+	background: var(--rojo);
+	border-radius: 2px;
+	flex-shrink: 0;
+	margin: 0 20px;
+}
+
+.contacto-tarjeta-cuerpo {
+	display: flex;
+	flex-direction: column;
+	gap: 4px;
+}
+
+.contacto-tarjeta-etiqueta {
+	font-family: var(--font-display);
+	font-size: 0.78rem;
+	font-weight: 700;
+	letter-spacing: 2.5px;
+	text-transform: uppercase;
+	color: var(--rojo);
+	margin: 0;
+}
+
+.contacto-tarjeta-link {
+	font-family: var(--font-body);
+	font-size: 0.95rem;
+	color: #333;
+	text-decoration: none;
+	line-height: 1.5;
+	transition: color 0.2s;
+}
+
+.contacto-tarjeta-link:hover {
+	color: var(--rojo);
+}
+
+.contacto-tarjeta-texto {
+	font-family: var(--font-body);
+	font-size: 0.95rem;
+	color: #333;
+	line-height: 1.5;
+	margin: 0;
+}
+
+.contacto-redes {
+	display: flex;
+	gap: 14px;
+	align-items: center;
+	flex-wrap: wrap;
+}
+
+.contacto-red-link {
+	transition:
+		transform 0.2s,
+		opacity 0.2s;
+	opacity: 0.75;
+}
+
+.contacto-red-link:hover {
+	transform: translateY(-2px);
+	opacity: 1;
+}
+
+.contacto-tel-mobile {
+	display: none;
+	text-decoration: none;
+	color: inherit;
+	font-weight: inherit;
+}
+
+.contacto-tel-desktop {
+	display: block;
+	margin: 0;
+}
+
+.contacto-tel-mobile:active {
+	opacity: 0.7;
+}
+
+/* ════════════════════════════════════════
+   RESPONSIVE
+════════════════════════════════════════ */
+@media (max-width: 900px) {
+	.filosofia-seccion {
+		padding: 52px 24px 72px;
+	}
+	.filosofia-panel {
+		grid-template-columns: 1fr;
+		gap: 28px;
+	}
+	.filosofia-imagen {
+		height: 260px;
+	}
+	.contacto-pin-decorativo {
+		width: 220px;
+		top: 40px;
+	}
+}
+
+@media (max-width: 768px) {
+	.contacto-tel-mobile {
+		display: block;
+	}
+	.contacto-tel-desktop {
+		display: none;
+	}
+}
+
+@media (max-width: 560px) {
+	.filosofia-panel {
+		gap: 24px;
+		text-align: center;
+	}
+	.filosofia-imagen {
+		height: 220px;
+	}
+	.filosofia-texto-col {
+		align-items: center;
+	}
+	.filosofia-subtitulo {
+		text-align: center;
+	}
+	.acento-linea {
+		margin: 0 auto 20px !important;
+	}
+	.filosofia-parrafo {
+		text-align: left;
+	}
+	.contacto-contenedor {
+		padding: 52px 16px 48px;
+	}
+	.contacto-titulo {
+		font-size: clamp(2rem, 9vw, 3rem);
+	}
+	.contacto-subtitulo {
+		max-width: 100%;
+	}
+	.contacto-pin-decorativo {
+		display: none;
+	}
+	.contacto-tarjeta {
+		padding: 16px 18px;
+	}
+	.contacto-tarjeta-icono {
+		width: 44px;
+		height: 44px;
+	}
+	.contacto-tarjeta-icono svg {
+		width: 18px;
+		height: 18px;
+	}
+	.contacto-tarjeta-divisor {
+		margin: 0 14px;
+		height: 34px;
+	}
+	.carousel-admin-thumbs {
+		justify-content: center;
+	}
+	.carousel-upload-wrap {
+		justify-content: center;
+	}
+}
+
+.contacto-tarjeta-link {
+	text-decoration: none;
+	color: inherit;
+	display: flex;
+}
+
+/* solo mobile clickeable */
+@media (min-width: 769px) {
+	.contacto-tarjeta-link {
+		pointer-events: none;
+	}
+}
+@media (max-width: 768px) {
+	.contacto-tarjeta-link:active {
+		transform: scale(0.98);
+	}
+}

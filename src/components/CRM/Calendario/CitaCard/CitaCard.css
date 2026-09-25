@@ -1,0 +1,144 @@
+/* components/CRM/Calendario/CitaCard/CitaCard.css */
+
+@keyframes citaFadeIn {
+	from {
+		opacity: 0;
+		transform: translateY(3px);
+	}
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
+
+.cita-card {
+	display: flex;
+	align-items: center;
+	gap: 5px;
+	width: 100%;
+	padding: 3px 6px 3px 5px;
+	background: color-mix(in srgb, var(--cita-color) 12%, #111);
+	border: 1px solid color-mix(in srgb, var(--cita-color) 25%, transparent);
+	border-radius: 4px;
+	cursor: pointer;
+	text-align: left;
+	overflow: hidden;
+	transition:
+		background 0.15s,
+		border-color 0.15s;
+	animation: citaFadeIn 0.25s ease both;
+	max-width: 100%;
+	min-width: 0;
+	box-sizing: border-box;
+}
+
+.cita-card:hover {
+	background: color-mix(in srgb, var(--cita-color) 22%, #111);
+	border-color: color-mix(in srgb, var(--cita-color) 45%, transparent);
+}
+
+.cita-card__dot {
+	flex-shrink: 0;
+	width: 6px;
+	height: 6px;
+	border-radius: 50%;
+	background: var(--cita-color);
+}
+
+.cita-card__hora {
+	flex-shrink: 0;
+	font-family: "Barlow Condensed", sans-serif;
+	font-size: 14px;
+	font-weight: 700;
+	color: var(--cita-color);
+	letter-spacing: 0.3px;
+}
+
+.cita-card__nombre {
+	font-family: "Barlow", sans-serif;
+	font-size: 15px;
+	font-weight: 500;
+	color: rgba(255, 255, 255, 0.75);
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	min-width: 0;
+}
+
+/* Vencido sin finalizar */
+.cita-card--vencido {
+	border-color: color-mix(in srgb, #ffc107 30%, transparent) !important;
+	opacity: 0.75;
+}
+
+.cita-card__vencido-icon {
+	margin-left: auto;
+	flex-shrink: 0;
+	font-size: 12px;
+	font-family: "Barlow Condensed", sans-serif;
+	font-weight: 900;
+	color: #ffc107;
+	line-height: 1;
+}
+
+/* ── Responsive mobile ── */
+@media (max-width: 640px) {
+	.cita-card {
+		padding: 2px 4px;
+		border-radius: 3px;
+		gap: 3px;
+	}
+
+	.cita-card__dot {
+		display: none;
+	}
+
+	/* Ocultar hora — no entra en celda angosta */
+	.cita-card__hora {
+		display: none;
+	}
+
+	.cita-card__nombre {
+		font-size: 10px;
+		white-space: nowrap;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		width: 100%;
+	}
+
+	.cita-card__vencido-icon {
+		font-size: 9px;
+		margin-left: auto;
+		flex-shrink: 0;
+	}
+}
+
+/* Realizada — tachado verde */
+.cita-card--realizada {
+	opacity: 0.6;
+}
+.cita-card--realizada .cita-card__nombre {
+	text-decoration: line-through;
+	color: rgba(34, 197, 94, 0.7);
+}
+.cita-card--realizada .cita-card__hora {
+	color: rgba(34, 197, 94, 0.6);
+}
+.cita-card--realizada .cita-card__dot {
+	background: #22c55e;
+}
+
+/* Cancelada — tachado rojo apagado */
+.cita-card--cancelada {
+	opacity: 0.45;
+}
+.cita-card--cancelada .cita-card__nombre {
+	text-decoration: line-through;
+	color: rgba(239, 68, 68, 0.7);
+}
+.cita-card--cancelada .cita-card__hora {
+	color: rgba(239, 68, 68, 0.5);
+}
+.cita-card--cancelada .cita-card__dot {
+	background: #ef4444;
+}

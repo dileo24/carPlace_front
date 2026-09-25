@@ -1,0 +1,589 @@
+/* components/CRM/Calendario/CitaDrawer/CitaDrawer.css */
+
+.cita-drawer__paper {
+	width: 450px !important;
+	background: #111 !important;
+	border-left: 1px solid #1e1e1e !important;
+}
+
+.cita-drawer {
+	display: flex;
+	flex-direction: column;
+	height: 100%;
+	overflow-y: auto;
+	scrollbar-width: thin;
+	scrollbar-color: #1e1e1e transparent;
+}
+
+.cita-drawer::-webkit-scrollbar {
+	width: 4px;
+}
+.cita-drawer::-webkit-scrollbar-thumb {
+	background: #1e1e1e;
+	border-radius: 2px;
+}
+
+/* ── Header ── */
+.cita-drawer__header {
+	position: relative;
+	padding: 18px 52px 16px 20px;
+	display: flex;
+	flex-direction: column;
+	gap: 8px;
+}
+
+.cita-drawer__header-meta {
+	display: flex;
+	gap: 6px;
+	flex-wrap: wrap;
+}
+
+.cita-drawer__titulo {
+	margin: 0;
+	font-family: "Barlow", sans-serif;
+	font-size: 20px;
+	font-weight: 700;
+	color: #fff;
+	line-height: 1.3;
+}
+
+.cita-drawer__subtitulo {
+	margin: 0;
+	font-family: "Barlow", sans-serif;
+	font-size: 14px;
+	color: #666;
+}
+
+.cita-drawer__tel {
+	color: #555;
+}
+
+.cita-drawer__close {
+	width: 28px;
+	height: 28px;
+	background: #1a1a1a;
+	border: 1px solid #222;
+	border-radius: 6px;
+	color: #555;
+	cursor: pointer;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	transition:
+		color 0.15s,
+		border-color 0.15s;
+}
+
+.cita-drawer__close:hover {
+	color: #fff;
+	border-color: #333;
+}
+
+/* ── Divider ── */
+.cita-drawer__divider {
+	height: 1px;
+	background: #1a1a1a;
+	margin: 0 20px;
+}
+
+/* ── Sections ── */
+.cita-drawer__section {
+	padding: 14px 20px;
+}
+
+.cita-drawer__section-label {
+	margin: 0 0 10px;
+	font-family: "Barlow Condensed", sans-serif;
+	font-size: 17px;
+	font-weight: 700;
+	color: #444;
+	text-transform: uppercase;
+	letter-spacing: 1px;
+}
+
+/* Chips */
+.cita-drawer__chips {
+	display: flex;
+	gap: 8px;
+	flex-wrap: wrap;
+}
+
+.cita-drawer__chip {
+	padding: 4px 10px;
+	background: color-mix(in srgb, var(--chip-color) 14%, #111);
+	border: 1px solid color-mix(in srgb, var(--chip-color) 30%, transparent);
+	border-radius: 20px;
+	font-family: "Barlow Condensed", sans-serif;
+	font-size: 15px;
+	font-weight: 700;
+	color: var(--chip-color);
+	letter-spacing: 0.5px;
+	text-transform: uppercase;
+}
+
+/* Data rows */
+.cita-drawer__datos {
+	display: flex;
+	flex-direction: column;
+	gap: 8px;
+}
+
+.cita-drawer__data-row {
+	display: flex;
+	gap: 8px;
+	align-items: baseline;
+}
+
+.cita-drawer__data-label {
+	font-family: "Barlow Condensed", sans-serif;
+	font-size: 15px;
+	font-weight: 700;
+	color: #636363;
+	text-transform: uppercase;
+	letter-spacing: 0.8px;
+	flex-shrink: 0;
+	min-width: 72px;
+}
+
+.cita-drawer__data-value {
+	font-family: "Barlow", sans-serif;
+	font-size: 17px;
+	font-weight: 500;
+	color: #ccc;
+}
+
+/* Notas */
+.cita-drawer__notas {
+	margin: 0;
+	font-family: "Barlow", sans-serif;
+	font-size: 15px;
+	color: #888;
+	line-height: 1.55;
+	font-style: italic;
+}
+
+/* Historial de la consulta (solo lectura) */
+.cita-drawer__historial {
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+}
+
+.cita-drawer__historial-item {
+	padding: 10px 12px;
+	background: #161616;
+	border: 1px solid #222;
+	border-radius: 8px;
+}
+
+.cita-drawer__historial-meta {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin-bottom: 4px;
+}
+
+.cita-drawer__historial-tipo {
+	font-family: "Barlow Condensed", sans-serif;
+	font-size: 12px;
+	font-weight: 700;
+	text-transform: uppercase;
+	letter-spacing: 0.6px;
+	color: #cc0000;
+}
+
+.cita-drawer__historial-fecha {
+	font-family: "Barlow", sans-serif;
+	font-size: 12px;
+	color: #555;
+}
+
+.cita-drawer__historial-texto {
+	margin: 0;
+	font-family: "Barlow", sans-serif;
+	font-size: 14px;
+	color: #ccc;
+	line-height: 1.5;
+}
+
+/* ── Acciones ── */
+.cita-drawer__actions {
+	margin-top: auto;
+	padding: 16px 20px 20px;
+	display: flex;
+	flex-direction: column;
+	gap: 8px;
+	border-top: 1px solid #1a1a1a;
+}
+
+.cita-drawer__action-btn {
+	width: 100%;
+	padding: 9px 16px;
+	border-radius: 7px;
+	font-family: "Barlow Condensed", sans-serif;
+	font-size: 14px;
+	font-weight: 700;
+	letter-spacing: 0.8px;
+	text-transform: uppercase;
+	cursor: pointer;
+	transition:
+		background 0.15s,
+		border-color 0.15s,
+		color 0.15s;
+}
+
+.cita-drawer__action-btn--realizada {
+	background: rgba(76, 175, 80, 0.12);
+	border: 1px solid rgba(76, 175, 80, 0.3);
+	color: #4caf50;
+}
+.cita-drawer__action-btn--realizada:hover {
+	background: rgba(76, 175, 80, 0.22);
+	border-color: rgba(76, 175, 80, 0.5);
+}
+
+.cita-drawer__action-btn--cancelar {
+	background: rgba(107, 114, 128, 0.1);
+	border: 1px solid rgba(107, 114, 128, 0.25);
+	color: #6b7280;
+}
+.cita-drawer__action-btn--cancelar:hover {
+	background: rgba(107, 114, 128, 0.18);
+	border-color: rgba(107, 114, 128, 0.4);
+	color: #9ca3af;
+}
+
+.cita-drawer__action-btn--editar {
+	background: none;
+	border: 1px solid #2a2a2a;
+	border-radius: 7px;
+	color: #aaa;
+	font-family: "Barlow Condensed", sans-serif;
+	font-size: 14px;
+	font-weight: 700;
+	text-transform: uppercase;
+	letter-spacing: 0.5px;
+	padding: 9px 14px;
+	cursor: pointer;
+	width: 100%;
+	transition:
+		border-color 0.12s,
+		color 0.12s;
+}
+.cita-drawer__action-btn--editar:hover {
+	border-color: #444;
+	color: #fff;
+}
+
+.cita-drawer__action-btn--eliminar {
+	background: transparent;
+	border: 1px solid rgba(239, 68, 68, 0.3);
+	color: #ef4444;
+}
+.cita-drawer__action-btn--eliminar:hover {
+	background: rgba(239, 68, 68, 0.08);
+	border-color: rgba(239, 68, 68, 0.5);
+}
+
+/* ── Banner vencido ── */
+.cita-drawer__banner-vencido {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	padding: 10px 20px;
+	background: rgba(255, 193, 7, 0.08);
+	border-bottom: 1px solid rgba(255, 193, 7, 0.18);
+	color: #ffc107;
+	font-family: "Barlow", sans-serif;
+	font-size: 14px;
+	font-weight: 500;
+	line-height: 1.4;
+}
+
+/* ── Panel finalización ── */
+.cita-drawer__section--fin {
+	background: rgba(76, 175, 80, 0.04);
+}
+
+.cita-drawer__fin-textarea {
+	width: 100%;
+	box-sizing: border-box;
+	background: #0d0d0d;
+	border: 1px solid #222;
+	border-radius: 6px;
+	padding: 9px 10px;
+	font-family: "Barlow", sans-serif;
+	font-size: 15px;
+	color: #ccc;
+	resize: vertical;
+	min-height: 80px;
+	outline: none;
+	transition: border-color 0.15s;
+	line-height: 1.5;
+}
+.cita-drawer__fin-textarea:focus {
+	border-color: #4caf50;
+}
+.cita-drawer__fin-textarea::placeholder {
+	color: #333;
+}
+
+.cita-drawer__fin-actions {
+	display: flex;
+	gap: 8px;
+	margin-top: 10px;
+}
+
+.cita-drawer__fin-btn {
+	flex: 1;
+	padding: 8px;
+	border-radius: 6px;
+	font-family: "Barlow Condensed", sans-serif;
+	font-size: 14px;
+	font-weight: 700;
+	letter-spacing: 0.8px;
+	text-transform: uppercase;
+	cursor: pointer;
+	transition: all 0.15s;
+}
+
+.cita-drawer__fin-btn--cancel {
+	background: transparent;
+	border: 1px solid #222;
+	color: #555;
+}
+.cita-drawer__fin-btn--cancel:hover {
+	border-color: #333;
+	color: #888;
+}
+
+.cita-drawer__fin-btn--confirm {
+	background: rgba(76, 175, 80, 0.15);
+	border: 1px solid rgba(76, 175, 80, 0.35);
+	color: #4caf50;
+}
+.cita-drawer__fin-btn--confirm:hover {
+	background: rgba(76, 175, 80, 0.25);
+	border-color: rgba(76, 175, 80, 0.55);
+}
+
+.cita-drawer__notas--fin {
+	color: #4caf50;
+	font-style: normal;
+	font-weight: 500;
+}
+
+.cita-drawer__estado-final {
+	margin: 0;
+	text-align: center;
+	font-family: "Barlow Condensed", sans-serif;
+	font-size: 14px;
+	font-weight: 700;
+	letter-spacing: 1px;
+	text-transform: uppercase;
+	color: #cc0000;
+	padding: 6px 0 2px;
+}
+.cita-drawer__estado-final--cancelada {
+	color: #6b7280;
+}
+
+@keyframes pulseGreen {
+	0%,
+	100% {
+		box-shadow: 0 0 0 0 rgba(76, 175, 80, 0);
+	}
+	50% {
+		box-shadow: 0 0 0 4px rgba(76, 175, 80, 0.18);
+	}
+}
+.cita-drawer__action-btn--pulse {
+	animation: pulseGreen 2s ease infinite;
+}
+
+/* Confirmar eliminar */
+.cita-drawer__confirm-eliminar {
+	padding: 0 24px 16px;
+}
+.cita-drawer__confirm-text {
+	font-family: "Barlow", sans-serif;
+	font-size: 14px;
+	color: #aaa;
+	margin: 0 0 12px;
+}
+.cita-drawer__confirm-btns {
+	display: flex;
+	gap: 8px;
+}
+
+.cita-drawer__fin-btn--eliminar {
+	flex: 2;
+	background: #ef4444;
+	color: #fff;
+	border: none;
+}
+.cita-drawer__fin-btn--eliminar:hover {
+	background: #dc2626;
+}
+
+/* Spinner */
+.cita-drawer__spinner {
+	display: inline-block;
+	width: 14px;
+	height: 14px;
+	border: 2px solid rgba(255, 255, 255, 0.3);
+	border-top-color: #fff;
+	border-radius: 50%;
+	animation: citaSpinnerRot 0.6s linear infinite;
+}
+@keyframes citaSpinnerRot {
+	to {
+		transform: rotate(360deg);
+	}
+}
+
+/* Invitados */
+.cita-drawer__invitados {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 6px;
+	margin-top: 4px;
+}
+
+.cita-drawer__invitado-pill {
+	display: flex;
+	align-items: center;
+	gap: 6px;
+	background: #111;
+	border: 1px solid #222;
+	border-radius: 20px;
+	padding: 4px 10px 4px 4px;
+	font-family: "Barlow", sans-serif;
+	font-size: 13px;
+	color: #ccc;
+}
+
+.cita-drawer__invitado-avatar {
+	width: 22px;
+	height: 22px;
+	border-radius: 50%;
+	background: #1a1a1a;
+	border: 1px solid #333;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-family: "Barlow Condensed", sans-serif;
+	font-size: 11px;
+	font-weight: 700;
+	color: #888;
+	flex-shrink: 0;
+}
+
+/* ══════════════════════════════════════════════
+   RESPONSIVE — CitaDrawer mobile
+   ══════════════════════════════════════════════ */
+@media (max-width: 640px) {
+	.cita-drawer__paper {
+		width: 100vw !important;
+	}
+
+	.cita-drawer__header {
+		padding: 14px 48px 14px 16px;
+	}
+
+	.cita-drawer__titulo {
+		font-size: 17px;
+	}
+
+	.cita-drawer__subtitulo {
+		font-size: 13px;
+	}
+
+	.cita-drawer__section {
+		padding: 12px 16px;
+	}
+
+	.cita-drawer__divider {
+		margin: 0 16px;
+	}
+
+	.cita-drawer__section-label {
+		font-size: 14px;
+	}
+
+	.cita-drawer__data-label {
+		font-size: 13px;
+		min-width: 62px;
+	}
+
+	.cita-drawer__data-value {
+		font-size: 15px;
+	}
+
+	.cita-drawer__notas {
+		font-size: 13px;
+	}
+
+	.cita-drawer__actions {
+		padding: 12px 16px 18px;
+	}
+
+	.cita-drawer__action-btn {
+		padding: 11px 16px;
+		font-size: 13px;
+	}
+
+	.cita-drawer__fin-textarea {
+		font-size: 14px;
+	}
+
+	.cita-drawer__banner-vencido {
+		font-size: 13px;
+		padding: 9px 16px;
+	}
+
+	.cita-drawer__chip {
+		font-size: 13px;
+	}
+
+	.cita-drawer__confirm-eliminar {
+		padding: 0 16px 14px;
+	}
+}
+
+.cita-drawer__header-actions {
+	position: absolute;
+	top: 14px;
+	right: 14px;
+	display: flex;
+	align-items: center;
+	gap: 6px;
+}
+
+.cita-drawer__header-action-btn {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 28px;
+	height: 28px;
+	border: none;
+	background: transparent;
+	color: var(--text-secondary, #94a3b8);
+	cursor: pointer;
+	border-radius: 6px;
+	transition:
+		background 0.15s,
+		color 0.15s;
+}
+
+.cita-drawer__header-action-btn:hover {
+	background: var(--surface-hover, rgba(255, 255, 255, 0.06));
+	color: var(--text-primary, #fff);
+}
+
+.cita-drawer__invitados-nota {
+	font-size: 12px;
+	color: #888;
+	margin: 4px 0 8px;
+	line-height: 1.4;
+}

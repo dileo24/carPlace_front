@@ -1,0 +1,349 @@
+/* HeroNosotros.css */
+
+.hno-root {
+	--red: #cc0000;
+	--dark: #111;
+	--font-display: "Barlow Condensed", sans-serif;
+	--font-body: "Barlow", sans-serif;
+	position: relative;
+}
+
+/* ════════════════════════════════════════
+   HERO FULL-BLEED
+════════════════════════════════════════ */
+.hno-hero {
+	position: relative;
+	width: 100%;
+	min-height: 650px;
+	overflow: hidden;
+	display: flex;
+	align-items: center;
+}
+
+/* Imagen que cubre todo */
+.hno-bg-img {
+	position: absolute;
+	inset: 0;
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	object-position: center right;
+	display: block;
+}
+
+/* Overlay: blanco fuerte a la izquierda, transparente a la derecha */
+.hno-overlay {
+	position: absolute;
+	inset: 0;
+	background: linear-gradient(
+		to right,
+		rgba(255, 255, 255, 1) 20%,
+		rgba(255, 255, 255, 0.97) 45%,
+		rgba(255, 255, 255, 0.7) 65%,
+		rgba(255, 255, 255, 0) 90%
+	);
+	z-index: 1;
+}
+
+/* Acento rojo triangular — esquina superior derecha */
+.hno-accent-top {
+	position: absolute;
+	top: 0;
+	right: 0;
+	width: 90px;
+	height: 90px;
+	background: var(--red);
+	clip-path: polygon(100% 0, 100% 100%, 0 0);
+	z-index: 2;
+}
+
+/* Acento rojo triangular — esquina inferior derecha */
+.hno-accent-bottom {
+	position: absolute;
+	bottom: 0;
+	right: 0;
+	width: 130px;
+	height: 130px;
+	background: var(--red);
+	clip-path: polygon(100% 0, 100% 100%, 0 100%);
+	z-index: 2;
+}
+
+/* Contenido de texto */
+.hno-content {
+	position: relative;
+	z-index: 3;
+	padding: 80px 56px 100px 80px;
+	max-width: 700px;
+}
+
+/* Overline */
+.hno-overline-row {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+	margin-bottom: 18px;
+}
+
+.hno-overline-bar {
+	display: block;
+	width: 30px;
+	height: 3px;
+	background: var(--red);
+	flex-shrink: 0;
+}
+
+.hno-overline-label {
+	font-family: var(--font-display);
+	font-size: 1rem;
+	font-weight: 700;
+	letter-spacing: 3px;
+	text-transform: uppercase;
+	color: var(--red);
+}
+
+/* Heading */
+.hno-heading {
+	font-family: var(--font-display);
+	font-size: clamp(2.5rem, 4vw, 4rem);
+	font-weight: 700;
+	color: var(--dark);
+	text-transform: uppercase;
+	line-height: 0.95;
+	margin: 0;
+	letter-spacing: -1px;
+}
+
+.hno-heading--red {
+	color: var(--red);
+	display: block;
+}
+
+.hno-underline {
+	width: 40px;
+	height: 4px;
+	background: var(--red);
+	margin: 18px 0 22px;
+	border-radius: 2px;
+}
+
+/* Body */
+.hno-body {
+	font-family: var(--font-body);
+	font-size: 1.1rem;
+	color: #444;
+	line-height: 1.75;
+	margin: 0 0 14px;
+	max-width: 700px;
+}
+
+/* CTA */
+.hno-cta {
+	display: inline-flex;
+	align-items: center;
+	gap: 12px;
+	margin-top: 8px;
+	border: 2px solid var(--dark);
+	border-radius: 50px;
+	padding: 11px 22px;
+	font-family: var(--font-display);
+	font-size: 0.8rem;
+	font-weight: 700;
+	letter-spacing: 1.5px;
+	text-transform: uppercase;
+	color: var(--dark);
+	text-decoration: none;
+	transition:
+		background 0.2s,
+		color 0.2s,
+		border-color 0.2s;
+}
+
+.hno-cta:hover {
+	background: var(--red);
+	border-color: var(--red);
+	color: #fff;
+}
+
+.hno-cta-circle {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 26px;
+	height: 26px;
+	background: var(--dark);
+	color: #fff;
+	border-radius: 50%;
+	font-size: 1.1rem;
+	line-height: 1;
+	transition:
+		background 0.2s,
+		color 0.2s;
+	flex-shrink: 0;
+}
+
+.hno-cta:hover .hno-cta-circle {
+	background: #fff;
+	color: var(--red);
+}
+
+/* ════════════════════════════════════════
+   STATS CARD — encimada (margin-top negativo)
+════════════════════════════════════════ */
+.hno-stats-wrap {
+	position: absolute;
+	bottom: -10%;
+	left: 50%;
+	transform: translateX(-50%);
+	width: 100%;
+	max-width: 1100px;
+	padding: 0 24px;
+	z-index: 10;
+}
+
+.hno-stats-card {
+	background: #fff;
+	border-radius: 20px;
+	box-shadow: 0 8px 40px rgba(0, 0, 0, 0.13);
+	display: flex;
+	align-items: stretch;
+	justify-content: center;
+	overflow: hidden;
+}
+
+.hno-stat {
+	flex: 1;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	text-align: center;
+	padding: 36px 24px 32px;
+	gap: 3px;
+}
+
+.hno-stat-sep {
+	width: 1px;
+	background: #ebebeb;
+	margin: 20px 0;
+	flex-shrink: 0;
+}
+
+.hno-stat-icon {
+	width: 60px;
+	height: 60px;
+	border-radius: 50%;
+	background: var(--red);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	margin-bottom: 12px;
+	flex-shrink: 0;
+}
+
+.hno-stat-icon svg {
+	width: 28px;
+	height: 28px;
+	color: #fff;
+}
+
+.hno-stat-num {
+	font-family: var(--font-display);
+	font-size: 2.8rem;
+	font-weight: 900;
+	color: var(--red);
+	line-height: 1;
+}
+
+.hno-stat-label {
+	font-family: var(--font-display);
+	font-size: 0.95rem;
+	font-weight: 800;
+	color: var(--dark);
+	text-transform: uppercase;
+	letter-spacing: 1px;
+	line-height: 1.2;
+	margin-top: 2px;
+}
+
+.hno-stat-sub {
+	font-family: var(--font-display);
+	font-size: 0.82rem;
+	font-weight: 600;
+	color: #999;
+	text-transform: uppercase;
+	letter-spacing: 1px;
+}
+
+.hno-stat-extra {
+	font-family: var(--font-body);
+	font-size: 0.82rem;
+	color: #aaa;
+	margin-top: 4px;
+}
+
+/* ════════════════════════════════════════
+   RESPONSIVE
+════════════════════════════════════════ */
+@media (max-width: 860px) {
+	.hno-hero {
+		min-height: 520px;
+	}
+
+	.hno-content {
+		padding: 60px 32px 120px 32px;
+		max-width: 100%;
+	}
+
+	.hno-overlay {
+		background: linear-gradient(
+			to right,
+			rgba(255, 255, 255, 1) 0%,
+			rgba(255, 255, 255, 0.95) 40%,
+			rgba(255, 255, 255, 0.5) 65%,
+			rgba(255, 255, 255, 0) 80%
+		);
+	}
+
+	.hno-root {
+		padding-bottom: 100px;
+	}
+}
+
+@media (max-width: 600px) {
+	.hno-hero {
+		min-height: 480px;
+	}
+
+	.hno-content {
+		padding: 48px 20px 140px 20px;
+	}
+
+	.hno-overlay {
+		background: rgba(255, 255, 255, 0.88);
+	}
+
+	.hno-stats-card {
+		flex-direction: column;
+		border-radius: 16px;
+	}
+
+	.hno-stat-sep {
+		width: 80%;
+		height: 1px;
+		margin: 0 auto;
+	}
+
+	.hno-stat {
+		padding: 24px 20px;
+	}
+
+	.hno-stats-wrap {
+		position: static;
+		transform: none;
+		margin-top: 0;
+	}
+
+	.hno-root {
+		padding-bottom: 0;
+	}
+}

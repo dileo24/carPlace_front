@@ -1,0 +1,35 @@
+/* Tooltip.css */
+
+.cq-tooltip-wrap {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+}
+
+/* Versión portal: fixed en el body, centrada con transform */
+.cq-tooltip--portal {
+  position: absolute;
+  white-space: nowrap;
+  background: #1e1e1e;
+  border: 1px solid #2a2a2a;
+  color: #aaa;
+  font-family: "Barlow", sans-serif;
+  font-size: 0.72rem;
+  font-weight: 400;
+  line-height: 1.4;
+  padding: 5px 10px;
+  border-radius: 5px;
+  pointer-events: none;
+  z-index: 9999;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.5);
+}
+
+.cq-tooltip--portal::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  border: 5px solid transparent;
+  border-top-color: #2a2a2a;
+}

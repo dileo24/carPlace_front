@@ -1,0 +1,218 @@
+@import url('https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600&family=Barlow+Condensed:wght@600;700&display=swap');
+
+.cuentas-table__scroll {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  flex: 1;
+  min-height: 0;
+}
+
+.cuentas-table {
+  width: 100%;
+  min-width: 560px;
+  border-collapse: collapse;
+}
+
+.cuentas-table__head-row {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  background: #0d0d0d;
+}
+
+.cuentas-table__th {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  color: #333;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  padding: 10px 16px;
+  text-align: left;
+  white-space: nowrap;
+  border-bottom: 1px solid #1a1a1a;
+}
+
+.cuentas-table__th--monto {
+  text-align: right;
+}
+
+.cuentas-table__th--actions {
+  text-align: right;
+}
+
+.cuentas-table__row {
+  border-bottom: 1px solid #161616;
+  border-left: 3px solid transparent;
+  animation: cuentasRowFadeIn 0.22s ease both;
+}
+
+@keyframes cuentasRowFadeIn {
+  from { opacity: 0; transform: translateY(4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.cuentas-table__row:hover {
+  background: #111;
+}
+
+/* Convención pedida por el cliente: verde = yo debo, rojo = me deben. */
+.cuentas-table__row--debo {
+  border-left-color: #2ecc71;
+}
+
+.cuentas-table__row--me-deben {
+  border-left-color: #cc0000;
+}
+
+.cuentas-table__td {
+  font-family: 'Barlow', sans-serif;
+  font-size: 14px;
+  color: #ccc;
+  font-weight: 500;
+  padding: 9px 16px;
+  vertical-align: middle;
+}
+
+.cuentas-table__td--motivo {
+  color: #e8e8e8;
+  max-width: 320px;
+  white-space: normal;
+}
+
+.cuentas-table__td--detalle {
+  white-space: nowrap;
+  color: #999;
+}
+
+.cuentas-table__row--debo .cuentas-table__td--detalle {
+  color: #2ecc71;
+}
+
+.cuentas-table__row--me-deben .cuentas-table__td--detalle {
+  color: #ff4d4d;
+}
+
+.cuentas-table__flecha {
+  color: #444;
+  margin: 0 2px;
+}
+
+.cuentas-table__td--monto {
+  text-align: right;
+  white-space: nowrap;
+  color: #e8e8e8;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+.cuentas-table__td--actions {
+  text-align: right;
+  white-space: nowrap;
+}
+
+.cuentas-table__actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
+.cuentas-table__btn {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  border-radius: 5px;
+  border: none;
+  padding: 5px 12px;
+  cursor: pointer;
+  transition: opacity 0.15s, background 0.15s;
+  white-space: nowrap;
+}
+
+.cuentas-table__btn--delete {
+  background: rgba(204, 0, 0, 0.1);
+  color: #cc0000;
+  border: 1px solid rgba(204, 0, 0, 0.2);
+}
+
+.cuentas-table__btn--delete:hover {
+  background: rgba(204, 0, 0, 0.2);
+}
+
+.cuentas-table__confirm {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  justify-content: flex-end;
+}
+
+.cuentas-table__confirm-label {
+  font-family: 'Barlow', sans-serif;
+  font-size: 13px;
+  color: #999;
+  white-space: nowrap;
+}
+
+.cuentas-table__btn--confirm {
+  background: #cc0000;
+  color: #fff;
+}
+
+.cuentas-table__btn--confirm:hover {
+  background: #aa0000;
+}
+
+.cuentas-table__btn--cancel {
+  background: #1a1a1a;
+  color: #777;
+  border: 1px solid #252525;
+}
+
+.cuentas-table__btn--cancel:hover {
+  color: #bbb;
+  background: #222;
+}
+
+/* ── Estados ── */
+.cuentas-table__state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  flex: 1;
+  padding: 64px 24px;
+  color: #444;
+}
+
+.cuentas-table__state--error {
+  color: #cc0000;
+}
+
+.cuentas-table__state-text {
+  font-family: 'Barlow', sans-serif;
+  font-size: 14px;
+  color: inherit;
+}
+
+.cuentas-table__state-icon {
+  width: 36px;
+  height: 36px;
+}
+
+.cuentas-table__spinner {
+  width: 28px;
+  height: 28px;
+  border: 2px solid #1e1e1e;
+  border-top-color: #cc0000;
+  border-radius: 50%;
+  animation: cuentasSpin 0.75s linear infinite;
+  display: block;
+}
+
+@keyframes cuentasSpin {
+  to { transform: rotate(360deg); }
+}

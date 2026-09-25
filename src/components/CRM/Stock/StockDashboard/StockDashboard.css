@@ -1,0 +1,113 @@
+/* components/CRM/Stock/StockDashboard/StockDashboard.css */
+
+@import url('https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600&family=Barlow+Condensed:wght@400;600;700&display=swap');
+
+.stock-dashboard {
+  display: flex;
+  align-items: stretch;
+  gap: 0;
+  padding: 14px 24px;
+  border-bottom: 1px solid #1a1a1a;
+  background: #0a0a0a;
+  flex-shrink: 0;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.stock-dashboard::-webkit-scrollbar {
+  display: none;
+}
+
+/* ── Grupo ── */
+.stock-dashboard__group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 0 20px;
+  flex-shrink: 0;
+}
+
+.stock-dashboard__group:first-child {
+  padding-left: 0;
+}
+
+.stock-dashboard__group-label {
+  margin: 0;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  color: #444444;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.stock-dashboard__metrics {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+/* ── Métrica ── */
+.stock-dashboard__metric {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1px;
+}
+
+.stock-dashboard__metric-valor {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 26px;
+  font-weight: 700;
+  color: #fff;
+  line-height: 1;
+}
+
+.stock-dashboard__metric-valor--lg {
+  font-size: 22px;
+}
+
+.stock-dashboard__metric-label {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  color: #5c5c5c;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+}
+
+.stock-dashboard__metric-sep {
+  width: 1px;
+  height: 28px;
+  background: #1a1a1a;
+  flex-shrink: 0;
+}
+
+/* ── Divider vertical entre grupos ── */
+.stock-dashboard__divider {
+  width: 1px;
+  background: #1a1a1a;
+  margin: 0 4px;
+  flex-shrink: 0;
+  align-self: stretch;
+}
+
+/* ── Responsive ── */
+@media (max-width: 700px) {
+  .stock-dashboard {
+    padding: 12px 16px;
+    gap: 0;
+  }
+
+  .stock-dashboard__group {
+    padding: 0 14px;
+  }
+
+  .stock-dashboard__metric-valor {
+    font-size: 18px;
+  }
+
+  .stock-dashboard__metric-valor--lg {
+    font-size: 15px;
+  }
+}

@@ -1,0 +1,8 @@
+.ventas-view {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  background: #0a0a0a;
+  min-width: 0;
+  overflow: hidden;
+}

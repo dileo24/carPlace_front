@@ -1,0 +1,218 @@
+@import url('https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600&family=Barlow+Condensed:wght@600;700&display=swap');
+
+.integraciones-view {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  background: #0a0a0a;
+  overflow-y: auto;
+}
+
+.integraciones-header {
+  padding: 20px 28px 18px;
+  border-bottom: 1px solid #161616;
+  background: #0a0a0a;
+  flex-shrink: 0;
+}
+
+.integraciones-header__title {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 22px;
+  font-weight: 700;
+  color: #f0f0f0;
+  letter-spacing: 0.5px;
+  margin: 0;
+  text-transform: uppercase;
+}
+
+.integraciones-content {
+  padding: 24px 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.integraciones-aviso {
+  font-family: 'Barlow', sans-serif;
+  font-size: 13.5px;
+  font-weight: 600;
+  padding: 12px 16px;
+  border-radius: 8px;
+  border: 1px solid;
+}
+
+.integraciones-aviso--ok {
+  background: rgba(34, 197, 94, 0.08);
+  border-color: rgba(34, 197, 94, 0.3);
+  color: #4ade80;
+}
+
+.integraciones-aviso--error {
+  background: rgba(204, 0, 0, 0.08);
+  border-color: rgba(204, 0, 0, 0.25);
+  color: #ff6b6b;
+}
+
+.integraciones-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  flex-wrap: wrap;
+  background: #111;
+  border: 1px solid #1e1e1e;
+  border-radius: 12px;
+  padding: 20px 22px;
+  max-width: 760px;
+}
+
+.integraciones-card__info {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.integraciones-card__logo {
+  width: 46px;
+  height: 46px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700;
+  font-size: 15px;
+  flex-shrink: 0;
+}
+
+.integraciones-card__logo--ml {
+  background: #fff159;
+  color: #2d3277;
+}
+
+.integraciones-card__nombre {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 17px;
+  font-weight: 700;
+  color: #f0f0f0;
+  margin: 0 0 2px;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+}
+
+.integraciones-card__descripcion {
+  font-family: 'Barlow', sans-serif;
+  font-size: 12.5px;
+  color: #666;
+  margin: 0;
+  max-width: 360px;
+}
+
+.integraciones-card__estado {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.integraciones-card__estado-texto {
+  font-family: 'Barlow', sans-serif;
+  font-size: 13px;
+  color: #555;
+}
+
+.integraciones-card__estado-conectado {
+  font-family: 'Barlow', sans-serif;
+  font-size: 13.5px;
+  color: #ccc;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.integraciones-card__estado-conectado strong {
+  color: #f0f0f0;
+}
+
+.integraciones-card__dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.integraciones-card__dot--ok {
+  background: #22c55e;
+  box-shadow: 0 0 6px rgba(34, 197, 94, 0.6);
+}
+
+.integraciones-card__dot--off {
+  background: #444;
+}
+
+.integraciones-btn {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  border-radius: 6px;
+  border: none;
+  padding: 9px 16px;
+  cursor: pointer;
+  transition: background 0.18s, opacity 0.18s;
+  white-space: nowrap;
+}
+
+.integraciones-btn:disabled {
+  opacity: 0.6;
+  cursor: default;
+}
+
+.integraciones-btn--primario {
+  background: #cc0000;
+  color: #fff;
+}
+
+.integraciones-btn--primario:hover:not(:disabled) {
+  background: #aa0000;
+}
+
+.integraciones-btn--secundario {
+  background: #1a1a1a;
+  color: #aaa;
+  border: 1px solid #252525;
+}
+
+.integraciones-btn--secundario:hover:not(:disabled) {
+  background: #222;
+  color: #fff;
+}
+
+.integraciones-btn--peligro {
+  background: rgba(204, 0, 0, 0.1);
+  color: #cc0000;
+  border: 1px solid rgba(204, 0, 0, 0.2);
+}
+
+.integraciones-btn--peligro:hover:not(:disabled) {
+  background: rgba(204, 0, 0, 0.2);
+}
+
+@media (max-width: 640px) {
+  .integraciones-header,
+  .integraciones-content {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+
+  .integraciones-card {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .integraciones-card__estado {
+    width: 100%;
+    justify-content: space-between;
+  }
+}

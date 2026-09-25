@@ -1,0 +1,74 @@
+@import url("https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600&family=Barlow+Condensed:wght@500;600;700&display=swap");
+
+.crm-conv {
+	display: flex;
+	height: 100%;
+	background: #0a0a0a;
+	overflow: hidden;
+	font-family: "Barlow", sans-serif;
+}
+
+.crm-conv__panel {
+	display: flex;
+	overflow: hidden;
+}
+
+.crm-conv__panel--lista {
+	flex-shrink: 0;
+}
+
+.crm-conv__panel--chat {
+	flex: 1;
+	min-width: 0;
+}
+
+.crm-conv__error-toast {
+	position: absolute;
+	top: 12px;
+	left: 50%;
+	transform: translateX(-50%);
+	background: #ef4444;
+	color: #fff;
+	padding: 8px 16px;
+	border-radius: 8px;
+	font-size: 13px;
+	z-index: 100;
+}
+
+@media (max-width: 768px) {
+	.crm-conv {
+		position: relative;
+		height: 100%;
+	}
+
+	.crm-conv__panel--lista,
+	.crm-conv__panel--chat {
+		width: 100%;
+		position: absolute;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		height: 100%;
+		z-index: 1;
+		transition: transform 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+		overflow: hidden;
+	}
+
+	.crm-conv__panel--chat {
+		z-index: 2;
+		max-height: 100%;
+	}
+
+	.crm-conv__panel--oculto-movil {
+		pointer-events: none;
+	}
+
+	.crm-conv__panel--lista.crm-conv__panel--oculto-movil {
+		transform: translateX(-100%);
+	}
+
+	.crm-conv__panel--chat.crm-conv__panel--oculto-movil {
+		transform: translateX(100%);
+	}
+}

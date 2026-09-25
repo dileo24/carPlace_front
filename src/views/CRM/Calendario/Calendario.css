@@ -1,0 +1,26 @@
+/* views/CRM/Calendario/Calendario.css */
+
+.calendario-view {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  background: #0a0a0a;
+  overflow: hidden;
+}
+
+/* Placeholder vista semana */
+.calendario-view__placeholder {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.calendario-view__placeholder p {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  color: #333;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}

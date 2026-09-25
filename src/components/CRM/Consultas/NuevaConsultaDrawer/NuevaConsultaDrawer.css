@@ -1,0 +1,627 @@
+/* NuevaConsultaDrawer.css */
+
+/* Extiende el drawer base de ConsultaDrawer.css */
+.cq-drawer--form {
+	width: min(520px, 100vw);
+}
+
+/* ── Form layout ───────────────────────────────────────────────────────────── */
+
+.nc-form {
+	display: flex;
+	flex-direction: column;
+	padding-bottom: 100px; /* espacio para el footer sticky */
+}
+
+.nc-section {
+	padding: 20px 24px;
+	border-bottom: 1px solid #161616;
+	display: flex;
+	flex-direction: column;
+	gap: 14px;
+}
+
+.nc-section-title {
+	font-family: "Barlow Condensed", sans-serif;
+	font-size: 0.8rem;
+	font-weight: 700;
+	letter-spacing: 0.12em;
+	text-transform: uppercase;
+	color: #505050;
+	margin: 0;
+}
+
+.nc-row {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: 12px;
+}
+
+/* ── Fields ────────────────────────────────────────────────────────────────── */
+
+.nc-field {
+	display: flex;
+	flex-direction: column;
+	gap: 6px;
+}
+.nc-field--error .nc-label {
+	color: rgba(239, 68, 68, 0.9);
+}
+
+.nc-label {
+	font-size: 0.85rem;
+	font-weight: 600;
+	letter-spacing: 0.06em;
+	text-transform: uppercase;
+	color: #8b8b8b;
+	display: flex;
+	align-items: center;
+	gap: 4px;
+}
+
+.nc-req {
+	color: #cc0000;
+	font-size: 0.8rem;
+}
+.nc-error {
+	font-size: 0.85rem;
+	color: #ef4444;
+	display: block;
+	margin-top: -2px;
+}
+
+/* ── Inputs ────────────────────────────────────────────────────────────────── */
+
+.nc-input,
+.nc-select,
+.nc-textarea {
+	background: #0e0e0e;
+	border: 1px solid #1e1e1e;
+	border-radius: 6px;
+	color: #e0e0e0;
+	font-family: "Barlow", sans-serif;
+	font-size: 0.88rem;
+	padding: 10px 12px;
+	outline: none;
+	width: 100%;
+	box-sizing: border-box;
+	transition:
+		border-color 0.2s,
+		box-shadow 0.2s;
+}
+
+.nc-input::placeholder,
+.nc-textarea::placeholder {
+	color: rgb(63, 63, 63);
+}
+
+.nc-input:focus,
+.nc-select:focus,
+.nc-textarea:focus {
+	border-color: #cc0000;
+	box-shadow: 0 0 0 3px rgba(204, 0, 0, 0.1);
+}
+
+.nc-input--error {
+	border-color: rgba(239, 68, 68, 0.5) !important;
+	box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.08) !important;
+}
+
+.nc-select {
+	appearance: none;
+	background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23444' stroke-width='2'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
+	background-repeat: no-repeat;
+	background-position: right 12px center;
+	padding-right: 32px;
+	cursor: pointer;
+}
+
+.nc-textarea {
+	resize: vertical;
+	min-height: 90px;
+	line-height: 1.5;
+}
+
+/* Prefixed input (USD) */
+.nc-input-prefix-wrap {
+	position: relative;
+	display: flex;
+	align-items: center;
+}
+.nc-input-prefix {
+	position: absolute;
+	left: 12px;
+	font-family: "Barlow Condensed", sans-serif;
+	font-size: 0.78rem;
+	font-weight: 600;
+	color: #444;
+	letter-spacing: 0.04em;
+	pointer-events: none;
+}
+.nc-input--prefixed {
+	padding-left: 44px;
+}
+
+/* ── Toggle vehículo stock / libre ─────────────────────────────────────────── */
+
+.nc-vehiculo-toggle {
+	display: flex;
+	gap: 0;
+	border: 1px solid #1e1e1e;
+	border-radius: 7px;
+	overflow: hidden;
+	width: fit-content;
+}
+
+.nc-vehiculo-toggle__btn {
+	display: inline-flex;
+	align-items: center;
+	gap: 6px;
+	padding: 8px 16px;
+	background: transparent;
+	border: none;
+	color: #707070;
+	font-family: "Barlow", sans-serif;
+	font-size: 0.95rem;
+	font-weight: 500;
+	cursor: pointer;
+	transition: all 0.15s;
+	border-right: 1px solid #1e1e1e;
+}
+.nc-vehiculo-toggle__btn:last-child {
+	border-right: none;
+}
+.nc-vehiculo-toggle__btn:hover {
+	color: #888;
+	background: #141414;
+}
+.nc-vehiculo-toggle__btn--active {
+	background: rgba(204, 0, 0, 0.12);
+	color: #ff4444;
+}
+
+/* ── Lista de autos del catálogo ───────────────────────────────────────────── */
+
+.nc-autos-loading,
+.nc-autos-empty {
+	font-size: 0.85rem;
+	color: #444;
+	padding: 12px 0;
+	text-align: center;
+}
+
+.nc-autos-list {
+	max-height: 200px;
+	overflow-y: auto;
+	border: 1px solid #1a1a1a;
+	border-radius: 6px;
+	margin-top: 8px;
+	scrollbar-width: thin;
+	scrollbar-color: #2a2a2a transparent;
+}
+
+.nc-autos-list::-webkit-scrollbar {
+	width: 4px;
+}
+.nc-autos-list::-webkit-scrollbar-track {
+	background: transparent;
+}
+.nc-autos-list::-webkit-scrollbar-thumb {
+	background: #2a2a2a;
+	border-radius: 2px;
+}
+
+.nc-auto-item {
+	width: 100%;
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	padding: 9px 12px;
+	background: transparent;
+	border: none;
+	border-bottom: 1px solid #161616;
+	color: #888;
+	font-family: "Barlow", sans-serif;
+	font-size: 0.875rem;
+	cursor: pointer;
+	text-align: left;
+	transition:
+		background 0.12s,
+		color 0.12s;
+}
+.nc-auto-item:last-child {
+	border-bottom: none;
+}
+.nc-auto-item:hover {
+	background: #111;
+	color: #ccc;
+}
+.nc-auto-item--selected {
+	background: rgba(204, 0, 0, 0.08);
+	color: #ff5555;
+}
+
+.nc-auto-item__titulo {
+	flex: 1;
+}
+.nc-auto-item__anio {
+	font-size: 0.8rem;
+	color: #676767;
+	font-family: "Barlow Condensed", sans-serif;
+	letter-spacing: 0.05em;
+}
+.nc-auto-item--selected .nc-auto-item__anio {
+	color: rgba(255, 85, 85, 0.5);
+}
+.nc-auto-item__check {
+	color: #cc0000;
+	flex-shrink: 0;
+}
+
+/* ── Canal de contacto (origen) ────────────────────────────────────────────── */
+
+.nc-origen-grid {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 7px;
+}
+
+.nc-origen-btn {
+	display: inline-flex;
+	align-items: center;
+	gap: 6px;
+	padding: 6px 12px;
+	background: #0e0e0e;
+	border: 1px solid #1e1e1e;
+	border-radius: 6px;
+	color: #727272;
+	font-family: "Barlow", sans-serif;
+	font-size: 0.9rem;
+	font-weight: 500;
+	cursor: pointer;
+	transition: all 0.15s;
+	white-space: nowrap;
+}
+.nc-origen-btn:hover {
+	border-color: #333;
+	color: #999;
+}
+.nc-origen-btn__icon {
+	display: flex;
+	align-items: center;
+}
+
+.nc-origen-btn--active.nc-origen-btn--telefono {
+	background: rgba(139, 195, 74, 0.1);
+	color: #8bc34a;
+	border-color: rgba(139, 195, 74, 0.3);
+}
+.nc-origen-btn--active.nc-origen-btn--presencial {
+	background: rgba(255, 193, 7, 0.1);
+	color: #ffc107;
+	border-color: rgba(255, 193, 7, 0.3);
+}
+.nc-origen-btn--active.nc-origen-btn--referido {
+	background: rgba(156, 39, 176, 0.1);
+	color: #ce93d8;
+	border-color: rgba(156, 39, 176, 0.3);
+}
+.nc-origen-btn--active.nc-origen-btn--otro {
+	background: rgba(160, 160, 160, 0.1);
+	color: #aaa;
+	border-color: rgba(160, 160, 160, 0.3);
+}
+.nc-origen-btn--active.nc-origen-btn--whatsapp {
+	background: rgba(37, 211, 102, 0.12);
+	color: #25d366;
+	border-color: rgba(37, 211, 102, 0.35);
+}
+.nc-origen-btn--active.nc-origen-btn--instagram {
+	background: rgba(225, 48, 108, 0.12);
+	color: #e1306c;
+	border-color: rgba(225, 48, 108, 0.35);
+}
+.nc-origen-btn--active.nc-origen-btn--facebook {
+	background: rgba(66, 103, 178, 0.12);
+	color: #4267b2;
+	border-color: rgba(66, 103, 178, 0.35);
+}
+.nc-origen-btn--active.nc-origen-btn--web {
+	background: rgba(100, 181, 246, 0.12);
+	color: #64b5f6;
+	border-color: rgba(100, 181, 246, 0.35);
+}
+
+/* ── Seguimiento simplificado (usuario restringido) ────────────────────────── */
+
+.nc-seguimiento-grid {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: 8px;
+}
+
+.nc-seguimiento-btn {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	padding: 11px 14px;
+	background: #0e0e0e;
+	border: 1px solid #1e1e1e;
+	border-radius: 8px;
+	color: #606060;
+	font-family: "Barlow", sans-serif;
+	font-size: 0.875rem;
+	font-weight: 500;
+	cursor: pointer;
+	transition: all 0.15s;
+	text-align: left;
+	position: relative;
+}
+.nc-seguimiento-btn:hover {
+	border-color: #2a2a2a;
+	color: #888;
+}
+
+.nc-seguimiento-btn__icon {
+	display: flex;
+	align-items: center;
+	flex-shrink: 0;
+}
+.nc-seguimiento-btn__check {
+	margin-left: auto;
+	flex-shrink: 0;
+}
+
+/* Estados activos por tipo */
+.nc-seguimiento-btn--llamar.nc-seguimiento-btn--active {
+	background: rgba(139, 195, 74, 0.1);
+	border-color: rgba(139, 195, 74, 0.3);
+	color: #8bc34a;
+}
+.nc-seguimiento-btn--mensaje.nc-seguimiento-btn--active {
+	background: rgba(100, 181, 246, 0.1);
+	border-color: rgba(100, 181, 246, 0.3);
+	color: #64b5f6;
+}
+.nc-seguimiento-btn--quiere_esperar.nc-seguimiento-btn--active {
+	background: rgba(255, 193, 7, 0.1);
+	border-color: rgba(255, 193, 7, 0.3);
+	color: #ffc107;
+}
+.nc-seguimiento-btn--perdido.nc-seguimiento-btn--active {
+	background: rgba(239, 68, 68, 0.1);
+	border-color: rgba(239, 68, 68, 0.3);
+	color: #ef4444;
+}
+
+/* ── Asesor cards ──────────────────────────────────────────────────────────── */
+
+.nc-asesor-grid {
+	display: flex;
+	gap: 10px;
+	flex-wrap: wrap;
+	padding: 2px;
+	border-radius: 8px;
+	transition: box-shadow 0.2s;
+}
+.nc-asesor-grid--error {
+	box-shadow: 0 0 0 2px rgba(239, 68, 68, 0.3);
+}
+
+.nc-asesor-card {
+	flex: 1;
+	min-width: 100px;
+	display: flex;
+	align-items: center;
+	gap: 10px;
+	padding: 10px 14px;
+	background: #0e0e0e;
+	border: 1px solid #1e1e1e;
+	border-radius: 8px;
+	cursor: pointer;
+	transition: all 0.18s;
+}
+.nc-asesor-card:hover {
+	border-color: #333;
+}
+.nc-asesor-card--active {
+	background: rgba(204, 0, 0, 0.1);
+	border-color: #cc0000;
+}
+
+.nc-asesor-card__avatar {
+	width: 30px;
+	height: 30px;
+	border-radius: 50%;
+	background: rgba(204, 0, 0, 0.12);
+	color: #cc0000;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-family: "Barlow Condensed", sans-serif;
+	font-weight: 700;
+	font-size: 0.9rem;
+	border: 1px solid rgba(204, 0, 0, 0.15);
+	flex-shrink: 0;
+	transition: background 0.18s;
+}
+.nc-asesor-card--active .nc-asesor-card__avatar {
+	background: rgba(204, 0, 0, 0.25);
+	border-color: rgba(204, 0, 0, 0.4);
+}
+
+.nc-asesor-card__name {
+	font-size: 0.85rem;
+	color: #888;
+	font-weight: 500;
+	white-space: nowrap;
+	transition: color 0.18s;
+}
+.nc-asesor-card--active .nc-asesor-card__name {
+	color: #ff5555;
+}
+
+/* ── Footer sticky ─────────────────────────────────────────────────────────── */
+
+.nc-footer {
+	position: sticky;
+	bottom: 0;
+	display: flex;
+	align-items: center;
+	justify-content: flex-end;
+	gap: 10px;
+	padding: 16px 24px;
+	background: #111;
+	border-top: 1px solid #1a1a1a;
+	z-index: 5;
+}
+
+.nc-btn-cancel {
+	padding: 10px 18px;
+	background: transparent;
+	border: 1px solid #222;
+	border-radius: 6px;
+	color: #555;
+	font-family: "Barlow", sans-serif;
+	font-size: 0.85rem;
+	font-weight: 500;
+	cursor: pointer;
+	transition: all 0.15s;
+}
+.nc-btn-cancel:hover {
+	border-color: #444;
+	color: #888;
+}
+
+.nc-btn-primary {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	padding: 10px 20px;
+	background: #cc0000;
+	border: none;
+	border-radius: 6px;
+	color: #fff;
+	font-family: "Barlow", sans-serif;
+	font-size: 0.85rem;
+	font-weight: 600;
+	letter-spacing: 0.03em;
+	cursor: pointer;
+	transition:
+		background 0.2s,
+		transform 0.15s;
+}
+.nc-btn-primary:hover {
+	background: #e00000;
+	transform: translateY(-1px);
+}
+
+/* ── Success screen ────────────────────────────────────────────────────────── */
+
+.nc-success {
+	flex: 1;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	padding: 48px 32px;
+	text-align: center;
+	gap: 8px;
+}
+
+.nc-success__check {
+	width: 64px;
+	height: 64px;
+	border-radius: 50%;
+	background: rgba(76, 175, 80, 0.12);
+	border: 2px solid rgba(76, 175, 80, 0.3);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	color: #4caf50;
+	margin-bottom: 8px;
+}
+
+.nc-success__title {
+	font-family: "Barlow Condensed", sans-serif;
+	font-size: 1.6rem;
+	font-weight: 700;
+	color: #fff;
+	margin: 0;
+	letter-spacing: 0.03em;
+}
+
+.nc-success__sub {
+	font-size: 0.88rem;
+	color: #555;
+	margin: 0;
+}
+
+/* Selector de moneda inline */
+.nc-moneda-select {
+	background: #0e0e0e;
+	border: 1px solid #1e1e1e;
+	border-right: none;
+	border-radius: 6px 0 0 6px;
+	color: #ccc;
+	font-family: "Barlow Condensed", sans-serif;
+	font-size: 0.85rem;
+	font-weight: 700;
+	padding: 10px 12px;
+	cursor: pointer;
+	outline: none;
+	appearance: none;
+	flex-shrink: 0;
+	letter-spacing: 0.06em;
+	transition: border-color 0.15s;
+	min-width: 58px;
+	text-align: center;
+}
+.nc-moneda-select:focus {
+	border-color: #cc0000;
+}
+
+.nc-input--prefixed {
+	padding-left: 14px !important;
+	border-radius: 0 6px 6px 0 !important;
+	border-left: 1px solid #2a2a2a !important;
+	flex: 1;
+}
+
+.nc-checkboxes,
+.cq-edit-checkboxes {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 8px;
+	margin-top: 4px;
+}
+
+.nc-checkbox,
+.cq-edit-checkbox {
+	display: flex;
+	align-items: center;
+	gap: 6px;
+	padding: 6px 12px;
+	border: 1px solid rgba(255, 255, 255, 0.1);
+	border-radius: 6px;
+	cursor: pointer;
+	font-size: 0.78rem;
+	color: var(--text-muted, #9ca3af);
+	transition:
+		border-color 0.15s,
+		color 0.15s,
+		background 0.15s;
+	user-select: none;
+}
+
+.nc-checkbox:has(input:checked),
+.cq-edit-checkbox:has(input:checked) {
+	border-color: rgba(255, 255, 255, 0.3);
+	color: #fff;
+	background: rgba(255, 255, 255, 0.05);
+}
+
+.nc-checkbox input,
+.cq-edit-checkbox input {
+	display: none;
+}

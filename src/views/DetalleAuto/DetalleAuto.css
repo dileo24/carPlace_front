@@ -1,0 +1,296 @@
+/* DetalleAuto.css */
+
+.da-page {
+	background: #f5f5f5;
+	min-height: 100vh;
+	padding: 50px 24px 60px;
+	box-sizing: border-box;
+}
+
+.da-inner {
+	max-width: 1200px;
+	margin: 0 auto;
+}
+
+/* ── Breadcrumb ── */
+.da-breadcrumb {
+	max-width: 1200px;
+	margin: 0 auto 20px;
+}
+
+.da-breadcrumb-link {
+	background: none;
+	border: none;
+	cursor: pointer;
+	font-family: "Barlow", sans-serif;
+	font-size: 0.88rem;
+	font-weight: 600;
+	color: #666;
+	padding: 0;
+	transition: color 0.2s;
+	display: inline-flex;
+	align-items: center;
+	gap: 6px;
+}
+
+.da-breadcrumb-link:hover {
+	color: #cc0000;
+}
+
+/* ── Layout dos columnas ── */
+.da-layout {
+	max-width: 1200px;
+	margin: 0 auto;
+	display: grid;
+	grid-template-columns: 1fr 380px;
+	gap: 24px;
+	align-items: start;
+}
+
+/* ── Galería ── */
+.da-gallery-col {
+	/* sticky para que la info scrollee independiente en desktop */
+	position: sticky;
+	top: 90px;
+	/* crítico: min-width 0 evita que el grid se rompa con Swiper adentro */
+	min-width: 0;
+}
+
+.da-gallery-card {
+	background: #fff;
+	border-radius: 16px;
+	overflow: hidden;
+	box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
+	/* Contiene el Swiper sin que se desborde */
+	width: 100%;
+}
+
+/* Forzamos que el Swiper y sus slides no rompan el contenedor */
+.da-gallery-card .swiper,
+.da-gallery-card .swiper-wrapper,
+.da-gallery-card .swiper-slide {
+	width: 100% !important;
+	max-width: 100% !important;
+}
+
+/* ── Panel de info ── */
+.da-info-col {
+	min-width: 0;
+}
+
+.da-info-card {
+	background: #fff;
+	border-radius: 16px;
+	padding: 26px 24px 22px;
+	box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
+	display: flex;
+	flex-direction: column;
+	gap: 0;
+}
+
+/* Header */
+.da-info-header {
+	margin-bottom: 16px;
+}
+
+.da-badge {
+	display: inline-block;
+	background: #cc0000;
+	color: #fff;
+	font-family: "Barlow Condensed", sans-serif;
+	font-size: 0.7rem;
+	font-weight: 700;
+	letter-spacing: 1.5px;
+	text-transform: uppercase;
+	padding: 3px 10px;
+	border-radius: 6px;
+	margin-bottom: 10px;
+}
+
+.da-title {
+	font-family: "Barlow Condensed", sans-serif;
+	font-size: 2.25rem;
+	font-weight: 800;
+	color: #111;
+	text-transform: uppercase;
+	letter-spacing: 1px;
+	margin: 0;
+	line-height: 1;
+}
+
+.da-subtitle {
+	font-family: "Barlow Condensed", sans-serif;
+	font-size: 1.5rem;
+	font-weight: 500;
+	color: #555;
+	text-transform: uppercase;
+	letter-spacing: 0.5px;
+	margin: 4px 0 0;
+}
+
+/* Precio */
+.da-price-wrapper {
+	margin-bottom: 16px;
+}
+
+/* Divider */
+.da-divider {
+	height: 1px;
+	background: #f0f0f0;
+	margin-bottom: 16px;
+}
+
+/* Specs */
+.da-specs-wrapper {
+	margin-bottom: 20px;
+}
+
+/* Botón WhatsApp */
+.da-wpp-btn {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 10px;
+	background: #25d366;
+	color: #fff;
+	text-decoration: none;
+	font-family: "Barlow Condensed", sans-serif;
+	font-size: 0.95rem;
+	font-weight: 700;
+	letter-spacing: 1px;
+	text-transform: uppercase;
+	padding: 13px 20px;
+	border-radius: 10px;
+	transition:
+		background 0.2s,
+		transform 0.15s;
+	margin-bottom: 10px;
+}
+
+.da-wpp-btn:hover {
+	background: #1ebe5c;
+	transform: translateY(-1px);
+}
+
+.da-wpp-icon {
+	width: 20px;
+	height: 20px;
+	flex-shrink: 0;
+}
+
+/* Botón editar */
+.da-edit-btn {
+	width: 100%;
+	background: transparent;
+	border: 1.5px solid #ddd;
+	color: #666;
+	font-family: "Barlow", sans-serif;
+	font-size: 0.85rem;
+	font-weight: 600;
+	padding: 10px 20px;
+	border-radius: 10px;
+	cursor: pointer;
+	transition:
+		border-color 0.2s,
+		color 0.2s,
+		background 0.2s;
+}
+
+.da-edit-btn:hover {
+	border-color: #111;
+	color: #111;
+	background: #f9f9f9;
+}
+
+/* ── Benefits ── */
+.da-benefits {
+	max-width: 1200px;
+	margin: 0 auto;
+}
+
+/* ── Relacionados ── */
+.da-relacionados {
+	max-width: 1200px;
+	margin: 0 auto;
+}
+
+.da-notas-reventa {
+	background: #fff8f0;
+	border-left: 3px solid #cc0000;
+	border-radius: 8px;
+	padding: 12px 16px;
+}
+
+.da-notas-reventa__titulo {
+	display: block;
+	font-family: "Barlow", sans-serif;
+	font-size: 0.78rem;
+	font-weight: 700;
+	text-transform: uppercase;
+	letter-spacing: 1px;
+	color: #cc0000;
+	margin-bottom: 6px;
+}
+
+.da-notas-reventa__texto {
+	font-family: "Barlow", sans-serif;
+	font-size: 0.9rem;
+	color: #444;
+	margin: 0;
+	line-height: 1.5;
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 960px) {
+	.da-layout {
+		grid-template-columns: 1fr;
+	}
+
+	.da-gallery-col {
+		position: static;
+	}
+}
+
+@media (max-width: 600px) {
+	.da-page {
+		padding: 45px 14px 40px;
+	}
+
+	.da-info-card {
+		padding: 18px 16px 16px;
+	}
+
+	.da-title {
+		font-size: 2rem;
+	}
+
+	.da-subtitle {
+		font-size: 1.5rem;
+	}
+}
+
+.da-precio-info {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	background: #f5f5f5;
+	border-radius: 8px;
+	padding: 10px 16px;
+	margin-top: 10px;
+}
+
+.da-precio-info__label {
+	font-family: "Barlow", sans-serif;
+	font-size: 0.8rem;
+	font-weight: 700;
+	text-transform: uppercase;
+	letter-spacing: 1px;
+	color: #888;
+}
+
+.da-precio-info__valor {
+	font-family: "Barlow Condensed", sans-serif;
+	font-size: 1.1rem;
+	font-weight: 700;
+	color: #111;
+}

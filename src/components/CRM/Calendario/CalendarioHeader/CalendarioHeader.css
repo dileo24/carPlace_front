@@ -1,0 +1,263 @@
+/* components/CRM/Calendario/CalendarioHeader/CalendarioHeader.css */
+
+@import url('https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600&family=Barlow+Condensed:wght@400;600;700&display=swap');
+
+.cal-header {
+  padding: 18px 24px 14px;
+  border-bottom: 1px solid #1a1a1a;
+  background: #0a0a0a;
+  flex-shrink: 0;
+}
+
+/* ── Top row ── */
+.cal-header__top {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+/* Nav */
+.cal-header__nav {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.cal-header__title {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 22px;
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: 0.5px;
+  margin: 0;
+  min-width: 180px;
+  text-align: center;
+}
+
+.cal-header__year {
+  color: #555;
+  font-weight: 400;
+}
+
+.cal-header__nav-btn {
+  width: 30px;
+  height: 30px;
+  background: #151515;
+  border: 1px solid #222;
+  border-radius: 6px;
+  color: #888;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.15s, border-color 0.15s, background 0.15s;
+}
+
+.cal-header__nav-btn:hover {
+  color: #fff;
+  border-color: #333;
+  background: #1e1e1e;
+}
+
+.cal-header__hoy-btn {
+  padding: 5px 12px;
+  background: #151515;
+  border: 1px solid #222;
+  border-radius: 6px;
+  color: #888;
+  font-family: 'Barlow', sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  cursor: pointer;
+  transition: color 0.15s, border-color 0.15s;
+  text-transform: uppercase;
+}
+
+.cal-header__hoy-btn:hover {
+  color: #fff;
+  border-color: #333;
+}
+
+/* Vista selector */
+.cal-header__vista-selector {
+  display: flex;
+  background: #111;
+  border: 1px solid #1e1e1e;
+  border-radius: 7px;
+  overflow: hidden;
+}
+
+.cal-header__vista-btn {
+  padding: 5px 14px;
+  background: transparent;
+  border: none;
+  color: rgba(255, 255, 255, 0.35);
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: color 0.15s, background 0.15s;
+}
+
+.cal-header__vista-btn--active {
+  background: rgba(204, 0, 0, 0.14);
+  color: #fff;
+}
+
+.cal-header__vista-btn:hover:not(.cal-header__vista-btn--active) {
+  color: rgba(255, 255, 255, 0.65);
+}
+
+/* Nueva cita */
+.cal-header__nueva-btn {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  padding: 7px 16px;
+  background: #cc0000;
+  border: none;
+  border-radius: 7px;
+  color: #fff;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.6px;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.cal-header__nueva-btn:hover {
+  background: #e60000;
+}
+
+/* ── Bottom row ── */
+.cal-header__bottom {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  margin-top: 12px;
+  flex-wrap: wrap;
+}
+
+/* Pills asesores */
+.cal-header__asesores {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.cal-header__asesor-pill {
+  padding: 4px 11px;
+  background: #111;
+  border: 1px solid #222;
+  border-radius: 20px;
+  color: rgba(255, 255, 255, 0.651);
+  font-family: 'Barlow', sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.cal-header__asesor-pill:hover {
+  border-color: #333;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.cal-header__asesor-pill--active {
+  background: rgba(204, 0, 0, 0.12);
+  border-color: rgba(204, 0, 0, 0.35);
+  color: #fff;
+}
+
+/* Métricas */
+.cal-header__metricas {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-left: auto;
+}
+
+.cal-header__metrica {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.cal-header__metrica-valor {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 26px;
+  font-weight: 700;
+  color: #fff;
+  line-height: 1;
+}
+
+.cal-header__metrica-valor--green {
+  color: #4caf50;
+}
+
+.cal-header__metrica-valor--yellow {
+  color: #ffc107;
+}
+
+.cal-header__metrica-label {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  color: #747474;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+}
+
+.cal-header__metrica-sep {
+  width: 1px;
+  height: 28px;
+  background: #1e1e1e;
+}
+
+/* ── Responsive ── */
+@media (max-width: 700px) {
+  .cal-header {
+    padding: 14px 16px 10px;
+  }
+
+  .cal-header__title {
+    font-size: 18px;
+    min-width: 140px;
+  }
+
+  .cal-header__nueva-btn {
+    margin-left: 0;
+    padding: 6px 12px;
+    font-size: 12px;
+  }
+
+  .cal-header__metricas {
+    margin-left: 0;
+  }
+}
+
+/* ── Asegurar visibilidad mobile del botón nuevo evento ── */
+@media (max-width: 480px) {
+  .cal-header__top {
+    gap: 10px;
+  }
+
+  .cal-header__nueva-btn {
+    margin-left: auto;
+    padding: 7px 12px;
+    font-size: 11px;
+    gap: 5px;
+    flex-shrink: 0;
+  }
+
+  .cal-header__nueva-btn-text {
+    display: inline; /* siempre visible */
+  }
+}

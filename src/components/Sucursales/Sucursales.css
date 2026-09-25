@@ -1,0 +1,183 @@
+/* Sucursales.css */
+
+.suc-section {
+	width: 100%;
+}
+
+.suc-hero {
+	position: relative;
+	background-size: cover;
+	background-position: center center;
+	background-repeat: no-repeat;
+	min-height: 700px;
+	display: flex;
+	align-items: center;
+}
+
+/* Overlay negro (sin tinte rojo) */
+.suc-overlay {
+	position: absolute;
+	inset: 0;
+	background: linear-gradient(
+		to right,
+		rgba(0, 0, 0, 0.88) 0%,
+		rgba(0, 0, 0, 0.75) 45%,
+		rgba(0, 0, 0, 0.45) 70%,
+		rgba(0, 0, 0, 0.20) 100%
+	);
+	z-index: 1;
+}
+
+.suc-inner {
+	position: relative;
+	z-index: 2;
+	max-width: 1100px;
+	width: 100%;
+	margin: 0 auto;
+	padding: 60px 24px;
+	display: flex;
+	align-items: center;
+	gap: 48px;
+}
+
+/* ─── ANIMACIÓN ─────────────────────────────── */
+.suc-anim {
+	opacity: 0;
+	transform: translateY(32px);
+	transition:
+		opacity 0.6s cubic-bezier(0.22, 0.68, 0, 1.15),
+		transform 0.6s cubic-bezier(0.22, 0.68, 0, 1.15);
+}
+
+.suc-anim.is-visible {
+	opacity: 1;
+	transform: none;
+}
+
+/* ── Lado izquierdo: texto ── */
+.suc-left {
+	flex: 1;
+	min-width: 0;
+	display: flex;
+	flex-direction: column;
+	gap: 24px;
+}
+
+.suc-title {
+	font-family: "Barlow Condensed", sans-serif;
+	font-size: clamp(2rem, 4vw, 3rem);
+	font-weight: 800;
+	color: #fff;
+	text-transform: uppercase;
+	letter-spacing: 1px;
+	line-height: 1.1;
+	margin: 0;
+}
+
+.suc-loc {
+	display: flex;
+	align-items: center;
+	gap: 14px;
+}
+
+.suc-loc-icon {
+	width: 42px;
+	height: 42px;
+	background: #cc0000;
+	border-radius: 50%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-shrink: 0;
+	margin-top: 2px;
+}
+
+.suc-pin {
+	width: 20px;
+	height: 20px;
+	color: #fff;
+}
+
+.suc-loc-text {
+	display: flex;
+	flex-direction: column;
+	gap: 4px;
+}
+
+.suc-loc-dir {
+	font-family: "Barlow Condensed", sans-serif;
+	font-size: 1.1rem;
+	font-weight: 700;
+	color: #fff;
+	letter-spacing: 0.5px;
+	line-height: 1.3;
+}
+
+.suc-btn {
+	align-self: flex-start;
+	background: transparent;
+	border: 2px solid rgba(255, 255, 255, 0.3);
+	color: #fff;
+	font-family: "Barlow Condensed", sans-serif;
+	font-size: 0.88rem;
+	font-weight: 700;
+	letter-spacing: 1.5px;
+	text-transform: uppercase;
+	padding: 11px 24px;
+	border-radius: 50px;
+	text-decoration: none;
+	transition: border-color 0.2s, background 0.2s, color 0.2s;
+}
+
+.suc-btn:hover {
+	border-color: #cc0000;
+	background: #cc0000;
+	color: #fff;
+}
+
+/* ── Mapa derecha ── */
+.suc-map-card {
+	flex-shrink: 0;
+	width: 480px;
+	height: 320px;
+	border-radius: 16px;
+	overflow: hidden;
+	box-shadow: 0 8px 40px rgba(0, 0, 0, 0.5);
+	border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.suc-map-card iframe {
+	width: 100%;
+	height: 100%;
+	display: block;
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 900px) {
+	.suc-inner {
+		flex-direction: column;
+		gap: 32px;
+		padding: 48px 24px;
+	}
+
+	.suc-map-card {
+		width: 100%;
+		height: 260px;
+	}
+
+	.suc-overlay {
+		background: rgba(0, 0, 0, 0.78);
+	}
+}
+
+@media (max-width: 480px) {
+	.suc-map-card {
+		height: 200px;
+	}
+
+	.suc-btn {
+		width: 100%;
+		text-align: center;
+		justify-content: center;
+	}
+}

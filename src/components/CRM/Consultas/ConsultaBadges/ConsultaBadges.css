@@ -1,0 +1,51 @@
+/* ConsultaBadges.css */
+
+/* ── Estado badges ─────────────────────────────────────────────────────────── */
+
+.cq-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 3px 10px;
+  border-radius: 100px;
+  font-family: "Barlow Condensed", sans-serif;
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  cursor: default;
+}
+
+.cq-badge--nuevo        { background: rgba(100,149,237,.12); color: #6495ed; border: 1px solid rgba(100,149,237,.2); }
+.cq-badge--perdido { background: rgba(107,114,128,.10); color: #9ca3af; border: 1px solid rgba(107,114,128,.2); }
+.cq-badge--con_oferta   { background: rgba(156,39,176,.12);  color: #ce93d8; border: 1px solid rgba(156,39,176,.2); }
+.cq-badge--seguimiento  { background: rgba(255,152,0,.10);   color: #ff9800; border: 1px solid rgba(255,152,0,.2); }
+.cq-badge--cerrado      { background: rgba(76,175,80,.10);   color: #4caf50; border: 1px solid rgba(76,175,80,.2); }
+.cq-badge--manual       { background: rgba(245,158,11,.10);  color: #f59e0b; border: 1px solid rgba(245,158,11,.2); font-size: 0.68rem; }
+
+/* ── Origen chips ──────────────────────────────────────────────────────────── */
+
+.cq-origen {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 3px 9px;
+  border-radius: 4px;
+  font-family: "Barlow Condensed", sans-serif;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  cursor: default;
+}
+
+.cq-origen--whatsapp   { background: rgba(37,211,102,.10);  color: #25d366; border: 1px solid rgba(37,211,102,.15); }
+.cq-origen--web        { background: rgba(100,181,246,.10); color: #64b5f6; border: 1px solid rgba(100,181,246,.15); }
+.cq-origen--instagram  { background: rgba(225,48,108,.10);  color: #e1306c; border: 1px solid rgba(225,48,108,.15); }
+.cq-origen--facebook   { background: rgba(66,103,178,.10);  color: #4267b2; border: 1px solid rgba(66,103,178,.2); }
+.cq-origen--telefono   { background: rgba(139,195,74,.10);  color: #8bc34a; border: 1px solid rgba(139,195,74,.15); }
+.cq-origen--presencial { background: rgba(255,193,7,.08);   color: #ffc107; border: 1px solid rgba(255,193,7,.15); }
+.cq-origen--referido   { background: rgba(156,39,176,.10);  color: #ce93d8; border: 1px solid rgba(156,39,176,.15); }
+.cq-origen--otro       { background: rgba(160,160,160,.08); color: #888;    border: 1px solid rgba(160,160,160,.15); }

@@ -1,0 +1,42 @@
+body {
+	height: 100%;
+	margin: 0;
+	padding: 0;
+	overflow-x: hidden;
+	font-family: "Montserrat", sans-serif !important;
+}
+
+.app-container {
+	display: flex;
+	flex-direction: column;
+	min-height: 100vh;
+	background-color: rgb(233, 233, 233);
+}
+
+.main-content {
+	flex-grow: 1;
+	margin-bottom: 1rem;
+}
+
+Navbar,
+Footer {
+	flex-shrink: 0;
+	background-color: rgb(29, 29, 29);
+}
+
+.btn-primary {
+	background-color: #bd0101 !important;
+	border: none !important;
+}
+
+@media (hover: none) and (pointer: coarse) {
+  a, button, [role="button"], li,
+  .conv-item, .conv-lista__btn-config,
+  .mpmodal__btn, .mpmodal__item {
+    -webkit-tap-highlight-color: transparent;
+  }
+}
+
+button, a, [role="button"], li {
+  touch-action: manipulation;
+}

@@ -1,0 +1,411 @@
+/* FinanciacionBanner.css */
+
+/* Wrapper externo: padding para que el auto tenga espacio para sobresalir */
+.fi-banner {
+	position: relative;
+	overflow: hidden;
+}
+
+/* La tarjeta rectangular con bordes redondeados y fondo degradado rojo claro */
+.fi-banner-inner {
+	max-width: 1175px;
+	margin: 0 auto;
+	/* Fondo con degradado rojo más claro y difuminado */
+	background: linear-gradient(135deg, #6d1a1a 0%, #4a0f0f 100%);
+	border-radius: 28px;
+	display: flex;
+	align-items: center; /* Centrado vertical */
+	gap: 0;
+	position: relative;
+	overflow: visible;
+	padding: 52px 56px;
+	box-shadow: 0 12px 60px rgba(0, 0, 0, 0.3);
+	/* Efecto difuminado adicional en los bordes */
+	backdrop-filter: blur(0px);
+	padding-right: 300px;
+}
+
+/* Decoración con difuminado radial para crear el efecto "red difuminado" */
+.fi-banner-inner::before {
+	content: "";
+	position: absolute;
+	inset: 0;
+	border-radius: 28px;
+	background: radial-gradient(ellipse 80% 60% at 30% 40%, rgba(255, 80, 80, 0.25) 0%, rgba(180, 30, 30, 0.1) 60%, transparent 100%);
+	pointer-events: none;
+}
+
+/* Segunda capa de difuminado para más profundidad */
+.fi-banner-inner::after {
+	content: "";
+	position: absolute;
+	inset: 0;
+	border-radius: 28px;
+	background: radial-gradient(circle at 80% 20%, rgba(255, 100, 100, 0.2) 0%, transparent 70%);
+	pointer-events: none;
+}
+
+/* ── Texto izquierda ── */
+.fi-text-side {
+	flex: 1;
+	min-width: 0;
+	padding-right: 32px;
+	position: relative;
+	z-index: 2;
+}
+
+.fi-overline {
+	font-family: "Barlow Condensed", sans-serif;
+	font-size: 0.78rem;
+	font-weight: 700;
+	letter-spacing: 3px;
+	text-transform: uppercase;
+	color: #ffa0a0;
+	margin: 0 0 10px;
+}
+
+.fi-title {
+	font-family: "Barlow Condensed", sans-serif;
+	font-size: clamp(2rem, 4vw, 3rem);
+	font-weight: 800;
+	color: #f5f5f5;
+	text-transform: uppercase;
+	letter-spacing: 1px;
+	line-height: 1.1;
+	margin: 0 0 16px;
+}
+
+.fi-title span {
+	color: #ff6b6b;
+	text-shadow: 0 0 8px rgba(255, 100, 100, 0.3);
+}
+
+.fi-body {
+	font-family: "Barlow", sans-serif;
+	font-size: 0.97rem;
+	color: rgba(255, 255, 255, 0.7);
+	line-height: 1.65;
+	margin: 0 0 20px;
+	max-width: 480px;
+}
+
+/* Logos bancos pill */
+/* Logos bancos - grilla de tarjetas */
+.fi-bancos-grid {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 8px;
+	margin-bottom: 28px;
+}
+
+/* Estado inicial */
+.fi-banco-card {
+	background: rgba(0, 0, 0, 0.1);
+	border: 1px solid rgba(255, 255, 255, 0.18);
+	border-radius: 12px;
+	padding: 8px 14px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	backdrop-filter: blur(4px);
+	transition:
+		background 0.25s,
+		border-color 0.25s,
+		transform 0.25s;
+	min-width: 80px;
+	height: 44px;
+
+	/* NUEVO */
+	opacity: 0;
+	transform: translateY(18px) scale(0.95);
+}
+
+/* Cuando entra el banner */
+.fi-banner.animate .fi-banco-card {
+	animation: fi-bank-in 0.6s ease forwards;
+}
+
+/* Delay escalonado */
+.fi-banner.animate .fi-banco-card:nth-child(1) {
+	animation-delay: 0.25s;
+}
+.fi-banner.animate .fi-banco-card:nth-child(2) {
+	animation-delay: 0.38s;
+}
+.fi-banner.animate .fi-banco-card:nth-child(3) {
+	animation-delay: 0.51s;
+}
+.fi-banner.animate .fi-banco-card:nth-child(4) {
+	animation-delay: 0.64s;
+}
+.fi-banner.animate .fi-banco-card:nth-child(5) {
+	animation-delay: 0.77s;
+}
+
+/* Hover premium */
+.fi-banco-card:hover {
+	background: rgba(255, 255, 255, 0.18);
+	border-color: rgba(255, 255, 255, 0.35);
+	transform: translateY(-3px) scale(1.03);
+}
+
+/* Keyframe */
+@keyframes fi-bank-in {
+	0% {
+		opacity: 0;
+		transform: translateY(18px) scale(0.95);
+	}
+
+	65% {
+		opacity: 1;
+		transform: translateY(-3px) scale(1.02);
+	}
+
+	100% {
+		opacity: 1;
+		transform: translateY(0) scale(1);
+	}
+}
+
+.fi-banco-card-logo {
+	height: 28px;
+	width: auto;
+	max-width: 90px;
+	object-fit: contain;
+	opacity: 0.9;
+	filter: brightness(1.1);
+}
+
+.fi-banco-mas-card {
+	font-family: "Barlow Condensed", sans-serif;
+	font-size: 0.85rem;
+	font-weight: 700;
+	color: rgba(255, 255, 255, 0.55);
+	font-style: italic;
+	min-width: 48px;
+	text-align: center;
+}
+
+/* Mobile */
+@media (max-width: 480px) {
+	.fi-bancos-grid {
+		justify-content: center;
+	}
+}
+
+/* Botones */
+.fi-actions {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 12px;
+}
+
+.fi-btn {
+	font-family: "Barlow Condensed", sans-serif;
+	font-size: 0.88rem;
+	font-weight: 700;
+	letter-spacing: 1.5px;
+	text-transform: uppercase;
+	padding: 14px 24px;
+	border-radius: 50px;
+	cursor: pointer;
+	text-decoration: none;
+	transition: all 0.2s;
+	border: 2px solid transparent;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.fi-btn--primary {
+	background: #b81c1c;
+	color: #fff;
+	border-color: #b81c1c;
+	box-shadow: 0 2px 8px rgba(184, 28, 28, 0.3);
+}
+
+.fi-btn--primary:hover {
+	background: #9e1515;
+	border-color: #9e1515;
+	transform: translateY(-1px);
+	box-shadow: 0 6px 20px rgba(184, 28, 28, 0.5);
+}
+
+.fi-btn--outline {
+	color: #fff;
+	border-color: rgba(255, 255, 255, 0.4);
+	background: transparent;
+}
+
+.fi-btn--outline:hover {
+	border-color: #ff6b6b;
+	color: #ffa0a0;
+	background: rgba(255, 100, 100, 0.1);
+}
+
+/* ── Auto: centrado verticalmente y justo al lado del texto ── */
+.fi-visual-side {
+	flex-shrink: 0;
+	width: 460px;
+	position: absolute;
+	right: -80px;
+	width: auto;
+	z-index: 10;
+}
+
+/* Difuminado rojo detrás del auto */
+.fi-visual-side::before {
+	content: "";
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-45%, -50%);
+	width: 100%;
+	height: 80%;
+	background: radial-gradient(ellipse at center, rgba(255, 100, 100, 0.4) 0%, rgba(200, 50, 50, 0.15) 50%, transparent 80%);
+	filter: blur(20px);
+	border-radius: 50%;
+	pointer-events: none;
+	z-index: 0;
+}
+
+/* Capa adicional difuminada más amplia */
+.fi-visual-side::after {
+	content: "";
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	width: 130%;
+	height: 100%;
+	background: radial-gradient(ellipse at center, rgba(255, 80, 80, 0.2) 0%, transparent 70%);
+	filter: blur(30px);
+	pointer-events: none;
+	z-index: 0;
+}
+
+.fi-car-img {
+	width: 650px;
+	max-width: none;
+	object-fit: contain;
+	display: block;
+	position: relative;
+	z-index: 2;
+	transition: transform 0.3s ease;
+	opacity: 0;
+	transform: translateX(120px) scale(0.95);
+}
+.fi-banner.animate .fi-car-img {
+	animation: fi-car-enter 0.9s cubic-bezier(0.22, 1, 0.36, 1) 0.2s both;
+}
+@keyframes fi-car-enter {
+	0% {
+		transform: translateX(120px) scale(0.95);
+		opacity: 0;
+	}
+	60% {
+		transform: translateX(-10px) scale(1.02);
+		opacity: 1;
+	}
+	100% {
+		transform: translateX(0) scale(1);
+		opacity: 1;
+	}
+}
+
+@media (min-width: 769px) {
+	.fi-car-img {
+		opacity: 0;
+		transform: translateX(120px) scale(0.95);
+	}
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 950px) {
+	.fi-banner-inner {
+		padding: 40px 32px;
+	}
+
+	.fi-visual-side {
+		width: 380px;
+	}
+
+	.fi-car-img {
+		max-width: 360px;
+	}
+
+	.fi-text-side {
+		padding-right: 24px;
+	}
+}
+
+@media (max-width: 768px) {
+	.fi-banner {
+		padding: 32px 16px 48px;
+	}
+
+	.fi-banner-inner {
+		flex-direction: column;
+		align-items: center;
+		padding: 40px 20px;
+		gap: 20px;
+		padding-right: 20px;
+	}
+
+	.fi-visual-side {
+		position: relative;
+		right: 0;
+		bottom: 0;
+		width: 100%;
+		display: flex;
+		justify-content: center;
+		order: -1;
+	}
+
+	.fi-car-img {
+		width: 320px;
+		max-width: 90%;
+	}
+
+	.fi-visual-side::before,
+	.fi-visual-side::after {
+		width: 100%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+	}
+
+	.fi-text-side {
+		padding-right: 0;
+		text-align: center;
+	}
+
+	.fi-actions {
+		justify-content: center;
+	}
+
+	.fi-body {
+		max-width: 100%;
+	}
+}
+
+@media (max-width: 480px) {
+	.fi-banner-inner {
+		padding: 28px 20px;
+	}
+
+	.fi-actions {
+		flex-direction: column;
+	}
+
+	.fi-btn {
+		width: 100%;
+	}
+
+	.fi-banco-inline-sep {
+		display: none;
+	}
+
+	.fi-visual-side::before {
+		filter: blur(15px);
+	}
+}

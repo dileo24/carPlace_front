@@ -1,0 +1,147 @@
+/* TipologiaGrid.css */
+
+.tipologia-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(2, 240px);
+  gap: 12px;
+}
+
+/* ─── CARD ─────────────────────────────────── */
+.tipologia-card {
+  position: relative;
+  border: none;
+  border-radius: 16px;
+  overflow: hidden;
+  cursor: pointer;
+  padding: 0;
+  background: #222;
+
+  /* Estado inicial: invisible y desplazada hacia abajo */
+  opacity: 0;
+  transform: translateY(36px);
+  transition:
+    opacity 0.55s cubic-bezier(0.22, 0.68, 0, 1.15),
+    transform 0.55s cubic-bezier(0.22, 0.68, 0, 1.15),
+    box-shadow 0.25s;
+}
+
+/* Clase añadida por JS al hacer scroll */
+.tipologia-card.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Hover: solo sube un poco (el zoom lo hace .tipologia-bg) */
+.tipologia-card:hover {
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
+}
+
+/* ─── IMAGEN (elemento separado para el zoom) ─ */
+.tipologia-bg {
+  position: absolute;
+  inset: 0;
+  background-size: 130%;
+  background-position: center;
+  transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+              background-size 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  will-change: transform;
+}
+
+.tipologia-card:hover .tipologia-bg {
+  transform: scale(1.08);
+}
+
+/* ─── OVERLAY ───────────────────────────────── */
+.tipologia-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to top,
+    rgba(0, 0, 0, 0.65) 0%,
+    rgba(0, 0, 0, 0.1) 60%,
+    transparent 100%
+  );
+  transition: background 0.3s;
+  z-index: 1;
+}
+
+.tipologia-card--featured .tipologia-overlay {
+  background: rgba(0, 0, 0, 0.25);
+}
+
+.tipologia-card:hover .tipologia-overlay {
+  background: linear-gradient(
+    to top,
+    rgba(75, 0, 0, 0.5) 0%,
+    rgba(0, 0, 0, 0.25) 60%,
+    transparent 100%
+  );
+}
+
+/* ─── CONTENIDO ─────────────────────────────── */
+.tipologia-content {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-end;
+  height: 100%;
+  padding: 20px;
+  gap: 6px;
+}
+
+.tipologia-card--featured .tipologia-content {
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+/* ─── NOMBRE ────────────────────────────────── */
+.tipologia-nombre {
+  font-family: "Barlow Condensed", sans-serif;
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+}
+
+.tipologia-card--featured .tipologia-nombre {
+  font-size: 1.8rem;
+}
+
+/* ─── RESPONSIVE ────────────────────────────── */
+@media (max-width: 768px) {
+  .tipologia-grid {
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: auto;
+  }
+
+  .tipologia-card--featured {
+    grid-column: span 2;
+    height: 160px;
+  }
+
+  .tipologia-card {
+    height: 160px;
+  }
+}
+
+@media (max-width: 480px) {
+  .tipologia-grid {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+
+  .tipologia-card--featured {
+    grid-column: span 1;
+    height: 140px;
+  }
+
+  .tipologia-card {
+    height: 140px;
+  }
+}

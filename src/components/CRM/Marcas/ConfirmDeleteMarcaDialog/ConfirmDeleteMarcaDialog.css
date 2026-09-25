@@ -1,0 +1,141 @@
+@import url('https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600&family=Barlow+Condensed:wght@600;700&display=swap');
+
+.cdm-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.65);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1300;
+  padding: 20px;
+  animation: cdmFadeIn 0.15s ease both;
+}
+
+@keyframes cdmFadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.cdm-dialog {
+  background: #111;
+  border: 1px solid rgba(204, 0, 0, 0.35);
+  border-radius: 10px;
+  width: 100%;
+  max-width: 440px;
+  box-shadow: 0 12px 48px rgba(0, 0, 0, 0.6);
+  font-family: 'Barlow', sans-serif;
+}
+
+.cdm-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 18px 20px 14px;
+  border-bottom: 1px solid #1a1a1a;
+}
+
+.cdm-header-icon {
+  width: 22px;
+  height: 22px;
+  flex-shrink: 0;
+}
+
+.cdm-title {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  color: #f0f0f0;
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+}
+
+.cdm-body {
+  padding: 16px 20px;
+}
+
+.cdm-text {
+  font-size: 14px;
+  color: #999;
+  line-height: 1.5;
+  margin: 0;
+}
+
+.cdm-warning {
+  font-size: 13.5px;
+  color: #e6a800;
+  line-height: 1.55;
+  margin: 0 0 12px;
+  padding: 10px 12px;
+  background: rgba(255, 180, 0, 0.08);
+  border: 1px solid rgba(255, 180, 0, 0.25);
+  border-radius: 6px;
+}
+
+.cdm-warning strong {
+  color: #ffb400;
+}
+
+.cdm-autos-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  max-height: 160px;
+  overflow-y: auto;
+}
+
+.cdm-auto-chip {
+  font-size: 12.5px;
+  color: #bbb;
+  background: #151515;
+  border: 1px solid #222;
+  border-radius: 5px;
+  padding: 4px 9px;
+  white-space: nowrap;
+}
+
+.cdm-footer {
+  padding: 14px 20px 18px;
+  border-top: 1px solid #1a1a1a;
+  display: flex;
+  gap: 10px;
+  justify-content: flex-end;
+}
+
+.cdm-btn {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  border-radius: 6px;
+  border: none;
+  padding: 9px 16px;
+  cursor: pointer;
+  transition: background 0.18s, opacity 0.18s;
+}
+
+.cdm-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.cdm-btn--cancel {
+  background: #1a1a1a;
+  color: #999;
+  border: 1px solid #252525;
+}
+
+.cdm-btn--cancel:hover:not(:disabled) {
+  color: #ccc;
+  background: #222;
+}
+
+.cdm-btn--confirm {
+  background: #cc0000;
+  color: #fff;
+}
+
+.cdm-btn--confirm:hover:not(:disabled) {
+  background: #aa0000;
+}

@@ -1,0 +1,384 @@
+/* CRMConsultas.css — layout, tabla y filtros de la vista /CRM/consultas
+   Los estilos de drawers y badges viven en sus propios componentes.       */
+
+@import url("https://fonts.googleapis.com/css2?family=Barlow:wght@300;400;500;600;700&family=Barlow+Condensed:wght@400;500;600;700&display=swap");
+
+/* ── Root ──────────────────────────────────────────────────────────────────── */
+
+.cq-root {
+  padding: 32px 28px 0;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+/* ── Page header ───────────────────────────────────────────────────────────── */
+
+.cq-page-header {
+	display: flex;
+	align-items: flex-end;
+	justify-content: space-between;
+	margin-bottom: 28px;
+	gap: 16px;
+}
+
+.cq-page-title {
+	font-family: "Barlow Condensed", sans-serif;
+	font-size: 2.2rem;
+	font-weight: 700;
+	letter-spacing: 0.04em;
+	text-transform: uppercase;
+	color: #fff;
+	margin: 0 0 2px;
+	line-height: 1;
+}
+
+.cq-page-sub {
+	font-size: 0.8rem;
+	color: #555;
+	margin: 0;
+}
+
+.cq-link-cargar-mas {
+	background: none;
+	border: none;
+	padding: 0;
+	color: #cc0000;
+	font-family: "Barlow", sans-serif;
+	font-size: 0.8rem;
+	font-weight: 500;
+	cursor: pointer;
+	text-decoration: underline;
+}
+.cq-link-cargar-mas:hover {
+	color: #e00000;
+}
+.cq-link-cargar-mas:disabled {
+	color: #555;
+	cursor: default;
+	text-decoration: none;
+}
+
+.cq-btn-new {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	padding: 10px 18px;
+	background: #cc0000;
+	color: #fff;
+	border: none;
+	border-radius: 6px;
+	font-family: "Barlow", sans-serif;
+	font-size: 0.82rem;
+	font-weight: 600;
+	letter-spacing: 0.04em;
+	text-transform: uppercase;
+	cursor: pointer;
+	transition:
+		background 0.2s,
+		transform 0.15s;
+	white-space: nowrap;
+}
+.cq-btn-new:hover {
+	background: #e00000;
+	transform: translateY(-1px);
+}
+
+/* ── Filters ───────────────────────────────────────────────────────────────── */
+
+.cq-filters {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 12px;
+	margin-bottom: 20px;
+	align-items: center;
+}
+
+.cq-search-wrap {
+	position: relative;
+	display: flex;
+	align-items: center;
+	min-width: 260px;
+	flex: 1 1 260px;
+	max-width: 380px;
+}
+
+.cq-search-icon {
+	position: absolute;
+	left: 12px;
+	color: #444;
+	pointer-events: none;
+}
+
+.cq-search {
+	width: 100%;
+	padding: 9px 36px;
+	background: #111;
+	border: 1px solid #1e1e1e;
+	border-radius: 6px;
+	color: #e0e0e0;
+	font-family: "Barlow", sans-serif;
+	font-size: 0.85rem;
+	outline: none;
+	transition:
+		border-color 0.2s,
+		box-shadow 0.2s;
+}
+.cq-search::placeholder {
+	color: #3a3a3a;
+}
+.cq-search:focus {
+	border-color: #cc0000;
+	box-shadow: 0 0 0 3px rgba(204, 0, 0, 0.12);
+}
+
+.cq-search-clear {
+	position: absolute;
+	right: 10px;
+	background: none;
+	border: none;
+	color: #555;
+	cursor: pointer;
+	font-size: 0.75rem;
+	padding: 2px 4px;
+	transition: color 0.15s;
+}
+.cq-search-clear:hover {
+	color: #cc0000;
+}
+
+.cq-filter-group {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 6px;
+}
+
+.cq-pill {
+	display: inline-flex;
+	align-items: center;
+	gap: 6px;
+	padding: 6px 12px;
+	background: #111;
+	border: 1px solid #1e1e1e;
+	border-radius: 100px;
+	color: #666;
+	font-family: "Barlow", sans-serif;
+	font-size: 0.78rem;
+	font-weight: 500;
+	cursor: pointer;
+	transition: all 0.18s;
+	white-space: nowrap;
+}
+.cq-pill:hover {
+	border-color: #333;
+	color: #bbb;
+}
+.cq-pill--active {
+	background: rgba(204, 0, 0, 0.15);
+	border-color: #cc0000;
+	color: #ff4444;
+}
+
+/* ── Table ─────────────────────────────────────────────────────────────────── */
+
+.cq-table-wrap {
+	background: #111;
+	border: 1px solid #1a1a1a;
+	border-radius: 10px;
+	overflow: hidden;
+}
+
+.cq-table {
+	width: 100%;
+	border-collapse: collapse;
+}
+.cq-thead-row {
+	border-bottom: 1px solid #1e1e1e;
+}
+
+.cq-th {
+	padding: 12px 16px;
+	text-align: left;
+	font-family: "Barlow Condensed", sans-serif;
+	font-size: 0.72rem;
+	font-weight: 600;
+	letter-spacing: 0.1em;
+	text-transform: uppercase;
+	color: #3a3a3a;
+	background: #0e0e0e;
+	white-space: nowrap;
+}
+
+.cq-th--sortable {
+	cursor: pointer;
+	user-select: none;
+	transition: color 0.15s;
+}
+.cq-th--sortable:hover {
+	color: #666;
+}
+.cq-th--sort-active {
+	color: #cc0000 !important;
+}
+.cq-th__inner {
+	display: inline-flex;
+	align-items: center;
+	gap: 5px;
+}
+.cq-th__sort-icon {
+	display: inline-flex;
+	align-items: center;
+	color: #2a2a2a;
+	transition: color 0.15s;
+}
+.cq-th__sort-icon--active {
+	color: #cc0000;
+}
+
+.cq-row {
+	border-bottom: 1px solid #161616;
+	cursor: pointer;
+	transition: background 0.15s;
+	animation: cqRowIn 0.22s ease both;
+}
+
+@keyframes cqRowIn {
+	from {
+		opacity: 0;
+		transform: translateY(6px);
+	}
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
+.cq-row:last-child {
+	border-bottom: none;
+}
+
+.cq-cell {
+	padding: 14px 16px;
+	vertical-align: middle;
+	font-size: 0.85rem;
+}
+
+.cq-cell--nombre {
+	display: flex;
+	align-items: center;
+	gap: 12px;
+}
+
+.cq-cell__avatar {
+	width: 34px;
+	height: 34px;
+	border-radius: 50%;
+	background: rgba(204, 0, 0, 0.15);
+	color: #cc0000;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-family: "Barlow Condensed", sans-serif;
+	font-weight: 700;
+	font-size: 0.95rem;
+	flex-shrink: 0;
+	border: 1px solid rgba(204, 0, 0, 0.2);
+}
+
+.cq-cell__main {
+	font-weight: 500;
+	color: #e0e0e0;
+	line-height: 1.3;
+}
+.cq-cell__sub {
+	font-size: 0.75rem;
+	color: #444;
+	margin-top: 2px;
+}
+
+.cq-cell--motivo-col {
+	max-width: 220px;
+}
+.cq-cell__motivo {
+	font-size: 0.82rem;
+	color: #666;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	line-height: 1.3;
+}
+
+.cq-cell--muted {
+	color: #444;
+	font-size: 0.8rem;
+}
+.cq-cell--arrow {
+	color: #2a2a2a;
+	text-align: right;
+	padding-right: 18px;
+	transition: color 0.15s;
+}
+.cq-row:hover .cq-cell--arrow {
+	color: #cc0000;
+}
+
+/* ── Responsive ────────────────────────────────────────────────────────────── */
+
+@media (max-width: 900px) {
+	.cq-cell--hide-md,
+	.cq-th.cq-cell--hide-md {
+		display: none;
+	}
+}
+@media (max-width: 640px) {
+	.cq-cell--hide-sm,
+	.cq-th.cq-cell--hide-sm {
+		display: none;
+	}
+	.cq-root {
+		padding: 40px 14px 48px;
+	}
+}
+
+/* ── Empty state ───────────────────────────────────────────────────────────── */
+
+.cq-empty {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	gap: 12px;
+	padding: 64px 24px;
+}
+.cq-empty__icon {
+	font-size: 2.4rem;
+	opacity: 0.3;
+}
+.cq-empty__text {
+	color: #444;
+	font-size: 0.88rem;
+	margin: 0;
+}
+
+.cq-select {
+	background: #111;
+	border: 1px solid #2a2a2a;
+	border-radius: 20px;
+	color: #ccc;
+	font-family: "Barlow", sans-serif;
+	font-size: 13px;
+	padding: 5px 14px;
+	cursor: pointer;
+	outline: none;
+	appearance: none;
+	-webkit-appearance: none;
+	background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23666' stroke-width='2'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
+	background-repeat: no-repeat;
+	background-position: right 10px center;
+	padding-right: 28px;
+}
+
+.cq-select:focus {
+	border-color: #cc0000;
+}

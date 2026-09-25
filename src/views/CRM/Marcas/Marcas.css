@@ -1,0 +1,15 @@
+@import url('https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600&family=Barlow+Condensed:wght@600;700&display=swap');
+
+.marcas-view {
+	display: flex;
+	flex-direction: column;
+	height: 100%;
+	background: #0a0a0a;
+	overflow: hidden;
+}
+
+@media (max-width: 900px) {
+	.marcas-view {
+		overflow-y: auto;
+	}
+}

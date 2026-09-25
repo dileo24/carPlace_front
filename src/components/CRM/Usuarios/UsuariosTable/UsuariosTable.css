@@ -1,0 +1,243 @@
+@import url('https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600&family=Barlow+Condensed:wght@600;700&display=swap');
+
+/* ── Scroll wrapper (mobile horizontal scroll) ── */
+.usuarios-table__scroll {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  flex: 1;
+  min-height: 0;
+}
+
+/* ── Table ── */
+.usuarios-table {
+  width: 100%;
+  min-width: 560px;
+  border-collapse: collapse;
+}
+
+/* ── Head ── */
+.usuarios-table__head-row {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  background: #0d0d0d;
+}
+
+.usuarios-table__th {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  color: #333;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  padding: 10px 16px;
+  text-align: left;
+  white-space: nowrap;
+  border-bottom: 1px solid #1a1a1a;
+}
+
+.usuarios-table__th--actions {
+  text-align: right;
+}
+
+/* ── Rows ── */
+.usuarios-table__row {
+  border-bottom: 1px solid #161616;
+  animation: rowFadeIn 0.22s ease both;
+}
+
+@keyframes rowFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.usuarios-table__row:hover {
+  background: #111;
+}
+
+/* ── Cells ── */
+.usuarios-table__td {
+  font-family: 'Barlow', sans-serif;
+  font-size: 14px;
+  color: #ccc;
+  font-weight: 500;
+  padding: 11px 16px;
+  vertical-align: middle;
+  white-space: nowrap;
+}
+
+.usuarios-table__td--name {
+  color: #e8e8e8;
+  font-weight: 600;
+}
+
+.usuarios-table__td--email {
+  color: #888;
+}
+
+.usuarios-table__td--actions {
+  text-align: right;
+}
+
+/* ── Rol badge ── */
+.usuarios-table__rol {
+  display: inline-block;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+  border-radius: 4px;
+  padding: 3px 8px;
+}
+
+.usuarios-table__rol--admin {
+  background: rgba(255, 180, 0, 0.1);
+  color: #e6a800;
+  border: 1px solid rgba(255, 180, 0, 0.22);
+}
+
+.usuarios-table__rol--vendedor {
+  background: rgba(255, 255, 255, 0.05);
+  color: #9b9b9b;
+  border: 1px solid #252525;
+}
+
+.usuarios-table__rol--publicador_vendedor {
+  background: rgba(143, 0, 0, 0.616);
+  color: #bdbdbd;
+  border: 1px solid #252525;
+}
+
+.usuarios-table__rol--supervisor {
+  background: rgba(204, 0, 0, 0.12);
+  color: #cc0000;
+  border: 1px solid rgba(204, 0, 0, 0.25);
+}
+
+/* ── Action buttons ── */
+.usuarios-table__actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
+.usuarios-table__btn {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  border-radius: 5px;
+  border: none;
+  padding: 5px 12px;
+  cursor: pointer;
+  transition: opacity 0.15s, background 0.15s;
+  white-space: nowrap;
+}
+
+.usuarios-table__btn--edit {
+  background: #1a1a1a;
+  color: #aaa;
+  border: 1px solid #252525;
+}
+
+.usuarios-table__btn--edit:hover {
+  background: #222;
+  color: #fff;
+}
+
+.usuarios-table__btn--delete {
+  background: rgba(204, 0, 0, 0.1);
+  color: #cc0000;
+  border: 1px solid rgba(204, 0, 0, 0.2);
+}
+
+.usuarios-table__btn--delete:hover {
+  background: rgba(204, 0, 0, 0.2);
+}
+
+/* ── Inline confirm ── */
+.usuarios-table__confirm {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
+.usuarios-table__confirm-label {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: #555;
+}
+
+.usuarios-table__btn--confirm {
+  background: #cc0000;
+  color: #fff;
+  border: none;
+}
+
+.usuarios-table__btn--confirm:hover {
+  background: #aa0000;
+}
+
+.usuarios-table__btn--cancel {
+  background: #1a1a1a;
+  color: #888;
+  border: 1px solid #252525;
+}
+
+.usuarios-table__btn--cancel:hover {
+  color: #ccc;
+}
+
+/* ── Empty / loading / error states ── */
+.usuarios-table__state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  flex: 1;
+  padding: 64px 24px;
+  color: #444;
+}
+
+.usuarios-table__state--error {
+  color: #cc0000;
+}
+
+.usuarios-table__state-text {
+  font-family: 'Barlow', sans-serif;
+  font-size: 14px;
+  color: inherit;
+}
+
+.usuarios-table__state-icon {
+  width: 36px;
+  height: 36px;
+}
+
+.usuarios-table__spinner {
+  width: 28px;
+  height: 28px;
+  border: 2px solid #1e1e1e;
+  border-top-color: #cc0000;
+  border-radius: 50%;
+  animation: spin 0.75s linear infinite;
+  display: block;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}

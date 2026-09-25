@@ -1,0 +1,228 @@
+/* ─── Overlay ─────────────────────────────────────────────── */
+.nchat__overlay {
+	position: fixed;
+	inset: 0;
+	background: rgba(0, 0, 0, 0.65);
+	backdrop-filter: blur(2px);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	z-index: 1000;
+	padding: 16px;
+	animation: nchat-fade-in 0.15s ease;
+}
+
+@keyframes nchat-fade-in {
+	from {
+		opacity: 0;
+	}
+	to {
+		opacity: 1;
+	}
+}
+
+/* ─── Modal container ─────────────────────────────────────── */
+.nchat {
+	background: #111;
+	border: 1px solid #1e1e1e;
+	border-radius: 10px;
+	width: 100%;
+	max-width: 460px;
+	display: flex;
+	flex-direction: column;
+	box-shadow: 0 16px 48px rgba(0, 0, 0, 0.6);
+	animation: nchat-slide-in 0.18s ease;
+	overflow: hidden;
+}
+
+@keyframes nchat-slide-in {
+	from {
+		opacity: 0;
+		transform: translateY(10px) scale(0.98);
+	}
+	to {
+		opacity: 1;
+		transform: translateY(0) scale(1);
+	}
+}
+
+/* ─── Header ──────────────────────────────────────────────── */
+.nchat__header {
+	display: flex;
+	align-items: flex-start;
+	justify-content: space-between;
+	gap: 12px;
+	padding: 18px 18px 14px;
+	border-bottom: 1px solid #1a1a1a;
+	flex-shrink: 0;
+}
+
+.nchat__titulo {
+	font-family: "Barlow Condensed", sans-serif;
+	font-size: 18px;
+	font-weight: 700;
+	color: #e8e8e8;
+	margin: 0 0 3px;
+	letter-spacing: 0.02em;
+	text-transform: uppercase;
+}
+
+.nchat__subtitulo {
+	font-family: "Barlow", sans-serif;
+	font-size: 13px;
+	color: #797979;
+	margin: 0;
+}
+
+.nchat__close {
+	background: none;
+	border: none;
+	cursor: pointer;
+	color: #444;
+	padding: 3px;
+	border-radius: 5px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	transition:
+		color 0.15s,
+		background 0.15s;
+	flex-shrink: 0;
+}
+.nchat__close:hover {
+	color: #cc0000;
+	background: #1a0202;
+}
+.nchat__close:disabled {
+	opacity: 0.4;
+	cursor: not-allowed;
+}
+
+/* ─── Body ────────────────────────────────────────────────── */
+.nchat__body {
+	padding: 16px 18px;
+	display: flex;
+	flex-direction: column;
+	gap: 12px;
+}
+
+.nchat__row {
+	display: flex;
+	gap: 10px;
+}
+.nchat__row .nchat__field {
+	flex: 1;
+}
+
+.nchat__field {
+	display: flex;
+	flex-direction: column;
+	gap: 5px;
+}
+
+.nchat__label {
+	font-family: "Barlow", sans-serif;
+	font-size: 12px;
+	font-weight: 600;
+	color: #666;
+	text-transform: uppercase;
+	letter-spacing: 0.03em;
+}
+
+.nchat__input {
+	background: #0e0e0e;
+	border: 1px solid #1e1e1e;
+	border-radius: 6px;
+	padding: 9px 10px;
+	font-family: "Barlow", sans-serif;
+	font-size: 14px;
+	color: #ddd;
+	outline: none;
+	transition: border-color 0.15s;
+}
+.nchat__input:focus {
+	border-color: #3a0808;
+}
+.nchat__input::placeholder {
+	color: #3a3a3a;
+}
+.nchat__input:disabled {
+	opacity: 0.5;
+	cursor: not-allowed;
+}
+
+.nchat__error {
+	background: #1a0202;
+	border: 1px solid #3a0808;
+	border-radius: 6px;
+	padding: 8px 10px;
+	font-family: "Barlow", sans-serif;
+	font-size: 13px;
+	color: #ff6b6b;
+	margin: 0;
+}
+
+/* ─── Footer ──────────────────────────────────────────────── */
+.nchat__footer {
+	display: flex;
+	justify-content: flex-end;
+	gap: 8px;
+	padding: 13px 18px;
+	border-top: 1px solid #1a1a1a;
+	flex-shrink: 0;
+}
+
+.nchat__btn {
+	display: inline-flex;
+	align-items: center;
+	gap: 5px;
+	padding: 7px 16px;
+	border-radius: 6px;
+	font-family: "Barlow Condensed", sans-serif;
+	font-size: 14px;
+	font-weight: 700;
+	letter-spacing: 0.04em;
+	text-transform: uppercase;
+	cursor: pointer;
+	border: none;
+	transition:
+		background 0.15s,
+		color 0.15s,
+		opacity 0.15s;
+}
+
+.nchat__btn--ghost {
+	background: #161616;
+	color: #555;
+	border: 1px solid #222;
+}
+.nchat__btn--ghost:hover:not(:disabled) {
+	background: #1e1e1e;
+	color: #aaa;
+}
+
+.nchat__btn--primary {
+	background: #cc0000;
+	color: #fff;
+}
+.nchat__btn--primary:hover:not(:disabled) {
+	background: #e00000;
+}
+.nchat__btn--primary:disabled {
+	opacity: 0.3;
+	cursor: not-allowed;
+}
+
+.nchat__btn--exito {
+	background: #1a4a1a !important;
+	color: #4ade80 !important;
+}
+
+.nchat__btn:disabled {
+	cursor: not-allowed;
+}
+
+.nchat__btn--info {
+	background: #1a2a4a !important;
+	color: #6ba3ff !important;
+}

@@ -1,0 +1,287 @@
+/* components/CRM/Stock/StockCard/StockCard.css */
+
+@keyframes stockCardIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.stock-card {
+  background: #111;
+  border: 1px solid #1a1a1a;
+  border-radius: 10px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: border-color 0.15s, transform 0.15s;
+  animation: stockCardIn 0.25s ease both;
+  cursor: default;
+}
+
+.stock-card:hover {
+  border-color: #2a2a2a;
+  transform: translateY(-1px);
+}
+
+.stock-card--alistaje {
+  border-color: rgba(100, 149, 237, 0.2);
+}
+
+.stock-card--alistaje:hover {
+  border-color: rgba(100, 149, 237, 0.4);
+}
+
+/* ── Imagen ── */
+.stock-card__img-wrap {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  background: #0d0d0d;
+  cursor: pointer;
+  overflow: hidden;
+}
+
+.stock-card__img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.stock-card__img-wrap:hover .stock-card__img {
+  transform: scale(1.03);
+}
+
+.stock-card__img-placeholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #2a2a2a;
+}
+
+/* Chips de estado */
+.stock-card__estados {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  display: flex;
+  gap: 4px;
+  flex-wrap: wrap;
+}
+
+.stock-card__estado-chip {
+  padding: 3px 8px;
+  background: color-mix(in srgb, var(--chip-color) 18%, #0a0a0a);
+  border: 1px solid color-mix(in srgb, var(--chip-color) 40%, transparent);
+  border-radius: 4px;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--chip-color);
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  backdrop-filter: blur(4px);
+}
+
+/* Badges de la esquina superior derecha (patrimonio, ML) — en columna para
+   que nunca se superpongan si coinciden en el mismo auto. */
+.stock-card__top-right-badges {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 4px;
+}
+
+/* Badge patrimonio */
+.stock-card__patrimonio-badge {
+  width: 20px;
+  height: 20px;
+  background: rgba(204, 0, 0, 0.85);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 10px;
+  font-weight: 900;
+  color: #fff;
+  backdrop-filter: blur(4px);
+}
+
+/* Badge MercadoLibre — ya está publicado */
+.stock-card__ml-badge {
+  padding: 2px 6px;
+  background: #ffe600;
+  border-radius: 4px;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 10px;
+  font-weight: 900;
+  color: #1a1a1a;
+  letter-spacing: 0.5px;
+  backdrop-filter: blur(4px);
+}
+
+/* Badge oferta */
+.stock-card__oferta-badge {
+  position: absolute;
+  bottom: 8px;
+  right: 8px;
+  padding: 2px 7px;
+  background: rgba(204, 0, 0, 0.85);
+  border-radius: 4px;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  color: #fff;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* ── Body ── */
+.stock-card__body {
+  padding: 12px 14px 8px;
+  flex: 1;
+  cursor: pointer;
+}
+
+.stock-card__marca {
+  margin: 0;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  color: #444;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.stock-card__modelo {
+  margin: 2px 0 6px;
+  font-family: 'Barlow', sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  color: #e8e8e8;
+  line-height: 1.2;
+}
+
+.stock-card__specs {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-family: 'Barlow', sans-serif;
+  font-size: 12px;
+  color: #868686;
+  margin-bottom: 8px;
+}
+
+.stock-card__spec-sep {
+  color: #2a2a2a;
+}
+
+/* Precio */
+.stock-card__precio-wrap {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.stock-card__precio {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  color: #fff;
+}
+
+.stock-card__precio-tachado {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 12px;
+  font-weight: 500;
+  color: #444;
+  text-decoration: line-through;
+}
+
+.stock-card__precio-oferta {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  color: #cc0000;
+}
+
+/* Barra alistaje */
+.stock-card__alistaje-bar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.stock-card__alistaje-track {
+  flex: 1;
+  height: 3px;
+  background: #1e1e1e;
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.stock-card__alistaje-fill {
+  height: 100%;
+  background: #6495ed;
+  border-radius: 2px;
+  transition: width 0.3s ease;
+}
+
+.stock-card__alistaje-pct {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  color: #6495ed;
+  white-space: nowrap;
+}
+
+/* ── Footer ── */
+.stock-card__footer {
+  padding: 8px 14px 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border-top: 1px solid #161616;
+}
+
+.stock-card__ver-btn {
+  display: flex;
+  align-items: center;
+  padding: 5px 10px;
+  background: transparent;
+  border: none;
+  color: #5f5f5f;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 12.5px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: color 0.15s;
+}
+
+.stock-card__ver-btn:hover {
+  color: #ccc;
+}
+.stock-card__alistaje-badge {
+  position: absolute;
+  bottom: 8px;
+  left: 8px;
+  padding: 2px 7px;
+  background: rgba(76, 125, 216, 0.85);
+  border-radius: 4px;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  color: #252525;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  backdrop-filter: blur(4px);
+}

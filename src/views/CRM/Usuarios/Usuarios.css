@@ -1,0 +1,16 @@
+@import url('https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600&family=Barlow+Condensed:wght@600;700&display=swap');
+
+.usuarios-view {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  background: #0a0a0a;
+  overflow: hidden;
+}
+
+/* En móvil la tabla se puede scrollear verticalmente */
+@media (max-width: 900px) {
+  .usuarios-view {
+    overflow-y: auto;
+  }
+}

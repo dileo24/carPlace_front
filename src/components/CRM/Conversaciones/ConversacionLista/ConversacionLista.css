@@ -1,0 +1,456 @@
+@keyframes itemEntrar {
+	from {
+		opacity: 0;
+		transform: translateX(-6px);
+	}
+	to {
+		opacity: 1;
+		transform: translateX(0);
+	}
+}
+
+@keyframes tooltip-in {
+	from {
+		opacity: 0;
+		transform: translateX(-4px);
+	}
+	to {
+		opacity: 1;
+		transform: translateX(0);
+	}
+}
+
+/* El aside necesita position: relative para anclar el botón config */
+.conv-lista {
+	width: 300px;
+	flex-shrink: 0;
+	background: #111;
+	border-right: 1px solid #1a1a1a;
+	display: flex;
+	flex-direction: column;
+	overflow: hidden;
+	position: relative;
+}
+
+/* ── Métricas ── */
+.conv-lista__metricas {
+	display: flex;
+	align-items: center;
+	padding: 12px 16px;
+	border-bottom: 1px solid #1a1a1a;
+	gap: 0;
+}
+
+.conv-lista__metrica {
+	flex: 1;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 2px;
+}
+
+.conv-lista__metrica-sep {
+	width: 1px;
+	height: 28px;
+	background: #1e1e1e;
+}
+
+.conv-lista__metrica-valor {
+	font-family: "Barlow Condensed", sans-serif;
+	font-size: 24px;
+	font-weight: 700;
+	color: #cc0000;
+	line-height: 1;
+}
+
+.conv-lista__metrica-label {
+	font-family: "Barlow", sans-serif;
+	font-size: 13px;
+	color: #7c7c7c;
+	font-weight: 600;
+	text-transform: uppercase;
+	letter-spacing: 0.06em;
+}
+
+/* ── Botón config — anclado al aside, esquina superior derecha ── */
+.conv-lista__config-wrap {
+	position: absolute;
+	top: 8px;
+	right: 8px;
+	z-index: 20;
+}
+
+.conv-lista__btn-config {
+	background: #161616;
+	border: 1px solid #2a2a2a;
+	cursor: pointer;
+	color: #555;
+	padding: 5px;
+	width: 32px;
+	height: 32px;
+	border-radius: 6px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	transition:
+		color 0.15s,
+		background 0.15s,
+		border-color 0.15s;
+}
+.conv-lista__btn-config:hover {
+	color: #cc0000;
+	background: #1a0202;
+	border-color: #3a0808;
+}
+
+/* Tooltip hacia abajo, alineado a la derecha del botón */
+.conv-lista__tooltip {
+	position: absolute;
+	top: calc(100% + 6px);
+	right: 0;
+	background: #1e1e1e;
+	border: 1px solid #2a2a2a;
+	color: #bbb;
+	font-family: "Barlow", sans-serif;
+	font-size: 11px;
+	white-space: nowrap;
+	padding: 5px 9px;
+	border-radius: 5px;
+	pointer-events: none;
+	animation: tooltip-in 0.12s ease forwards;
+	z-index: 50;
+}
+/* flechita apuntando hacia arriba */
+.conv-lista__tooltip::before {
+	content: "";
+	position: absolute;
+	bottom: 100%;
+	right: 8px;
+	border: 5px solid transparent;
+	border-bottom-color: #2a2a2a;
+}
+
+/* ── Buscador ── */
+.conv-lista__buscador {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	padding: 10px 14px;
+	border-bottom: 1px solid #1a1a1a;
+	background: #0e0e0e;
+}
+
+.conv-lista__search-input {
+	flex: 1;
+	background: none;
+	border: none;
+	outline: none;
+	color: #ccc;
+	font-family: "Barlow", sans-serif;
+	font-size: 13px;
+}
+
+.conv-lista__search-input::placeholder {
+	color: #333;
+}
+
+/* ── Filtros ── */
+.conv-lista__filtros {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: 8px 12px;
+	border-bottom: 1px solid #1a1a1a;
+	gap: 8px;
+}
+
+.conv-lista__select-wrapper {
+	position: relative;
+	display: inline-flex;
+	align-items: center;
+	width: 100%;
+}
+
+.conv-lista__select {
+	width: 100%;
+	appearance: none;
+	-webkit-appearance: none;
+	background: #161616;
+	border: 1px solid #2a2a2a;
+	border-radius: 8px;
+	color: #aaa;
+	font-family: "Barlow Condensed", sans-serif;
+	font-size: 15px;
+	font-weight: 600;
+	letter-spacing: 0.04em;
+	padding: 7px 32px 7px 12px;
+	cursor: pointer;
+	outline: none;
+	transition: border-color 0.15s;
+}
+
+.conv-lista__select:focus {
+	border-color: #3a0808;
+	color: #ddd;
+}
+
+.conv-lista__select option {
+	background: #1a1a1a;
+	color: #ccc;
+}
+
+.conv-lista__select-arrow {
+	position: absolute;
+	right: 10px;
+	color: #444;
+	font-size: 12px;
+	pointer-events: none;
+}
+
+/* ── Lista de items ── */
+.conv-lista__items {
+	flex: 1;
+	overflow-y: auto;
+}
+
+.conv-lista__btn-cargar-mas {
+	display: block;
+	width: calc(100% - 24px);
+	margin: 8px 12px 16px;
+	padding: 10px;
+	background: #161616;
+	border: 1px solid #222;
+	border-radius: 6px;
+	color: #888;
+	font-family: "Barlow", sans-serif;
+	font-size: 12.5px;
+	font-weight: 500;
+	cursor: pointer;
+	transition: background 0.15s, color 0.15s;
+}
+.conv-lista__btn-cargar-mas:hover {
+	background: #1c1c1c;
+	color: #ccc;
+}
+.conv-lista__btn-cargar-mas:disabled {
+	cursor: default;
+	color: #444;
+}
+
+.conv-lista__items::-webkit-scrollbar {
+	width: 3px;
+}
+.conv-lista__items::-webkit-scrollbar-track {
+	background: transparent;
+}
+.conv-lista__items::-webkit-scrollbar-thumb {
+	background: #1e1e1e;
+	border-radius: 2px;
+}
+
+.conv-lista__empty {
+	padding: 32px 16px;
+	text-align: center;
+	color: #333;
+	font-family: "Barlow", sans-serif;
+	font-size: 13px;
+}
+
+/* ── Item individual ── */
+.conv-item {
+	display: flex;
+	align-items: center;
+	gap: 11px;
+	width: 100%;
+	padding: 11px 14px;
+	background: none;
+	border: none;
+	border-bottom: 1px solid #161616;
+	cursor: pointer;
+	text-align: left;
+	transition: background 0.12s;
+	animation: itemEntrar 0.25s ease both;
+}
+
+.conv-item:hover {
+	background: #161616;
+}
+
+.conv-item--activo {
+	background: #1a0202;
+	border-left: 3px solid #cc0000;
+	padding-left: 11px;
+}
+
+.conv-item--activo:hover {
+	background: #1f0303;
+}
+
+/* Avatar */
+.conv-item__avatar {
+	position: relative;
+	width: 38px;
+	height: 38px;
+	border-radius: 50%;
+	background: linear-gradient(135deg, #1a0000, #280404);
+	border: 1.5px solid #2a0808;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-shrink: 0;
+}
+
+.conv-item__iniciales {
+	font-family: "Barlow Condensed", sans-serif;
+	font-weight: 700;
+	font-size: 14px;
+	color: #aa3333;
+}
+
+.conv-item__canal-icon {
+	position: absolute;
+	bottom: -2px;
+	right: -2px;
+	width: 15px;
+	height: 15px;
+	background: #0d0d0d;
+	border: 1px solid #1e1e1e;
+	border-radius: 50%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+/* Contenido */
+.conv-item__contenido {
+	flex: 1;
+	min-width: 0;
+	display: flex;
+	flex-direction: column;
+	gap: 3px;
+}
+
+.conv-item__fila-top,
+.conv-item__fila-bot {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 6px;
+}
+
+.conv-item__nombre {
+	font-family: "Barlow Condensed", sans-serif;
+	font-weight: 600;
+	font-size: 15px;
+	color: #d8d8d8;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	flex: 1;
+}
+
+.conv-item--activo .conv-item__nombre {
+	color: #f0f0f0;
+}
+
+.conv-item__tiempo {
+	font-family: "Barlow", sans-serif;
+	font-size: 13px;
+	color: #6e6e6e;
+	flex-shrink: 0;
+}
+
+.conv-item__preview {
+	font-family: "Barlow", sans-serif;
+	font-size: 13px;
+	color: #3e3e3e;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	flex: 1;
+}
+
+.conv-item--activo .conv-item__preview {
+	color: #555;
+}
+
+.conv-item__badges {
+	display: flex;
+	align-items: center;
+	gap: 5px;
+	flex-shrink: 0;
+}
+
+.conv-item__badge-noLeido {
+	min-width: 17px;
+	height: 17px;
+	background: #cc0000;
+	color: #fff;
+	border-radius: 9px;
+	font-size: 10px;
+	font-family: "Barlow Condensed", sans-serif;
+	font-weight: 700;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: 0 4px;
+}
+.conv-item__badge-noLeido--admin {
+	background: #7c3aed;
+	color: #fff;
+}
+
+.conv-item__visita-icon {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	color: #f59e0b;
+	flex-shrink: 0;
+}
+
+.conv-item__estado-dot {
+	width: 7px;
+	height: 7px;
+	border-radius: 50%;
+	display: inline-block;
+	flex-shrink: 0;
+}
+
+.conv-item__nombre-alias {
+	font-weight: 700;
+	color: #d8d8d8;
+	font-size: 16px;
+	font-family: "Barlow Condensed", sans-serif;
+	display: block;
+}
+
+.conv-item__telefono {
+	font-weight: 500;
+	color: #505050;
+	font-size: 13px;
+	font-family: "Barlow", sans-serif;
+	display: block;
+	margin-top: 1px;
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+	.conv-lista {
+		width: 100%;
+		border-right: none;
+	}
+}
+
+.conv-item__preview-autor {
+	display: inline-flex;
+	align-items: center;
+	gap: 3px;
+	font-weight: 600;
+	margin-right: 3px;
+}
+.conv-item__preview-autor--bot {
+	color: #3b82f6;
+}
+.conv-item__preview-autor--asesor {
+	color: #f97316;
+}

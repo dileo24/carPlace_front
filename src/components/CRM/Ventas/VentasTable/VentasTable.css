@@ -1,0 +1,212 @@
+.ventas-table-wrapper {
+	flex: 1;
+	overflow-x: auto;
+	overflow-y: auto;
+	min-width: 0;
+}
+
+.ventas-table {
+	width: 100%;
+	min-width: 820px;
+	border-collapse: collapse;
+	table-layout: fixed;
+}
+
+/* ── Columnas ── */
+.ventas-table colgroup col:nth-child(1) {
+	width: 150px;
+} /* Nombre */
+.ventas-table colgroup col:nth-child(2) {
+	width: 130px;
+} /* Teléfono */
+.ventas-table colgroup col:nth-child(3) {
+	width: 180px;
+} /* Vehículo */
+.ventas-table colgroup col:nth-child(4) {
+	width: 90px;
+} /* Fecha */
+.ventas-table colgroup col:nth-child(5) {
+	width: 140px;
+} /* Auto recibido */
+.ventas-table colgroup col:nth-child(6) {
+	width: 100px;
+} /* Precio */
+.ventas-table colgroup col:nth-child(7) {
+	width: 110px;
+} /* Ganancia */
+.ventas-table colgroup col:nth-child(8) {
+	width: 160px;
+} /* Acciones */
+
+.ventas-td__ganancia-split,
+.ventas-td__propietario {
+	font-size: 11px;
+	color: var(--muted, #888);
+	white-space: nowrap;
+}
+
+/* ── Thead ── */
+.ventas-table thead {
+	position: sticky;
+	top: 0;
+	z-index: 2;
+}
+
+.ventas-table thead tr {
+	background: #0d0d0d;
+}
+
+.ventas-table th {
+	font-family: "Barlow Condensed", sans-serif;
+	font-size: 11px;
+	font-weight: 700;
+	color: #333;
+	text-transform: uppercase;
+	letter-spacing: 1px;
+	padding: 10px 16px;
+	text-align: left;
+	border-bottom: 1px solid #161616;
+	white-space: nowrap;
+}
+
+/* ── Tbody ── */
+.ventas-table tbody tr {
+	border-bottom: 1px solid #161616;
+	cursor: pointer;
+	transition: background 0.12s;
+}
+
+.ventas-table tbody tr:hover {
+	background: #141414;
+}
+
+.ventas-table tbody tr:hover .ventas-row-actions {
+	opacity: 1;
+}
+
+.ventas-table td {
+	padding: 11px 16px;
+	font-family: "Barlow", sans-serif;
+	font-size: 14px;
+	color: #ccc;
+	font-weight: 500;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+/* ── Celdas específicas ── */
+.ventas-td__nombre {
+	color: #fff !important;
+	font-weight: 600 !important;
+}
+
+.ventas-td__vehiculo {
+	color: #bbb !important;
+}
+
+.ventas-td__auto-recibido {
+	color: #888 !important;
+	font-size: 13px !important;
+}
+
+/* ── Acciones inline ── */
+.ventas-row-actions {
+	display: flex;
+	gap: 6px;
+	opacity: 0;
+	transition: opacity 0.12s;
+}
+
+@media (hover: none) {
+	.ventas-row-actions {
+		opacity: 1;
+	}
+}
+
+.ventas-row-btn {
+	background: none;
+	border: 1px solid #222;
+	border-radius: 5px;
+	font-family: "Barlow Condensed", sans-serif;
+	font-size: 11px;
+	font-weight: 700;
+	text-transform: uppercase;
+	letter-spacing: 0.3px;
+	color: #555;
+	padding: 3px 8px;
+	cursor: pointer;
+	transition:
+		border-color 0.12s,
+		color 0.12s;
+	white-space: nowrap;
+}
+
+.ventas-row-btn:hover {
+	border-color: #444;
+	color: #ccc;
+}
+
+.ventas-row-btn--delete:hover {
+	border-color: #cc0000;
+	color: #cc0000;
+}
+
+/* Animación de entrada */
+@keyframes ventaRowIn {
+	from {
+		opacity: 0;
+		transform: translateY(4px);
+	}
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
+
+.ventas-table tbody tr {
+	animation: ventaRowIn 0.18s ease both;
+}
+
+/* ── Empty state ── */
+.ventas-empty {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: 60px 24px;
+	font-family: "Barlow Condensed", sans-serif;
+	font-size: 14px;
+	color: #333;
+	text-transform: uppercase;
+	letter-spacing: 1px;
+}
+
+@media (max-width: 900px) {
+	.ventas-table th,
+	.ventas-table td {
+		padding: 9px 12px;
+	}
+}
+
+@media (max-width: 768px) {
+	.ventas-row-actions {
+		opacity: 1;
+	}
+	.ventas-table colgroup col:nth-child(1) {
+		width: 120px;
+	}
+	.ventas-table colgroup col:nth-child(2) {
+		display: none;
+	}
+	.ventas-table th:nth-child(2),
+	.ventas-table td:nth-child(2) {
+		display: none;
+	} /* ocultar teléfono */
+}
+
+.ventas-td__solo-lectura {
+	color: #333;
+	font-size: 13px;
+	font-family: "Barlow Condensed", sans-serif;
+	letter-spacing: 0.3px;
+}

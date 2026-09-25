@@ -1,0 +1,12 @@
+.sidebar-filtros .MuiAccordion-root {
+  border-bottom: 1px solid #eee;
+}
+
+.sidebar-filtros .MuiAccordionSummary-root {
+  min-height: 44px !important;
+}
+
+.sidebar-filtros .MuiAccordionDetails-root {
+  padding-top: 4px !important;
+  padding-bottom: 12px !important;
+}

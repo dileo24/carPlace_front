@@ -1,0 +1,152 @@
+.ventas-header {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 20px 24px 16px;
+  border-bottom: 1px solid #161616;
+  flex-shrink: 0;
+}
+
+.ventas-header__top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.ventas-header__title {
+  font-family: 'Barlow Condensed', sans-serif !important;
+  font-size: 26px !important;
+  font-weight: 700 !important;
+  color: #fff !important;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  line-height: 1;
+}
+
+/* ── Métricas ── */
+.ventas-header__metrics {
+  display: flex;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+
+.ventas-metric {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.ventas-metric__label {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  color: #444;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.ventas-metric__value {
+  font-family: 'Barlow', sans-serif;
+  font-size: 17px;
+  font-weight: 600;
+  color: #fff;
+  line-height: 1;
+}
+
+.ventas-metric__value--accent {
+  color: #cc0000;
+}
+
+/* ── Controles ── */
+.ventas-header__controls {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.ventas-search {
+  background: #0d0d0d;
+  border: 1px solid #222;
+  border-radius: 6px;
+  font-family: 'Barlow', sans-serif;
+  font-size: 14px;
+  color: #ccc;
+  padding: 7px 12px;
+  outline: none;
+  width: 240px;
+  transition: border-color 0.15s;
+}
+
+.ventas-search::placeholder {
+  color: #444;
+}
+
+.ventas-search:focus {
+  border-color: #cc0000;
+}
+
+.ventas-sort-btn {
+  background: #111;
+  border: 1px solid #222;
+  border-radius: 7px;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.6);
+  padding: 6px 12px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  white-space: nowrap;
+  transition: border-color 0.15s, color 0.15s;
+}
+
+.ventas-sort-btn:hover {
+  border-color: #444;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.ventas-sort-btn--active {
+  border-color: #cc0000;
+  color: #cc0000;
+}
+
+.ventas-nueva-btn {
+  background: #cc0000;
+  border: none;
+  border-radius: 7px;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  color: #fff;
+  padding: 6px 14px;
+  cursor: pointer;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  white-space: nowrap;
+  transition: background 0.15s;
+}
+
+.ventas-nueva-btn:hover {
+  background: #e00;
+}
+
+@media (max-width: 900px) {
+  .ventas-header {
+    padding: 14px 16px 12px;
+  }
+
+  .ventas-search {
+    width: 180px;
+  }
+
+  .ventas-header__metrics {
+    gap: 16px;
+  }
+}

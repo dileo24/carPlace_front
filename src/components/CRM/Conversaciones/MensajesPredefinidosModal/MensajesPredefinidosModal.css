@@ -1,0 +1,339 @@
+/* ─── Overlay ─────────────────────────────────────────────── */
+.mpmodal__overlay {
+	position: fixed;
+	inset: 0;
+	background: rgba(0, 0, 0, 0.65);
+	backdrop-filter: blur(2px);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	z-index: 1000;
+	padding: 16px;
+	animation: mpmodal-fade-in 0.15s ease;
+}
+
+@keyframes mpmodal-fade-in {
+	from {
+		opacity: 0;
+	}
+	to {
+		opacity: 1;
+	}
+}
+
+/* ─── Modal container ─────────────────────────────────────── */
+.mpmodal {
+	background: #111;
+	border: 1px solid #1e1e1e;
+	border-radius: 10px;
+	width: 100%;
+	max-width: 600px;
+	max-height: 82vh;
+	display: flex;
+	flex-direction: column;
+	box-shadow: 0 16px 48px rgba(0, 0, 0, 0.6);
+	animation: mpmodal-slide-in 0.18s ease;
+	overflow: hidden;
+}
+
+@keyframes mpmodal-slide-in {
+	from {
+		opacity: 0;
+		transform: translateY(10px) scale(0.98);
+	}
+	to {
+		opacity: 1;
+		transform: translateY(0) scale(1);
+	}
+}
+
+/* ─── Header ──────────────────────────────────────────────── */
+.mpmodal__header {
+	display: flex;
+	align-items: flex-start;
+	justify-content: space-between;
+	gap: 12px;
+	padding: 18px 18px 14px;
+	border-bottom: 1px solid #1a1a1a;
+	flex-shrink: 0;
+}
+
+.mpmodal__titulo {
+	font-family: "Barlow Condensed", sans-serif;
+	font-size: 18px;
+	font-weight: 700;
+	color: #e8e8e8;
+	margin: 0 0 3px;
+	letter-spacing: 0.02em;
+	text-transform: uppercase;
+}
+
+.mpmodal__subtitulo {
+	font-family: "Barlow", sans-serif;
+	font-size: 14px;
+	color: #797979;
+	margin: 0;
+}
+
+.mpmodal__close {
+	background: none;
+	border: none;
+	cursor: pointer;
+	color: #444;
+	padding: 3px;
+	border-radius: 5px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	transition:
+		color 0.15s,
+		background 0.15s;
+	flex-shrink: 0;
+}
+.mpmodal__close:hover {
+	color: #cc0000;
+	background: #1a0202;
+}
+
+/* ─── Lista de mensajes ───────────────────────────────────── */
+.mpmodal__lista {
+	flex: 1;
+	overflow-y: auto;
+	padding: 10px 14px;
+	display: flex;
+	flex-direction: column;
+	gap: 5px;
+}
+
+.mpmodal__lista::-webkit-scrollbar {
+	width: 3px;
+}
+.mpmodal__lista::-webkit-scrollbar-track {
+	background: transparent;
+}
+.mpmodal__lista::-webkit-scrollbar-thumb {
+	background: #1e1e1e;
+	border-radius: 2px;
+}
+
+.mpmodal__empty {
+	font-family: "Barlow", sans-serif;
+	font-size: 13px;
+	color: #333;
+	text-align: center;
+	padding: 28px 0;
+	margin: 0;
+}
+
+/* ─── Item ────────────────────────────────────────────────── */
+.mpmodal__item {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	padding: 9px 10px;
+	border-radius: 6px;
+	border: 1px solid #1a1a1a;
+	background: #0e0e0e;
+	transition:
+		border-color 0.15s,
+		background 0.15s;
+}
+
+.mpmodal__item:hover {
+	border-color: #2a2a2a;
+	background: #161616;
+}
+
+.mpmodal__item--editando {
+	border-color: #3a0808;
+	background: #1a0202;
+	align-items: flex-start;
+}
+
+.mpmodal__texto {
+	flex: 1;
+	font-family: "Barlow", sans-serif;
+	font-size: 16px;
+	color: #aaa;
+	line-height: 1.45;
+	word-break: break-word;
+	white-space: pre-wrap;
+}
+
+.mpmodal__acciones {
+	display: flex;
+	gap: 2px;
+	flex-shrink: 0;
+	opacity: 0;
+	transition: opacity 0.15s;
+}
+
+.mpmodal__item:hover .mpmodal__acciones {
+	opacity: 1;
+}
+
+/* ─── Botones de acción (editar/eliminar/confirmar) ───────── */
+.mpmodal__btn-accion {
+	background: none;
+	border: none;
+	cursor: pointer;
+	color: #444;
+	padding: 4px 5px;
+	border-radius: 5px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	transition:
+		color 0.15s,
+		background 0.15s;
+}
+.mpmodal__btn-accion:hover {
+	color: #aaa;
+	background: #1e1e1e;
+}
+.mpmodal__btn-accion--eliminar:hover {
+	color: #cc0000;
+	background: #1a0202;
+}
+.mpmodal__btn-accion--confirmar {
+	color: #cc0000;
+	margin-top: 2px;
+}
+.mpmodal__btn-accion--confirmar:hover {
+	color: #ff2222;
+	background: #1a0202;
+}
+
+/* ─── Textarea (edición y nuevo) ──────────────────────────── */
+.mpmodal__textarea {
+	flex: 1;
+	resize: none;
+	border: none;
+	background: transparent;
+	font-family: "Barlow", sans-serif;
+	font-size: 13px;
+	color: #ddd;
+	line-height: 1.45;
+	outline: none;
+	padding: 0;
+	width: 100%;
+}
+
+.mpmodal__textarea::placeholder {
+	color: #333;
+}
+
+/* ─── Sección agregar nuevo ───────────────────────────────── */
+.mpmodal__agregar {
+	padding: 0 14px 12px;
+	flex-shrink: 0;
+}
+
+.mpmodal__btn-nuevo {
+	display: flex;
+	align-items: center;
+	gap: 7px;
+	background: none;
+	border: 1.5px dashed #222;
+	border-radius: 6px;
+	width: 100%;
+	padding: 9px 12px;
+	font-family: "Barlow Condensed", sans-serif;
+	font-size: 13px;
+	font-weight: 600;
+	letter-spacing: 0.04em;
+	text-transform: uppercase;
+	color: #333;
+	cursor: pointer;
+	transition:
+		border-color 0.15s,
+		color 0.15s,
+		background 0.15s;
+}
+.mpmodal__btn-nuevo:hover {
+	border-color: #3a0808;
+	color: #cc0000;
+	background: #1a0202;
+}
+
+.mpmodal__nuevo-wrap {
+	border: 1px solid #3a0808;
+	border-radius: 6px;
+	padding: 10px 12px;
+	background: #1a0202;
+	display: flex;
+	flex-direction: column;
+	gap: 8px;
+}
+
+.mpmodal__nuevo-wrap .mpmodal__textarea {
+	min-height: 44px;
+}
+
+.mpmodal__nuevo-btns {
+	display: flex;
+	justify-content: flex-end;
+	gap: 6px;
+}
+
+/* ─── Footer ──────────────────────────────────────────────── */
+.mpmodal__footer {
+	display: flex;
+	justify-content: flex-end;
+	gap: 8px;
+	padding: 13px 18px;
+	border-top: 1px solid #1a1a1a;
+	flex-shrink: 0;
+}
+
+/* ─── Botones generales ───────────────────────────────────── */
+.mpmodal__btn {
+	display: inline-flex;
+	align-items: center;
+	gap: 5px;
+	padding: 7px 16px;
+	border-radius: 6px;
+	font-family: "Barlow Condensed", sans-serif;
+	font-size: 14px;
+	font-weight: 700;
+	letter-spacing: 0.04em;
+	text-transform: uppercase;
+	cursor: pointer;
+	border: none;
+	transition:
+		background 0.15s,
+		color 0.15s,
+		opacity 0.15s;
+}
+
+.mpmodal__btn--ghost {
+	background: #161616;
+	color: #555;
+	border: 1px solid #222;
+}
+.mpmodal__btn--ghost:hover {
+	background: #1e1e1e;
+	color: #aaa;
+}
+
+.mpmodal__btn--primary {
+	background: #cc0000;
+	color: #fff;
+}
+.mpmodal__btn--primary:hover:not(:disabled) {
+	background: #e00000;
+}
+.mpmodal__btn--primary:disabled {
+	opacity: 0.3;
+	cursor: not-allowed;
+}
+
+.mpmodal__btn--guardado {
+	background: #1a4a1a !important;
+	color: #4ade80 !important;
+}
+
+.mpmodal__item--editando .mpmodal__textarea {
+	min-height: 80px;
+	resize: vertical;
+}

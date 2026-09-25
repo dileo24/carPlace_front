@@ -1,0 +1,116 @@
+/* CardsRelacionados.css */
+
+.cr-section {
+  margin-top: 48px;
+  padding: 40px 0 0;
+  border-top: 1px solid #e8e8e8;
+}
+
+/* Header: título + flechas */
+.cr-header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  margin-bottom: 24px;
+}
+
+.cr-title-group {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.cr-overline {
+  font-family: "Barlow Condensed", sans-serif;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: #cc0000;
+}
+
+.cr-title {
+  font-family: "Barlow Condensed", sans-serif;
+  font-size: 1.6rem;
+  font-weight: 800;
+  color: #111;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin: 0;
+}
+
+/* Flechas de navegación */
+.cr-nav {
+  display: flex;
+  gap: 8px;
+}
+
+.cr-nav-btn {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 2px solid #ddd;
+  background: #fff;
+  font-size: 1.3rem;
+  cursor: pointer;
+  color: #333;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+  transition: border-color 0.2s, background 0.2s, color 0.2s;
+}
+
+.cr-nav-btn:hover:not(:disabled) {
+  border-color: #cc0000;
+  background: #cc0000;
+  color: #fff;
+}
+
+.cr-nav-btn:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+/* Carrusel */
+.cr-track-outer {
+  overflow: hidden;
+  width: 100%;
+  /* Fade edges */
+  -webkit-mask-image: linear-gradient(to right, transparent 0%, black 2%, black 98%, transparent 100%);
+  mask-image: linear-gradient(to right, transparent 0%, black 2%, black 98%, transparent 100%);
+}
+
+.cr-track {
+  --cr-gap: 18px;
+  --cr-card-w: calc((100% - var(--cr-gap) * 3) / 4);
+
+  display: flex;
+  gap: var(--cr-gap);
+  transition: transform 0.45s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.cr-card-wrapper {
+  min-width: var(--cr-card-w);
+  max-width: var(--cr-card-w);
+  flex-shrink: 0;
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 1024px) {
+  .cr-track {
+    --cr-card-w: calc((100% - var(--cr-gap) * 2) / 3);
+  }
+}
+
+@media (max-width: 700px) {
+  .cr-track {
+    --cr-card-w: calc((100% - var(--cr-gap)) / 2);
+  }
+}
+
+@media (max-width: 480px) {
+  .cr-track {
+    --cr-card-w: 85%;
+  }
+}

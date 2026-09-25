@@ -1,0 +1,723 @@
+/* TareaDrawer.css */
+.tarea-drawer {
+	display: flex;
+	flex-direction: column;
+	height: 100%;
+	overflow: hidden;
+}
+
+/* ─── Header ─── */
+.td-header {
+	padding: 20px 20px 18px;
+	border-bottom: 1px solid #1a1a1a;
+	flex-shrink: 0;
+}
+
+.td-header__top {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin-bottom: 14px;
+}
+
+.td-header__top-actions {
+	display: flex;
+	align-items: center;
+	gap: 6px;
+}
+
+.td-close {
+	width: 32px;
+	height: 32px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background: transparent;
+	border: 1px solid #222;
+	border-radius: 7px;
+	color: #555;
+	cursor: pointer;
+	transition: all 0.12s;
+}
+
+.td-close:hover {
+	background: #1a1a1a;
+	color: #ccc;
+}
+
+.td-btn-delete {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 32px;
+	height: 32px;
+	border-radius: 7px;
+	border: 1px solid transparent;
+	background: transparent;
+	color: #6b7280;
+	cursor: pointer;
+	transition:
+		color 0.15s,
+		background 0.15s,
+		border-color 0.15s;
+}
+.td-btn-delete:hover {
+	color: #ef4444;
+	background: rgba(239, 68, 68, 0.1);
+	border-color: rgba(239, 68, 68, 0.25);
+}
+
+.td-header__titulo {
+	font-family: "Barlow", sans-serif;
+	font-size: 18px;
+	font-weight: 700;
+	color: #e8e8e8;
+	margin: 0;
+	line-height: 1.35;
+}
+
+.td-vencida-banner {
+	margin-top: 10px;
+	padding: 8px 12px;
+	background: rgba(245, 158, 11, 0.08);
+	border: 1px solid rgba(245, 158, 11, 0.25);
+	border-radius: 7px;
+	font-family: "Barlow", sans-serif;
+	font-size: 13px;
+	font-weight: 600;
+	color: #f59e0b;
+}
+
+/* ─── Chip ─── */
+.td-chip {
+	display: inline-flex;
+	align-items: center;
+	padding: 4px 10px;
+	border-radius: 5px;
+	font-family: "Barlow Condensed", sans-serif;
+	font-size: 12px;
+	font-weight: 700;
+	letter-spacing: 0.5px;
+	text-transform: uppercase;
+}
+
+/* ─── Body ─── */
+.td-body {
+	flex: 1;
+	overflow-y: auto;
+	padding: 20px;
+	display: flex;
+	flex-direction: column;
+	gap: 24px;
+	scrollbar-width: thin;
+	scrollbar-color: #222 transparent;
+}
+
+.td-body::-webkit-scrollbar {
+	width: 4px;
+}
+
+.td-body::-webkit-scrollbar-thumb {
+	background: #222;
+	border-radius: 4px;
+}
+
+/* Chips row */
+.td-chips-row {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 8px;
+}
+
+/* ─── Section ─── */
+.td-section {
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+}
+
+.td-section-header {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.td-section-label {
+	font-family: "Barlow Condensed", sans-serif;
+	font-size: 12px;
+	font-weight: 700;
+	color: #444;
+	text-transform: uppercase;
+	letter-spacing: 1.2px;
+	display: flex;
+	align-items: center;
+	gap: 6px;
+}
+
+.td-notas-count {
+	color: #555;
+	font-size: 11px;
+}
+
+/* ─── Edit button ─── */
+.td-btn-edit {
+	display: flex;
+	align-items: center;
+	gap: 6px;
+	padding: 5px 12px;
+	background: transparent;
+	border: 1px solid #252525;
+	border-radius: 6px;
+	color: #555;
+	font-family: "Barlow", sans-serif;
+	font-size: 12px;
+	font-weight: 500;
+	cursor: pointer;
+	transition: all 0.12s;
+}
+
+.td-btn-edit:hover {
+	background: #1a1a1a;
+	color: #aaa;
+	border-color: #333;
+}
+
+/* ─── Data list ─── */
+.td-data-list {
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+}
+
+.td-data-row {
+	display: flex;
+	align-items: baseline;
+	gap: 12px;
+}
+
+.td-data-label {
+	font-family: "Barlow Condensed", sans-serif;
+	font-size: 12px;
+	font-weight: 600;
+	color: #444;
+	text-transform: uppercase;
+	letter-spacing: 0.7px;
+	white-space: nowrap;
+	min-width: 100px;
+}
+
+.td-data-value {
+	font-family: "Barlow", sans-serif;
+	font-size: 15px;
+	color: #ccc;
+	font-weight: 500;
+}
+
+.td-data-value--highlight {
+	color: #f59e0b;
+	font-weight: 600;
+}
+
+.td-descripcion-block {
+	display: flex;
+	flex-direction: column;
+	gap: 5px;
+	margin-top: 4px;
+}
+
+.td-descripcion {
+	font-family: "Barlow", sans-serif;
+	font-size: 14px;
+	color: #777;
+	line-height: 1.6;
+	margin: 0;
+	white-space: pre-line; /* ← esto */
+}
+
+/* ─── Edit form ─── */
+.td-edit-form {
+	display: flex;
+	flex-direction: column;
+	gap: 14px;
+	padding: 16px;
+	background: #0d0d0d;
+	border: 1px solid #1e1e1e;
+	border-radius: 10px;
+}
+
+.td-field {
+	display: flex;
+	flex-direction: column;
+	gap: 5px;
+}
+
+.td-field-row {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: 10px;
+}
+
+.td-field-label {
+	font-family: "Barlow Condensed", sans-serif;
+	font-size: 11px;
+	font-weight: 700;
+	color: #444;
+	text-transform: uppercase;
+	letter-spacing: 0.8px;
+}
+
+.td-input {
+	background: #111;
+	border: 1px solid #222;
+	border-radius: 7px;
+	font-family: "Barlow", sans-serif;
+	font-size: 14px;
+	color: #ccc;
+	padding: 9px 11px;
+	transition: border-color 0.15s;
+	width: 100%;
+	box-sizing: border-box;
+}
+
+.td-input:focus {
+	outline: none;
+	border-color: #cc0000;
+}
+
+.td-input::placeholder {
+	color: #333;
+}
+
+.td-input[type="date"]::-webkit-calendar-picker-indicator {
+	filter: invert(0.3);
+	cursor: pointer;
+}
+
+.td-select {
+	background: #111;
+	border: 1px solid #222;
+	border-radius: 7px;
+	font-family: "Barlow", sans-serif;
+	font-size: 14px;
+	color: #ccc;
+	padding: 9px 28px 9px 11px;
+	cursor: pointer;
+	appearance: none;
+	background-image: url("data:image/svg+xml,%3Csvg width='10' height='6' viewBox='0 0 10 6' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1L5 5L9 1' stroke='%23444' stroke-width='1.5' stroke-linecap='round'/%3E%3C/svg%3E");
+	background-repeat: no-repeat;
+	background-position: right 10px center;
+	width: 100%;
+	box-sizing: border-box;
+	transition: border-color 0.15s;
+}
+
+.td-select:focus {
+	outline: none;
+	border-color: #cc0000;
+}
+
+.td-select option {
+	background: #1a1a1a;
+	color: #ccc;
+}
+
+.td-edit-actions {
+	display: flex;
+	gap: 8px;
+	margin-top: 4px;
+}
+
+.td-btn-save {
+	flex: 1;
+	padding: 10px;
+	background: #cc0000;
+	border: none;
+	border-radius: 7px;
+	color: #fff;
+	font-family: "Barlow", sans-serif;
+	font-size: 14px;
+	font-weight: 700;
+	cursor: pointer;
+	transition: background 0.12s;
+}
+
+.td-btn-save:hover {
+	background: #e60000;
+}
+
+.td-btn-cancel-edit {
+	padding: 10px 16px;
+	background: transparent;
+	border: 1px solid #222;
+	border-radius: 7px;
+	color: #555;
+	font-family: "Barlow", sans-serif;
+	font-size: 14px;
+	cursor: pointer;
+	transition: all 0.12s;
+}
+
+.td-btn-cancel-edit:hover {
+	background: #1a1a1a;
+	color: #888;
+}
+
+/* ─── Textarea ─── */
+.td-textarea {
+	width: 100%;
+	background: #0d0d0d;
+	border: 1px solid #222;
+	border-radius: 7px;
+	font-family: "Barlow", sans-serif;
+	font-size: 14px;
+	color: #ccc;
+	padding: 10px 12px;
+	resize: vertical;
+	transition: border-color 0.15s;
+	box-sizing: border-box;
+	min-height: 68px;
+}
+
+.td-textarea:focus {
+	outline: none;
+	border-color: #cc0000;
+}
+
+.td-textarea::placeholder {
+	color: #333;
+}
+
+.td-textarea--sm {
+	min-height: 56px;
+}
+
+/* ─── Estado buttons ─── */
+.td-estado-btns {
+	display: flex;
+	flex-direction: column;
+	gap: 8px;
+}
+
+.td-estado-btn {
+	padding: 12px 16px;
+	border-radius: 8px;
+	font-family: "Barlow", sans-serif;
+	font-size: 14px;
+	font-weight: 600;
+	cursor: pointer;
+	transition:
+		opacity 0.12s,
+		transform 0.1s;
+	text-align: center;
+}
+
+.td-estado-btn:hover {
+	opacity: 0.85;
+	transform: translateY(-1px);
+}
+
+/* ─── Confirm block ─── */
+.td-confirm-block {
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+	padding: 14px;
+	background: rgba(76, 175, 80, 0.06);
+	border: 1px solid rgba(76, 175, 80, 0.18);
+	border-radius: 9px;
+}
+
+.td-confirm-text {
+	font-family: "Barlow", sans-serif;
+	font-size: 14px;
+	color: #ccc;
+	margin: 0;
+}
+
+.td-confirm-btns {
+	display: flex;
+	gap: 8px;
+}
+
+.td-btn-confirm {
+	flex: 1;
+	padding: 10px;
+	background: rgba(76, 175, 80, 0.15);
+	border: 1px solid rgba(76, 175, 80, 0.35);
+	border-radius: 7px;
+	color: #4caf50;
+	font-family: "Barlow", sans-serif;
+	font-size: 14px;
+	font-weight: 600;
+	cursor: pointer;
+	transition: opacity 0.12s;
+}
+
+.td-btn-confirm:hover {
+	opacity: 0.8;
+}
+
+.td-btn-cancel-confirm {
+	flex: 1;
+	padding: 10px;
+	background: #111;
+	border: 1px solid #222;
+	border-radius: 7px;
+	color: #666;
+	font-family: "Barlow", sans-serif;
+	font-size: 14px;
+	cursor: pointer;
+	transition: opacity 0.12s;
+}
+
+.td-btn-cancel-confirm:hover {
+	opacity: 0.8;
+}
+
+/* Confirm danger (eliminar tarea) */
+.td-confirm-block--danger {
+	background: rgba(239, 68, 68, 0.06);
+	border: 1px solid rgba(239, 68, 68, 0.2);
+	border-radius: 9px;
+	padding: 14px;
+	margin-bottom: 4px;
+}
+
+.td-confirm-block--danger .td-confirm-text {
+	color: #fca5a5;
+	font-size: 13px;
+	margin-bottom: 4px;
+}
+
+.td-btn-confirm--danger {
+	background: rgba(239, 68, 68, 0.15) !important;
+	border: 1px solid rgba(239, 68, 68, 0.4) !important;
+	color: #ef4444 !important;
+}
+
+.td-btn-confirm--danger:hover:not(:disabled) {
+	background: rgba(239, 68, 68, 0.25) !important;
+}
+
+.td-btn-confirm--danger:disabled {
+	opacity: 0.5;
+	cursor: not-allowed;
+}
+
+/* ─── Notas ─── */
+.td-notas {
+	display: flex;
+	flex-direction: column;
+	gap: 12px;
+}
+
+.td-notas__lista {
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+}
+
+.td-nota {
+	padding: 12px 14px;
+	background: #0d0d0d;
+	border: 1px solid #1e1e1e;
+	border-radius: 8px;
+	border-left: 2px solid #2a2a2a;
+}
+
+.td-nota__meta {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	margin-bottom: 7px;
+}
+
+.td-nota__autor {
+	font-family: "Barlow Condensed", sans-serif;
+	font-size: 12px;
+	font-weight: 700;
+	color: #555;
+	text-transform: uppercase;
+	letter-spacing: 0.5px;
+}
+
+.td-nota__fecha {
+	font-family: "Barlow", sans-serif;
+	font-size: 11px;
+	color: #333;
+}
+
+.td-nota__actions {
+	display: flex;
+	align-items: center;
+	gap: 4px;
+}
+
+.td-nota__btn {
+	width: 26px;
+	height: 26px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background: transparent;
+	border: 1px solid transparent;
+	border-radius: 5px;
+	color: #333;
+	cursor: pointer;
+	transition: all 0.12s;
+	flex-shrink: 0;
+}
+
+.td-nota__btn:hover {
+	background: #1a1a1a;
+	border-color: #2a2a2a;
+	color: #888;
+}
+
+.td-nota__btn--delete:hover {
+	background: rgba(204, 0, 0, 0.08);
+	border-color: rgba(204, 0, 0, 0.2);
+	color: #cc0000;
+}
+
+.td-nota__edit {
+	display: flex;
+	flex-direction: column;
+	gap: 7px;
+	margin-top: 4px;
+}
+
+.td-nota__edit-btns {
+	display: flex;
+	gap: 6px;
+}
+
+.td-nota__btn-guardar {
+	flex: 1;
+	padding: 7px 12px;
+	background: rgba(204, 0, 0, 0.12);
+	border: 1px solid rgba(204, 0, 0, 0.3);
+	border-radius: 6px;
+	color: #cc0000;
+	font-family: "Barlow", sans-serif;
+	font-size: 13px;
+	font-weight: 600;
+	cursor: pointer;
+	transition: opacity 0.12s;
+}
+
+.td-nota__btn-guardar:hover:not(:disabled) {
+	opacity: 0.8;
+}
+
+.td-nota__btn-guardar:disabled {
+	opacity: 0.3;
+	cursor: not-allowed;
+}
+
+.td-nota__btn-cancelar {
+	padding: 7px 12px;
+	background: transparent;
+	border: 1px solid #222;
+	border-radius: 6px;
+	color: #555;
+	font-family: "Barlow", sans-serif;
+	font-size: 13px;
+	cursor: pointer;
+	transition: all 0.12s;
+}
+
+.td-nota__btn-cancelar:hover {
+	background: #1a1a1a;
+	color: #888;
+}
+
+.td-nota__confirm-delete {
+	display: flex;
+	flex-direction: column;
+	gap: 7px;
+	margin-top: 4px;
+}
+
+.td-nota__confirm-text {
+	font-family: "Barlow", sans-serif;
+	font-size: 13px;
+	color: #888;
+}
+
+.td-nota__btn-eliminar {
+	flex: 1;
+	padding: 7px 12px;
+	background: rgba(204, 0, 0, 0.1);
+	border: 1px solid rgba(204, 0, 0, 0.25);
+	border-radius: 6px;
+	color: #cc0000;
+	font-family: "Barlow", sans-serif;
+	font-size: 13px;
+	font-weight: 600;
+	cursor: pointer;
+	transition: opacity 0.12s;
+}
+
+.td-nota__btn-eliminar:hover {
+	opacity: 0.75;
+}
+
+.td-nota__texto {
+	font-family: "Barlow", sans-serif;
+	font-size: 14px;
+	color: #aaa;
+	margin: 0;
+	line-height: 1.55;
+}
+
+.td-notas__add {
+	display: flex;
+	flex-direction: column;
+	gap: 8px;
+}
+
+.td-btn-nota {
+	padding: 10px;
+	background: rgba(204, 0, 0, 0.1);
+	border: 1px solid rgba(204, 0, 0, 0.25);
+	border-radius: 7px;
+	color: rgba(204, 0, 0, 0.8);
+	font-family: "Barlow", sans-serif;
+	font-size: 13px;
+	font-weight: 600;
+	cursor: pointer;
+	transition: all 0.12s;
+}
+
+.td-btn-nota:hover:not(:disabled) {
+	background: rgba(204, 0, 0, 0.18);
+	color: #cc0000;
+}
+
+.td-btn-nota:disabled {
+	opacity: 0.3;
+	cursor: not-allowed;
+}
+
+@media (max-width: 600px) {
+	.td-header {
+		padding: 16px 14px;
+	}
+	.td-body {
+		padding: 14px;
+		gap: 18px;
+	}
+	.td-header__titulo {
+		font-size: 15px;
+	}
+	.td-field-row {
+		grid-template-columns: 1fr;
+	}
+	.td-edit-actions {
+		flex-direction: column;
+	}
+	.td-confirm-btns {
+		flex-direction: column;
+	}
+}

@@ -1,0 +1,305 @@
+.contacto-drawer-paper {
+  width: 500px !important;
+  background: #111 !important;
+  border-left: 1px solid #1e1e1e !important;
+}
+
+.contacto-drawer-root {
+  height: 100%;
+  overflow-y: auto;
+  overflow-x: hidden;
+  display: flex;
+  flex-direction: column;
+  scrollbar-width: thin;
+  scrollbar-color: #2a2a2a transparent;
+}
+
+/* Header */
+.contacto-drawer-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 20px 16px;
+  flex-shrink: 0;
+}
+
+/* Visita pendiente */
+.contacto-drawer-visita-banner {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0 16px 12px;
+  padding: 8px 12px;
+  background: rgba(245, 158, 11, 0.1);
+  border: 1px solid rgba(245, 158, 11, 0.25);
+  border-radius: 8px;
+  color: #f59e0b;
+  font-size: 12.5px;
+  font-weight: 600;
+  font-family: 'Barlow', sans-serif;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.contacto-drawer-visita-banner:hover {
+  background: rgba(245, 158, 11, 0.16);
+}
+
+.contacto-drawer-avatar {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: #1a1a2e;
+  color: #8888cc;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700;
+  font-size: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  position: relative;
+}
+
+.contacto-drawer-avatar-canal {
+  position: absolute;
+  bottom: -2px;
+  right: -2px;
+  background: #111;
+  border-radius: 50%;
+  width: 16px;
+  height: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.contacto-drawer-header-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.contacto-drawer-nombre {
+  font-family: 'Barlow', sans-serif !important;
+  font-size: 17px !important;
+  font-weight: 600 !important;
+  color: #e0e0e0 !important;
+}
+
+.contacto-drawer-telefono {
+  font-size: 14px !important;
+  color: #555 !important;
+}
+
+.contacto-drawer-close {
+  color: #555 !important;
+}
+.contacto-drawer-close:hover {
+  color: #ccc !important;
+}
+
+/* Divider */
+.contacto-drawer-divider {
+  border-color: #1e1e1e !important;
+  flex-shrink: 0;
+}
+
+/* Section */
+.contacto-drawer-section {
+  padding: 16px;
+}
+
+.contacto-drawer-section-label {
+  font-family: 'Barlow Condensed', sans-serif !important;
+  font-size: 14px !important;
+  font-weight: 700 !important;
+  color: #797979 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 1px !important;
+}
+
+/* Datos */
+.contacto-drawer-datos {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.contacto-drawer-dato {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.contacto-drawer-dato.full {
+  grid-column: 1 / -1;
+}
+
+.contacto-drawer-dato-label {
+  font-size: 14px;
+  color: #6e6e6e;
+  text-transform: uppercase;
+  letter-spacing: 0.7px;
+  font-family: 'Barlow', sans-serif;
+}
+
+.contacto-drawer-dato-valor {
+  font-size: 15px;
+  color: #ccc;
+  font-family: 'Barlow', sans-serif;
+  font-weight: 500;
+}
+
+/* Visita */
+.contacto-drawer-visita {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #cc0000;
+  font-family: 'Barlow', sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  background: rgba(204,0,0,0.07);
+  border: 1px solid rgba(204,0,0,0.15);
+  border-radius: 7px;
+  padding: 10px 12px;
+}
+
+/* Sin perfil */
+.contacto-drawer-sin-perfil {
+  font-size: 14px !important;
+  color: #444 !important;
+  font-style: italic;
+}
+
+/* ── Resumen IA ─────────────────────────────── */
+.resumen-ia__label-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.resumen-ia__card {
+  background: #0d0d0d;
+  border: 1px solid #1e1e1e;
+  border-radius: 8px;
+  padding: 12px 14px;
+  min-height: 72px;
+}
+
+.resumen-ia__texto {
+  font-family: 'Barlow', sans-serif !important;
+  font-size: 16px !important;
+  color: #c5c5c5 !important;
+  line-height: 1.6 !important;
+}
+
+.resumen-ia__error {
+  font-size: 12px !important;
+  color: #444 !important;
+  font-style: italic;
+}
+
+/* Skeleton */
+.resumen-ia__skeleton-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.resumen-ia__skeleton {
+  height: 12px;
+  border-radius: 4px;
+  background: linear-gradient(90deg, #1a1a1a 25%, #242424 50%, #1a1a1a 75%);
+  background-size: 200% 100%;
+  animation: skeletonShimmer 1.4s ease-in-out infinite;
+}
+
+@keyframes skeletonShimmer {
+  0%   { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+} 
+
+/* ── Notas ─────────────────────────────────── */
+.contacto-drawer-notas-lista {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+
+.contacto-drawer-nota {
+  background: #0d0d0d;
+  border: 1px solid #1e1e1e;
+  border-radius: 8px;
+  padding: 9px 11px;
+}
+
+.contacto-drawer-nota-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 4px;
+}
+
+.contacto-drawer-nota-fecha {
+  font-size: 11px;
+  color: #555;
+  font-family: 'Barlow', sans-serif;
+}
+
+.contacto-drawer-nota-eliminar {
+  background: none;
+  border: none;
+  color: #444;
+  cursor: pointer;
+  padding: 2px;
+  display: flex;
+}
+
+.contacto-drawer-nota-eliminar:hover {
+  color: #cc0000;
+}
+
+.contacto-drawer-nota-texto {
+  font-family: 'Barlow', sans-serif !important;
+  font-size: 14px !important;
+  color: #c5c5c5 !important;
+  line-height: 1.5 !important;
+  white-space: pre-wrap;
+}
+
+.contacto-drawer-nota-add {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.contacto-drawer-nota-input {
+  background: #0d0d0d;
+  border: 1px solid #1e1e1e;
+  border-radius: 8px;
+  padding: 8px 10px;
+  color: #ddd;
+  font-family: 'Barlow', sans-serif;
+  font-size: 13px;
+  resize: vertical;
+}
+
+.contacto-drawer-nota-input:focus {
+  outline: none;
+  border-color: #3b82f6;
+}
+
+@media (max-width: 768px) {
+  .contacto-drawer-paper {
+    width: 100% !important;
+    top: 70px !important; /* altura de la navbar */
+    /* Sin esto, el panel seguía midiendo 100% del viewport (heredado de MUI)
+       y con el "top" desplazado se pasaba 70px por debajo de la pantalla —
+       cortando el contenido final (el botón "Agendar visita") sin poder
+       hacerle scroll para llegar a él. */
+    height: calc(100vh - 70px) !important;
+  }
+}

@@ -1,0 +1,241 @@
+/* components/CRM/Calendario/CalendarioGrid/CalendarioGrid.css */
+
+.cal-grid {
+	flex: 1;
+	display: flex;
+	flex-direction: column;
+	min-height: 0;
+	overflow: hidden;
+}
+
+/* ── Encabezados ── */
+.cal-grid__header {
+	display: grid;
+	grid-template-columns: repeat(7, 1fr);
+	border-bottom: 1px solid #1a1a1a;
+	flex-shrink: 0;
+}
+
+.cal-grid__day-label {
+	padding: 8px 0 7px;
+	text-align: center;
+	font-family: "Barlow Condensed", sans-serif;
+	font-size: 11px;
+	font-weight: 700;
+	color: #444;
+	letter-spacing: 0.8px;
+	text-transform: uppercase;
+}
+
+.cal-grid__day-label--short {
+	display: none;
+}
+.cal-grid__day-label--full {
+	display: inline;
+}
+
+/* ── Cuerpo ── */
+.cal-grid__body {
+	flex: 1;
+	display: grid;
+	grid-template-columns: repeat(7, 1fr);
+	grid-auto-rows: 1fr;
+	min-height: 0;
+	overflow-y: auto;
+	scrollbar-width: thin;
+	scrollbar-color: #1e1e1e transparent;
+}
+
+.cal-grid__body::-webkit-scrollbar {
+	width: 4px;
+}
+.cal-grid__body::-webkit-scrollbar-thumb {
+	background: #1e1e1e;
+	border-radius: 2px;
+}
+
+/* ── Celda ── */
+.cal-grid__cell {
+	border-right: 1px solid #141414;
+	border-bottom: 1px solid #141414;
+	padding: 7px 6px 6px;
+	display: flex;
+	flex-direction: column;
+	gap: 3px;
+	min-height: 90px;
+	background: #0a0a0a;
+	cursor: pointer;
+	transition: background 0.1s;
+	overflow: hidden;
+	min-width: 0;
+}
+
+.cal-grid__cell:hover {
+	background: #0e0e0e;
+}
+
+.cal-grid__cell:nth-child(7n) {
+	border-right: none;
+}
+
+/* Días de otro mes */
+.cal-grid__cell--out {
+	background: #080808;
+	cursor: default;
+}
+.cal-grid__cell--out .cal-grid__cell-num {
+	color: #282828;
+}
+
+/* Hoy */
+.cal-grid__cell--today .cal-grid__cell-num {
+	background: #cc0000;
+	color: #fff;
+}
+.cal-grid__cell--today:hover .cal-grid__cell-num {
+	background: #e60000;
+}
+
+/* ── Top row (número + badge) ── */
+.cal-grid__cell-top {
+	display: flex;
+	align-items: center;
+	gap: 4px;
+	flex-shrink: 0;
+}
+
+.cal-grid__cell-num {
+	font-family: "Barlow Condensed", sans-serif;
+	font-size: 13px;
+	font-weight: 700;
+	color: #555;
+	width: 22px;
+	height: 22px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	border-radius: 50%;
+	line-height: 1;
+	flex-shrink: 0;
+	align-self: flex-start;
+	transition:
+		background 0.15s,
+		color 0.15s;
+}
+
+/* Dot alerta */
+.cal-grid__cell-alerta-dot {
+	width: 5px;
+	height: 5px;
+	border-radius: 50%;
+	background: #ffc107;
+	flex-shrink: 0;
+	margin-bottom: 1px;
+}
+
+.cal-grid__cell--alerta {
+	border-left: 2px solid rgba(255, 193, 7, 0.25);
+}
+
+/* Citas */
+.cal-grid__cell-citas {
+	display: flex;
+	flex-direction: column;
+	gap: 2px;
+	overflow: hidden;
+	min-width: 0; /* ← esto es clave para que el ellipsis funcione en flexbox */
+	width: 100%;
+}
+
+/* Resumen "N eventos" cuando el día tiene más de MAX_CITAS_VISIBLES */
+.cal-grid__resumen-btn {
+	width: 100%;
+	padding: 4px 8px;
+	background: rgba(255, 255, 255, 0.06);
+	border: 1px solid rgba(255, 255, 255, 0.12);
+	border-radius: 4px;
+	color: rgba(255, 255, 255, 0.75);
+	font-family: "Barlow", sans-serif;
+	font-size: 13px;
+	font-weight: 600;
+	text-align: left;
+	cursor: pointer;
+	transition: background 0.15s, border-color 0.15s;
+}
+.cal-grid__resumen-btn:hover {
+	background: rgba(255, 255, 255, 0.12);
+	border-color: rgba(255, 255, 255, 0.22);
+}
+
+@media (max-width: 640px) {
+	.cal-grid__resumen-btn {
+		font-size: 10px;
+		padding: 3px 5px;
+	}
+}
+
+/* Popover con el listado completo del día */
+.cal-grid__resumen-popover {
+	background: #111 !important;
+	border: 1px solid rgba(255, 255, 255, 0.12) !important;
+	border-radius: 8px !important;
+	margin-top: 4px;
+}
+
+.cal-grid__resumen-lista {
+	display: flex;
+	flex-direction: column;
+	gap: 4px;
+	padding: 8px;
+	min-width: 220px;
+	max-width: 320px;
+	max-height: 320px;
+	overflow-y: auto;
+}
+
+/* ══════════════════════════════════════════════
+   RESPONSIVE — mobile: estilo Google Calendar
+   ══════════════════════════════════════════════ */
+@media (max-width: 640px) {
+	/* Encabezados: solo inicial */
+	.cal-grid__day-label--full {
+		display: none;
+	}
+	.cal-grid__day-label--short {
+		display: inline;
+	}
+
+	.cal-grid__day-label {
+		font-size: 10px;
+		padding: 6px 0 5px;
+	}
+
+	/* Cuerpo: scroll vertical, filas con altura fija igual para todas */
+	.cal-grid__body {
+		overflow-y: auto;
+		grid-auto-rows: 100px !important;
+	}
+
+	/* Celda: altura fija, sin min-height que la estire */
+	.cal-grid__cell {
+		min-height: unset !important;
+		height: 100px;
+		overflow: hidden;
+		padding: 5px 3px;
+		gap: 3px;
+	}
+
+	/* Número más pequeño */
+	.cal-grid__cell-num {
+		font-size: 11px;
+		width: 20px;
+		height: 20px;
+	}
+
+	/* Las citas se apilan verticalmente, texto visible */
+	.cal-grid__cell-citas {
+		flex-direction: column;
+		gap: 2px;
+		overflow: hidden; /* si hay muchas, se cortan dentro de la celda */
+	}
+}

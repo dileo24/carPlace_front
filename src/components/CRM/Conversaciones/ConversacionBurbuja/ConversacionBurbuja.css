@@ -1,0 +1,229 @@
+.burbuja-wrapper {
+	display: flex;
+	margin-bottom: 4px;
+}
+
+.burbuja-wrapper.saliente {
+	justify-content: flex-end;
+}
+
+.burbuja-wrapper.entrante {
+	justify-content: flex-start;
+}
+
+.burbuja {
+	max-width: 68%;
+	padding: 9px 13px 7px;
+	border-radius: 14px;
+	position: relative;
+	word-break: break-word;
+}
+
+.burbuja--entrante {
+	background: #1c1c1c;
+	border: 1px solid #2a2a2a;
+	border-bottom-left-radius: 4px;
+	color: #e8e8e8;
+}
+
+.burbuja--saliente {
+	background: #1a0505;
+	border: 1px solid #3a0808;
+	border-bottom-right-radius: 4px;
+	color: #f0d0d0;
+}
+
+.burbuja__texto {
+	margin: 0 0 4px;
+	font-size: 15px;
+	line-height: 1.5;
+	font-family: "Barlow", sans-serif;
+	color: inherit;
+	white-space: pre-wrap;
+}
+
+.burbuja__meta {
+	display: flex;
+	align-items: center;
+	gap: 6px;
+	justify-content: flex-end;
+}
+
+.burbuja__hora {
+	font-size: 12px;
+	font-weight: 600;
+	color: #8d8d8d;
+	font-family: "Barlow", sans-serif;
+	letter-spacing: 0.02em;
+}
+
+.burbuja--saliente .burbuja__hora {
+	color: #884444;
+}
+
+.burbuja--oculto {
+	opacity: 0.55;
+	outline: 1px dashed #cc0000;
+}
+
+.burbuja__oculto-aviso {
+	font-family: "Barlow Condensed", sans-serif;
+	font-size: 11px;
+	font-weight: 700;
+	text-transform: uppercase;
+	letter-spacing: 0.4px;
+	color: #ff6b6b;
+	margin: -2px 0 5px;
+}
+
+.burbuja__btn-ocultar {
+	background: none;
+	border: none;
+	padding: 0;
+	margin-left: 4px;
+	font-size: 11px;
+	color: #8d8d8d;
+	cursor: pointer;
+	opacity: 0.7;
+	transition: opacity 0.15s;
+}
+.burbuja__btn-ocultar:hover {
+	opacity: 1;
+	text-decoration: underline;
+}
+
+.burbuja__autor-badge {
+	display: inline-flex;
+	align-items: center;
+	gap: 3px;
+	font-size: 10px;
+	font-family: "Barlow Condensed", sans-serif;
+	letter-spacing: 0.04em;
+	text-transform: uppercase;
+	padding: 1px 5px;
+	border-radius: 3px;
+	font-weight: 600;
+}
+
+.burbuja__autor-badge--bot {
+	color: #3b82f6;
+	background: rgba(59, 130, 246, 0.1);
+	border: 1px solid rgba(59, 130, 246, 0.2);
+}
+
+.burbuja__autor-badge--asesor {
+	color: #f97316;
+	background: rgba(249, 115, 22, 0.1);
+	border: 1px solid rgba(249, 115, 22, 0.2);
+}
+
+.burbuja__media-placeholder {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	padding: 4px 0;
+}
+
+.burbuja__media-icono {
+	font-size: 20px;
+}
+
+.burbuja__media-label {
+	font-size: 13px;
+	opacity: 0.8;
+}
+
+.burbuja__imagen {
+	max-width: 240px;
+	border-radius: 8px;
+	cursor: pointer;
+	display: block;
+}
+
+.burbuja__audio {
+	display: flex;
+	flex-direction: column;
+	gap: 6px;
+	min-width: 220px;
+}
+
+.burbuja__audio-player {
+	width: 100%;
+	height: 36px;
+	border-radius: 8px;
+}
+
+.burbuja__audio-transcripcion {
+	font-size: 12px;
+	opacity: 0.75;
+	margin: 0;
+	font-style: italic;
+}
+
+.burbuja__video {
+	max-width: 260px;
+	border-radius: 8px;
+}
+
+.burbuja__cita {
+	border-left: 3px solid rgba(255, 255, 255, 0.3);
+	padding: 4px 8px;
+	margin-bottom: 6px;
+	border-radius: 4px;
+	background: rgba(255, 255, 255, 0.07);
+}
+
+.burbuja__cita-autor {
+	font-size: 11px;
+	font-weight: 600;
+	color: rgba(255, 255, 255, 0.6);
+	display: block;
+	margin-bottom: 2px;
+}
+
+.burbuja__cita-texto {
+	font-size: 12px;
+	color: rgba(255, 255, 255, 0.5);
+	margin: 0;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+.burbuja__audio-wrap {
+	display: flex;
+	flex-direction: column;
+	gap: 4px;
+}
+
+.burbuja__audio-speeds {
+	display: flex;
+	gap: 4px;
+}
+
+.burbuja__audio-speed-btn {
+	background: rgba(255, 255, 255, 0.07);
+	border: 1px solid rgba(255, 255, 255, 0.12);
+	border-radius: 4px;
+	color: #888;
+	font-family: "Barlow", sans-serif;
+	font-size: 11px;
+	font-weight: 600;
+	padding: 2px 7px;
+	cursor: pointer;
+	transition:
+		color 0.12s,
+		background 0.12s,
+		border-color 0.12s;
+}
+
+.burbuja__audio-speed-btn:hover {
+	color: #ccc;
+	border-color: #444;
+}
+
+.burbuja__audio-speed-btn.active {
+	background: rgba(204, 0, 0, 0.15);
+	border-color: rgba(204, 0, 0, 0.4);
+	color: #cc0000;
+}

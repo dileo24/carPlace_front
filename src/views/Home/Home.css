@@ -1,0 +1,16 @@
+.ver-todos-link {
+  color: #cc0000;
+  font-weight: 600;
+  text-decoration: none;
+  font-family: 'Barlow', sans-serif;
+  font-size: 0.95rem;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  transition: all 0.2s ease;
+}
+
+.ver-todos-link:hover {
+  color: #b40000;
+  transform: scale(1.05);
+}

@@ -1,0 +1,1058 @@
+/* components/CRM/Stock/StockDrawer/StockDrawer.css */
+
+.stock-drawer__paper {
+	width: 650px !important;
+	background: #111 !important;
+	border-left: 1px solid #2a2a2a !important;
+}
+
+.stock-drawer {
+	display: flex;
+	flex-direction: column;
+	height: 100%;
+	overflow-y: auto;
+	scrollbar-width: thin;
+	scrollbar-color: #2a2a2a transparent;
+}
+
+.stock-drawer::-webkit-scrollbar {
+	width: 4px;
+}
+.stock-drawer::-webkit-scrollbar-thumb {
+	background: #2a2a2a;
+	border-radius: 2px;
+}
+
+/* ── Imagen header ── */
+.stock-drawer__img-header {
+	position: relative;
+	height: 250px;
+	background: #0a0a0a;
+	flex-shrink: 0;
+}
+
+.stock-drawer__img {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+}
+
+.stock-drawer__img-placeholder {
+	width: 100%;
+	height: 100%;
+	background: #0d0d0d;
+}
+
+.stock-drawer__close {
+	position: absolute;
+	top: 12px;
+	right: 12px;
+	width: 34px;
+	height: 34px;
+	background: rgba(0, 0, 0, 0.65);
+	border: 1px solid rgba(255, 255, 255, 0.15);
+	border-radius: 7px;
+	color: #ccc;
+	cursor: pointer;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	transition: color 0.15s;
+	backdrop-filter: blur(4px);
+}
+
+.stock-drawer__close:hover {
+	color: #fff;
+}
+
+/* ── Título ── */
+.stock-drawer__titulo {
+	padding: 18px 24px 14px;
+}
+
+.stock-drawer__ml-banner {
+	margin: 0 24px 14px;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 10px;
+	font-family: 'Barlow', sans-serif;
+	font-size: 12.5px;
+	font-weight: 600;
+	padding: 8px 12px;
+	border-radius: 6px;
+	border: 1px solid;
+}
+
+.stock-drawer__ml-banner a {
+	font-family: 'Barlow Condensed', sans-serif;
+	font-weight: 700;
+	letter-spacing: 0.3px;
+	text-decoration: none;
+	color: inherit;
+	white-space: nowrap;
+}
+
+.stock-drawer__ml-banner a:hover {
+	text-decoration: underline;
+}
+
+.stock-drawer__ml-banner--activa {
+	background: rgba(34, 197, 94, 0.08);
+	border-color: rgba(34, 197, 94, 0.25);
+	color: #4ade80;
+}
+
+.stock-drawer__ml-banner--pausada {
+	background: rgba(234, 179, 8, 0.08);
+	border-color: rgba(234, 179, 8, 0.25);
+	color: #eab308;
+}
+
+.stock-drawer__marca {
+	margin: 0;
+	font-family: "Barlow Condensed", sans-serif;
+	font-size: 15px;
+	font-weight: 700;
+	color: #777;
+	text-transform: uppercase;
+	letter-spacing: 1.2px;
+}
+
+.stock-drawer__modelo {
+	margin: 4px 0 10px;
+	font-family: "Barlow", sans-serif;
+	font-size: 24px;
+	font-weight: 600;
+	color: #f2f2f2;
+}
+
+.stock-drawer__specs {
+	display: flex;
+	gap: 8px;
+	align-items: center;
+	font-family: "Barlow", sans-serif;
+	font-size: 15px;
+	color: #929292;
+	flex-wrap: wrap;
+	margin-bottom: 12px;
+}
+
+.stock-drawer__precio-wrap {
+	display: flex;
+	align-items: baseline;
+	gap: 10px;
+}
+
+.stock-drawer__precio {
+	font-family: "Barlow Condensed", sans-serif;
+	font-size: 28px;
+	font-weight: 700;
+	color: #fff;
+}
+
+.stock-drawer__precio-tachado {
+	font-family: "Barlow Condensed", sans-serif;
+	font-size: 17px;
+	color: #555;
+	text-decoration: line-through;
+}
+
+.stock-drawer__precio-oferta {
+	font-family: "Barlow Condensed", sans-serif;
+	font-size: 28px;
+	font-weight: 700;
+	color: #cc0000;
+}
+
+/* ── Divider ── */
+.stock-drawer__divider {
+	height: 1px;
+	background: #222;
+	margin: 0 24px;
+	flex-shrink: 0;
+}
+
+/* ── Sections ── */
+.stock-drawer__section {
+	padding: 18px 24px;
+}
+
+.stock-drawer__section--row {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 16px;
+}
+
+.stock-drawer__section--toggles {
+	display: flex;
+	flex-direction: column;
+	gap: 14px;
+}
+
+.stock-drawer__section-label {
+	margin: 0 0 2px;
+	font-family: "Barlow Condensed", sans-serif;
+	font-size: 14px;
+	font-weight: 700;
+	color: #888;
+	text-transform: uppercase;
+	letter-spacing: 1.2px;
+}
+
+.stock-drawer__section-hint {
+	font-weight: 400;
+	color: #555;
+	text-transform: none;
+	letter-spacing: 0;
+}
+
+.stock-drawer__section-desc {
+	margin: 0;
+	font-family: "Barlow", sans-serif;
+	font-size: 14px;
+	color: #666;
+}
+
+/* ── Toggle row (visible) ── */
+.stock-drawer__toggle-row {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 16px;
+}
+
+.stock-drawer__toggle-desc {
+	margin: 3px 0 0;
+	font-family: "Barlow", sans-serif;
+	font-size: 14px;
+	color: #838383;
+}
+
+/* ── Estados grid ── */
+.stock-drawer__estados-grid {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: 8px;
+	margin-top: 12px;
+}
+
+.stock-drawer__estados-grid_tipos {
+	grid-template-columns: 1fr 1fr 1fr;
+}
+
+.stock-drawer__estado-btn {
+	display: flex;
+	align-items: center;
+	gap: 9px;
+	padding: 12px 16px;
+	background: #0d0d0d;
+	border: 1px solid #2a2a2a;
+	border-radius: 8px;
+	color: #777;
+	font-family: "Barlow Condensed", sans-serif;
+	font-size: 15px;
+	font-weight: 700;
+	letter-spacing: 0.5px;
+	text-transform: uppercase;
+	cursor: pointer;
+	transition: all 0.15s;
+	position: relative;
+}
+
+.stock-drawer__estado-btn:hover {
+	border-color: color-mix(in srgb, var(--e-color) 30%, transparent);
+	color: var(--e-color);
+}
+
+.stock-drawer__estado-btn--active {
+	background: color-mix(in srgb, var(--e-color) 14%, #0d0d0d);
+	border-color: color-mix(in srgb, var(--e-color) 45%, transparent);
+	color: var(--e-color);
+}
+
+.stock-drawer__estado-dot {
+	width: 9px;
+	height: 9px;
+	border-radius: 50%;
+	background: var(--e-color);
+	flex-shrink: 0;
+}
+
+.stock-drawer__check {
+	margin-left: auto;
+	color: var(--e-color);
+}
+
+/* ── Toggle switch ── */
+.stock-drawer__toggle {
+	position: relative;
+	width: 44px;
+	height: 26px;
+	background: #1e1e1e;
+	border: 1px solid #2e2e2e;
+	border-radius: 13px;
+	cursor: pointer;
+	transition:
+		background 0.2s,
+		border-color 0.2s;
+	flex-shrink: 0;
+	padding: 0;
+}
+
+.stock-drawer__toggle--on {
+	background: rgba(204, 0, 0, 0.28);
+	border-color: rgba(204, 0, 0, 0.5);
+}
+
+.stock-drawer__toggle--green {
+	background: rgba(34, 197, 94, 0.22);
+	border-color: rgba(34, 197, 94, 0.45);
+}
+
+.stock-drawer__toggle-thumb {
+	position: absolute;
+	top: 3px;
+	left: 3px;
+	width: 18px;
+	height: 18px;
+	background: #555;
+	border-radius: 50%;
+	transition:
+		transform 0.2s,
+		background 0.2s;
+}
+
+.stock-drawer__toggle--on .stock-drawer__toggle-thumb {
+	transform: translateX(18px);
+	background: #cc0000;
+}
+
+.stock-drawer__toggle--green .stock-drawer__toggle-thumb {
+	transform: translateX(18px);
+	background: #22c55e;
+}
+
+/* ── Alistaje ── */
+.stock-drawer__alistaje-header {
+	display: flex;
+	align-items: flex-start;
+	justify-content: space-between;
+	margin-bottom: 12px;
+}
+
+.stock-drawer__alistaje-progress {
+	margin: 3px 0 0;
+	font-family: "Barlow Condensed", sans-serif;
+	font-size: 14px;
+	font-weight: 600;
+	color: #6495ed;
+}
+
+.stock-drawer__alistaje-bar {
+	height: 4px;
+	background: #222;
+	border-radius: 2px;
+	overflow: hidden;
+	margin-bottom: 14px;
+}
+
+.stock-drawer__alistaje-fill {
+	height: 100%;
+	background: #6495ed;
+	border-radius: 2px;
+	transition: width 0.3s ease;
+}
+
+/* Tareas lista */
+.stock-drawer__tareas {
+	list-style: none;
+	margin: 0 0 12px;
+	padding: 0;
+	display: flex;
+	flex-direction: column;
+	gap: 6px;
+}
+
+.stock-drawer__tarea {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+	padding: 10px 12px;
+	background: #0d0d0d;
+	border: 1px solid #222;
+	border-radius: 7px;
+	transition: border-color 0.15s;
+}
+
+.stock-drawer__tarea--hecha {
+	opacity: 0.5;
+}
+
+.stock-drawer__tarea-check {
+	width: 20px;
+	height: 20px;
+	border: 1.5px solid #333;
+	border-radius: 5px;
+	background: transparent;
+	cursor: pointer;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-shrink: 0;
+	transition:
+		border-color 0.15s,
+		background 0.15s;
+	padding: 0;
+	color: #6495ed;
+}
+
+.stock-drawer__tarea--hecha .stock-drawer__tarea-check {
+	background: rgba(100, 149, 237, 0.18);
+	border-color: rgba(100, 149, 237, 0.5);
+}
+
+.stock-drawer__tarea-texto {
+	flex: 1;
+	font-family: "Barlow", sans-serif;
+	font-size: 15px;
+	color: #ccc;
+	min-width: 0;
+}
+
+.stock-drawer__tarea--hecha .stock-drawer__tarea-texto {
+	text-decoration: line-through;
+	color: #666;
+}
+
+.stock-drawer__tarea-del {
+	background: none;
+	border: none;
+	color: #333;
+	cursor: pointer;
+	padding: 3px;
+	display: flex;
+	transition: color 0.15s;
+}
+
+.stock-drawer__tarea:hover .stock-drawer__tarea-del {
+	color: #666;
+}
+
+/* Input nueva tarea */
+.stock-drawer__tarea-add {
+	display: flex;
+	gap: 7px;
+	margin-bottom: 12px;
+}
+
+.stock-drawer__tarea-input {
+	flex: 1;
+	background: #0d0d0d;
+	border: 1px solid #252525;
+	border-radius: 7px;
+	padding: 10px 14px;
+	font-family: "Barlow", sans-serif;
+	font-size: 15px;
+	color: #ddd;
+	outline: none;
+	transition: border-color 0.15s;
+}
+
+.stock-drawer__tarea-input:focus {
+	border-color: #3a3a3a;
+}
+.stock-drawer__tarea-input::placeholder {
+	color: #686868;
+}
+
+.stock-drawer__tarea-add-btn {
+	width: 38px;
+	height: 38px;
+	background: #1a1a1a;
+	border: 1px solid #2a2a2a;
+	border-radius: 7px;
+	color: #999;
+	font-size: 22px;
+	line-height: 1;
+	cursor: pointer;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	transition: all 0.15s;
+	flex-shrink: 0;
+}
+
+.stock-drawer__tarea-add-btn:hover:not(:disabled) {
+	background: rgba(100, 149, 237, 0.14);
+	border-color: rgba(100, 149, 237, 0.35);
+	color: #6495ed;
+}
+
+.stock-drawer__tarea-add-btn:disabled {
+	opacity: 0.3;
+	cursor: default;
+}
+
+/* Templates */
+.stock-drawer__templates {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 6px;
+}
+
+.stock-drawer__template-btn {
+	padding: 6px 13px;
+	background: #0d0d0d;
+	border: 1px solid #222;
+	border-radius: 5px;
+	color: #8a8a8a;
+	font-family: "Barlow", sans-serif;
+	font-size: 16px;
+	cursor: pointer;
+	transition: all 0.15s;
+	white-space: nowrap;
+}
+
+.stock-drawer__template-btn:hover {
+	border-color: #333;
+	color: #999;
+}
+
+/* ── Notas ── */
+.stock-drawer__notas {
+	width: 100%;
+	box-sizing: border-box;
+	background: #0d0d0d;
+	border: 1px solid #252525;
+	border-radius: 7px;
+	padding: 12px 14px;
+	font-family: "Barlow", sans-serif;
+	font-size: 15px;
+	color: #ddd;
+	resize: vertical;
+	outline: none;
+	transition: border-color 0.15s;
+	margin-top: 10px;
+	line-height: 1.6;
+}
+
+.stock-drawer__notas:focus {
+	border-color: #3a3a3a;
+}
+.stock-drawer__notas::placeholder {
+	color: #6b6b6b;
+}
+
+/* ── Footer ── */
+.stock-drawer__footer {
+	padding: 16px 24px 20px;
+	border-top: 1px solid #222;
+	display: flex;
+	flex-direction: column;
+	gap: 8px;
+	flex-shrink: 0;
+	margin-top: auto;
+}
+
+.stock-drawer__footer-btns {
+	display: flex;
+	gap: 10px;
+}
+
+.stock-drawer__ml-footer-warning {
+	margin: 0;
+	font-size: 11.5px;
+	color: #eab308;
+	line-height: 1.4;
+}
+
+.stock-drawer__cancel-btn {
+	flex: 1;
+	padding: 13px;
+	background: transparent;
+	border: 1px solid #2a2a2a;
+	border-radius: 8px;
+	color: #777;
+	font-family: "Barlow Condensed", sans-serif;
+	font-size: 15px;
+	font-weight: 700;
+	letter-spacing: 0.8px;
+	text-transform: uppercase;
+	cursor: pointer;
+	transition: all 0.15s;
+}
+
+.stock-drawer__cancel-btn:hover {
+	color: #aaa;
+	border-color: #3a3a3a;
+}
+
+.stock-drawer__guardar-btn {
+	flex: 2;
+	padding: 13px;
+	background: #cc0000;
+	border: none;
+	border-radius: 8px;
+	color: #fff;
+	font-family: "Barlow Condensed", sans-serif;
+	font-size: 15px;
+	font-weight: 700;
+	letter-spacing: 0.8px;
+	text-transform: uppercase;
+	cursor: pointer;
+	transition: background 0.15s;
+}
+
+.stock-drawer__guardar-btn:hover {
+	background: #e60000;
+}
+
+.stock-drawer__notas-texto {
+	font-family: "Barlow", sans-serif;
+	font-size: 15px;
+	color: #bbb;
+	line-height: 1.65;
+	margin: 0;
+	white-space: pre-wrap;
+}
+
+.stock-drawer__sin-datos {
+	font-family: "Barlow", sans-serif;
+	font-size: 14px;
+	color: #555;
+	font-style: italic;
+	margin: 0;
+}
+
+.stock-drawer__vender-btn {
+	width: 100%;
+	padding: 13px;
+	background: rgba(34, 197, 94, 0.1);
+	border: 1px solid rgba(34, 197, 94, 0.3);
+	border-radius: 8px;
+	color: #22c55e;
+	font-family: "Barlow Condensed", sans-serif;
+	font-size: 15px;
+	font-weight: 700;
+	letter-spacing: 0.8px;
+	text-transform: uppercase;
+	cursor: pointer;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 7px;
+	transition:
+		background 0.15s,
+		border-color 0.15s;
+}
+
+.stock-drawer__vender-btn:hover {
+	background: rgba(34, 197, 94, 0.18);
+	border-color: rgba(34, 197, 94, 0.5);
+}
+
+.stock-drawer__field {
+	display: flex;
+	flex-direction: column;
+	gap: 6px;
+	margin-bottom: 14px;
+}
+
+.stock-drawer__field:last-child {
+	margin-bottom: 0;
+}
+
+.stock-drawer__field-label {
+	font-family: "Barlow Condensed", sans-serif;
+	font-size: 15px;
+	font-weight: 700;
+	color: #777;
+	text-transform: uppercase;
+	letter-spacing: 0.8px;
+}
+
+.stock-drawer__field-input {
+	background: #0d0d0d;
+	border: 1px solid #252525;
+	border-radius: 7px;
+	padding: 10px 14px;
+	font-family: "Barlow", sans-serif;
+	font-size: 15px;
+	color: #ddd;
+	width: 100%;
+	box-sizing: border-box;
+	outline: none;
+	transition: border-color 0.15s;
+}
+
+.stock-drawer__field-input:focus {
+	border-color: #cc0000;
+}
+
+.stock-drawer__field-input::placeholder {
+	color: #333;
+}
+
+.stock-drawer__field-input[type="date"] {
+	color-scheme: dark;
+}
+
+/* ── Mobile ── */
+@media (max-width: 640px) {
+	/* El paper de MUI ocupa todo el ancho */
+	.stock-drawer__paper {
+		width: 100vw !important;
+	}
+
+	/* Imagen más chica */
+	.stock-drawer__img-header {
+		height: 180px;
+	}
+
+	/* Título más compacto */
+	.stock-drawer__titulo {
+		padding: 12px 16px 10px;
+	}
+
+	.stock-drawer__marca {
+		font-size: 11px;
+	}
+
+	.stock-drawer__modelo {
+		font-size: 18px;
+		margin: 2px 0 6px;
+	}
+
+	.stock-drawer__specs {
+		font-size: 12px;
+		gap: 5px;
+		margin-bottom: 8px;
+	}
+
+	.stock-drawer__precio {
+		font-size: 20px;
+	}
+
+	.stock-drawer__precio-oferta {
+		font-size: 20px;
+	}
+
+	.stock-drawer__precio-tachado {
+		font-size: 13px;
+	}
+
+	/* Dividers y secciones */
+	.stock-drawer__divider {
+		margin: 0 16px;
+	}
+
+	.stock-drawer__section {
+		padding: 12px 16px;
+	}
+
+	.stock-drawer__section-label {
+		font-size: 11px;
+	}
+
+	/* Botones de estado/tipo: más pequeños */
+	.stock-drawer__estados-grid {
+		gap: 6px;
+		margin-top: 8px;
+	}
+
+	.stock-drawer__estados-grid_tipos {
+		grid-template-columns: 1fr 1fr; /* 3 en fila es muy justo en mobile */
+	}
+
+	.stock-drawer__estado-btn {
+		padding: 8px 10px;
+		font-size: 12px;
+		gap: 6px;
+	}
+
+	.stock-drawer__estado-dot {
+		width: 7px;
+		height: 7px;
+	}
+
+	/* Toggle row */
+	.stock-drawer__toggle-desc {
+		font-size: 12px;
+	}
+
+	/* Alistaje */
+	.stock-drawer__alistaje-progress {
+		font-size: 12px;
+	}
+
+	.stock-drawer__tarea {
+		padding: 8px 10px;
+	}
+
+	.stock-drawer__tarea-texto {
+		font-size: 13px;
+	}
+
+	.stock-drawer__tarea-input {
+		font-size: 13px;
+		padding: 8px 10px;
+	}
+
+	.stock-drawer__template-btn {
+		font-size: 12px;
+		padding: 5px 10px;
+	}
+
+	/* Campos de precio */
+	.stock-drawer__field-label {
+		font-size: 11px;
+	}
+
+	.stock-drawer__field-input {
+		font-size: 13px;
+		padding: 8px 10px;
+	}
+
+	/* Notas */
+	.stock-drawer__notas {
+		font-size: 13px;
+		padding: 8px 10px;
+		margin-top: 6px;
+	}
+
+	.stock-drawer__notas-texto {
+		font-size: 13px;
+	}
+
+	/* Footer */
+	.stock-drawer__footer {
+		padding: 12px 16px 16px;
+	}
+
+	.stock-drawer__cancel-btn,
+	.stock-drawer__guardar-btn,
+	.stock-drawer__vender-btn {
+		font-size: 13px;
+		padding: 11px;
+	}
+}
+
+.stock-drawer__venta-confirm-text {
+	font-family: "Barlow", sans-serif;
+	font-size: 14px;
+	color: #aaa;
+	margin: 0 0 12px;
+}
+
+.stock-drawer__venta-confirm-btns {
+	display: flex;
+	gap: 8px;
+}
+
+.stock-drawer__venta-confirm-btns .stock-drawer__vender-btn {
+	flex: 2;
+}
+
+.stock-drawer__venta-confirm-btns .stock-drawer__cancel-btn {
+	flex: 1;
+}
+
+.stock-drawer__field-value {
+	font-family: "Barlow Condensed", sans-serif;
+	font-size: 20px;
+	font-weight: 700;
+	color: #fff;
+	margin: 4px 0 0;
+	padding: 0;
+}
+
+.stock-drawer__pub-btn {
+	display: flex;
+	align-items: center;
+	gap: 9px;
+	padding: 12px 16px;
+	background: #0d0d0d;
+	border: 1px solid #2a2a2a;
+	border-radius: 8px;
+	color: #777;
+	font-family: "Barlow Condensed", sans-serif;
+	font-size: 15px;
+	font-weight: 700;
+	letter-spacing: 0.5px;
+	text-transform: uppercase;
+	cursor: pointer;
+	transition: all 0.15s;
+}
+
+.stock-drawer__pub-btn:disabled {
+	cursor: default;
+}
+
+.stock-drawer__pub-btn--on {
+	background: color-mix(in srgb, #22c55e 14%, #0d0d0d);
+	border-color: color-mix(in srgb, #22c55e 45%, transparent);
+	color: #22c55e;
+}
+
+.stock-drawer__pub-dot {
+	width: 9px;
+	height: 9px;
+	border-radius: 50%;
+	background: currentColor;
+	flex-shrink: 0;
+}
+
+.stock-drawer__edit-link {
+	position: absolute;
+	bottom: 12px;
+	right: 15px; /* deja espacio para el botón de cerrar */
+	display: inline-flex;
+	align-items: center;
+	gap: 6px;
+	padding: 6px 12px;
+	background: rgba(150, 37, 37, 0.65);
+	border: 1px solid rgba(255, 0, 0, 0.785);
+	border-radius: 7px;
+	font-family: "Barlow Condensed", sans-serif;
+	font-size: 16px;
+	font-weight: 700;
+	letter-spacing: 0.8px;
+	text-transform: uppercase;
+	color: #dadada;
+	text-decoration: none;
+	backdrop-filter: blur(4px);
+	transition:
+		color 0.15s,
+		border-color 0.15s;
+}
+
+.stock-drawer__edit-link:hover {
+	color: #ffffff;
+	border-color: rgba(255, 255, 255, 0.3);
+}
+
+.stock-drawer__field--destacado {
+	background: rgba(204, 0, 0, 0.04);
+	border: 1px solid rgba(204, 0, 0, 0.15);
+	border-radius: 8px;
+	padding: 12px 14px;
+	margin-bottom: 0;
+}
+
+.stock-drawer__field-label--destacado {
+	color: #cc0000;
+}
+
+.stock-drawer__field-input--destacado {
+	font-size: 17px;
+	font-weight: 700;
+	color: #fff;
+	border-color: rgba(204, 0, 0, 0.25);
+}
+
+.stock-drawer__field-input--destacado:focus {
+	border-color: #cc0000;
+}
+
+/* ── Precio cliente (badge ámbar/dorado) ── */
+.stock-drawer__field--cliente {
+	background: rgba(217, 155, 27, 0.06);
+	border: 1px solid rgba(217, 155, 27, 0.25);
+	border-radius: 8px;
+	padding: 12px 14px;
+	margin-bottom: 14px;
+}
+
+.stock-drawer__field-label--cliente {
+	color: #d99b1b;
+}
+
+.stock-drawer__field-input--cliente {
+	font-size: 17px;
+	font-weight: 700;
+	color: #fff;
+	border-color: rgba(217, 155, 27, 0.35);
+}
+
+.stock-drawer__field-input--cliente:focus {
+	border-color: #d99b1b;
+}
+
+/* ── Precio de oferta ── */
+.stock-drawer__field--oferta-wrap {
+	margin-top: 30px;
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+}
+
+.stock-drawer__oferta-toggle {
+	display: inline-flex;
+	align-items: center;
+	gap: 9px;
+	background: none;
+	border: none;
+	cursor: pointer;
+	padding: 0;
+	font-family: "Barlow Condensed", sans-serif;
+	font-size: 15px;
+	font-weight: 700;
+	text-transform: uppercase;
+	letter-spacing: 0.8px;
+	color: #7c7c7c;
+	transition: color 0.15s;
+}
+
+.stock-drawer__oferta-toggle:hover {
+	color: #22c55e;
+}
+
+.stock-drawer__oferta-toggle--on {
+	color: #22c55e;
+}
+
+.stock-drawer__oferta-toggle-box {
+	width: 16px;
+	height: 16px;
+	border: 1.5px solid #333;
+	border-radius: 4px;
+	background: transparent;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-shrink: 0;
+	transition:
+		border-color 0.15s,
+		background 0.15s;
+	color: #22c55e;
+}
+
+.stock-drawer__oferta-toggle--on .stock-drawer__oferta-toggle-box {
+	border-color: rgba(34, 197, 94, 0.6);
+	background: rgba(34, 197, 94, 0.15);
+}
+
+.stock-drawer__field--oferta {
+	background: rgba(34, 197, 94, 0.04);
+	border: 1px solid rgba(34, 197, 94, 0.15);
+	border-radius: 8px;
+	padding: 12px 14px;
+	margin-bottom: 0;
+}
+
+.stock-drawer__field-label--oferta {
+	color: #22c55e;
+}
+
+.stock-drawer__field-input--oferta {
+	font-size: 17px;
+	font-weight: 700;
+	color: #fff;
+	border-color: rgba(34, 197, 94, 0.25);
+}
+
+.stock-drawer__field-input--oferta:focus {
+	border-color: #22c55e;
+}

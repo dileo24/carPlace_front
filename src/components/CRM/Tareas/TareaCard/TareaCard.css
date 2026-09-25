@@ -1,0 +1,237 @@
+/* TareaCard.css */
+
+/* ─── Chip compartido ─── */
+.tarea-chip {
+	display: inline-flex;
+	align-items: center;
+	padding: 3px 8px;
+	border-radius: 4px;
+	font-family: "Barlow Condensed", sans-serif;
+	font-size: 14px;
+	font-weight: 700;
+	letter-spacing: 0.4px;
+	text-transform: uppercase;
+	white-space: nowrap;
+}
+
+.tarea-chip--small {
+	font-size: 12px;
+	padding: 2px 6px;
+}
+
+.tarea-bot-badge {
+	display: inline-flex;
+	align-items: center;
+	padding: 1px 5px;
+	border-radius: 3px;
+	background: rgba(100, 149, 237, 0.12);
+	border: 1px solid rgba(100, 149, 237, 0.3);
+	color: #6495ed;
+	font-family: "Barlow Condensed", sans-serif;
+	font-size: 11px;
+	font-weight: 800;
+	letter-spacing: 0.6px;
+}
+
+/* ─── Vista Lista: fila ─── */
+@keyframes rowFadeIn {
+	from {
+		opacity: 0;
+		transform: translateY(6px);
+	}
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
+
+.tarea-row {
+	display: grid;
+	grid-template-columns: 1fr 140px 100px 120px 120px;
+	align-items: center;
+	gap: 8px;
+	padding: 9px 16px;
+	border-bottom: 1px solid #161616;
+	cursor: pointer;
+	transition: background 0.12s;
+	animation: rowFadeIn 0.25s ease both;
+}
+
+.tarea-row:hover {
+	background: #141414;
+}
+
+.tarea-row--vencida {
+	border-left: 2px solid #f59e0b;
+	padding-left: 14px;
+}
+
+.tarea-row__titulo {
+	display: flex;
+	align-items: center;
+	gap: 6px;
+	min-width: 0;
+}
+
+.tarea-row__titulo-text {
+	font-family: "Barlow", sans-serif;
+	font-size: 15px;
+	font-weight: 500;
+	color: #e0e0e0;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+.tarea-row__tipo,
+.tarea-row__prioridad,
+.tarea-row__estado {
+	display: flex;
+}
+
+.tarea-row__asesor {
+	font-family: "Barlow", sans-serif;
+	font-size: 14px;
+	color: #888;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+.tarea-row__cliente {
+	display: flex;
+	flex-direction: column;
+	min-width: 0;
+	font-family: "Barlow", sans-serif;
+	font-size: 14px;
+	color: #aaa;
+	overflow: hidden;
+}
+
+.tarea-row__vehiculo {
+	font-size: 13px;
+	color: #555;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+.tarea-row__empty {
+	color: #333;
+	font-size: 14px;
+}
+
+.tarea-row__fecha {
+	font-family: "Barlow", sans-serif;
+	font-size: 14px;
+	color: #666;
+	white-space: nowrap;
+	display: flex;
+	align-items: center;
+	gap: 4px;
+}
+
+.tarea-row__fecha--vencida {
+	color: #f59e0b;
+	font-weight: 600;
+}
+
+.tarea-row__venc-icon {
+	font-size: 13px;
+}
+
+/* ─── Vista Tablero: card ─── */
+@keyframes cardFadeIn {
+	from {
+		opacity: 0;
+		transform: translateY(8px) scale(0.98);
+	}
+	to {
+		opacity: 1;
+		transform: translateY(0) scale(1);
+	}
+}
+
+.tarea-kcard {
+	background: #141414;
+	border: 1px solid #1e1e1e;
+	border-radius: 8px;
+	padding: 12px;
+	cursor: pointer;
+	transition:
+		border-color 0.12s,
+		background 0.12s,
+		transform 0.12s;
+	animation: cardFadeIn 0.25s ease both;
+}
+
+.tarea-kcard:hover {
+	background: #191919;
+	border-color: #2a2a2a;
+	transform: translateY(-1px);
+}
+
+.tarea-kcard--vencida {
+	border-left: 2px solid #f59e0b;
+}
+
+.tarea-kcard__header {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 4px;
+	margin-bottom: 8px;
+}
+
+.tarea-kcard__titulo {
+	font-family: "Barlow", sans-serif;
+	font-size: 15px;
+	font-weight: 500;
+	color: #e0e0e0;
+	margin: 0 0 8px;
+	line-height: 1.4;
+}
+
+.tarea-kcard__cliente {
+	display: flex;
+	flex-direction: column;
+	margin-bottom: 8px;
+	font-family: "Barlow", sans-serif;
+	font-size: 13px;
+	color: #888;
+}
+
+.tarea-kcard__vehiculo {
+	font-size: 12px;
+	color: #555;
+	margin-top: 1px;
+}
+
+.tarea-kcard__footer {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	margin-top: 4px;
+}
+
+.tarea-kcard__asesor {
+	display: flex;
+	align-items: center;
+	font-family: "Barlow", sans-serif;
+	font-size: 13px;
+	color: #666;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+.tarea-kcard__fecha {
+	font-family: "Barlow", sans-serif;
+	font-size: 13px;
+	color: #555;
+	white-space: nowrap;
+}
+
+.tarea-kcard__fecha--vencida {
+	color: #f59e0b;
+	font-weight: 600;
+}

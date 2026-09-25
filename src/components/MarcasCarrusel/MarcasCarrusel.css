@@ -1,0 +1,97 @@
+.marcas-carrusel-outer {
+  overflow-x: auto;
+  overflow-y: hidden;
+  width: 100%;
+  -webkit-overflow-scrolling: touch;
+}
+
+.marcas-carrusel-outer::-webkit-scrollbar {
+  display: none;
+}
+
+.marcas-carrusel-track {
+  display: flex;
+  gap: 16px;
+  width: max-content;
+  animation: marcas-scroll 28s linear infinite;
+}
+
+/* pausa en desktop */
+.marcas-carrusel-track:hover {
+  animation-play-state: paused;
+}
+
+.marcas-carrusel-outer.touching .marcas-carrusel-track {
+  animation-play-state: paused;
+}
+
+@keyframes marcas-scroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.marca-chip {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #f5f5f5;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  padding: 14px 22px;
+  cursor: pointer;
+  transition: background 0.2s, border-color 0.2s, transform 0.2s;
+  flex-shrink: 0;
+  width: 140px;
+  height: 80px;
+}
+
+.marca-chip:hover {
+  background-color: #f0f0f0;
+}
+
+.marca-logo {
+  max-width: 100%;
+  max-height: 80px;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  opacity: 0.85;
+  transition: opacity 0.2s, filter 0.2s;
+}
+
+.marca-chip:hover .marca-logo {
+  opacity: 1;
+}
+
+.marca-fallback-text {
+  color: #fff;
+  font-family: "Barlow", sans-serif;
+  font-weight: 600;
+  font-size: 0.9rem;
+  letter-spacing: 0.5px;
+}
+
+@media (min-width: 769px) {
+  .marcas-carrusel-outer {
+    overflow: hidden;          /* CLAVE: bloquea scroll horizontal */
+    pointer-events: none;     /* evita wheel / drag */
+  }
+
+  .marcas-carrusel-track {
+    pointer-events: auto;     /* mantiene click en botones */
+    display: flex;
+    gap: 16px;
+    width: max-content;
+    animation: marcas-scroll 28s linear infinite;
+    will-change: transform;
+  }
+
+  .marcas-carrusel-track:hover {
+    animation-play-state: paused;
+  }
+}

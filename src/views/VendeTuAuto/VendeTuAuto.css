@@ -1,0 +1,787 @@
+/* ================================================
+   VendeTuAuto.css — Sport Quatro
+   ================================================ */
+
+@import url("https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700;800;900&family=Barlow:wght@300;400;500;600;700&display=swap");
+
+/* ── Variables ── */
+:root {
+	--rojo: #a80000;
+	--rojo-vivo: #b80000;
+	--rojo-btn: #9a0000;
+	--negro: #0a0a0a;
+	--gris-medio: #f5f5f5;
+	--texto-oscuro: #1a1a1a;
+	--texto-medio: #444;
+}
+
+.vt-container {
+	font-family: "Barlow", sans-serif;
+	background: #f5f5f5;
+	overflow-x: hidden;
+}
+
+.vt-red {
+	color: var(--rojo-vivo);
+}
+
+/* ══════════════════════════════════════
+   ANIMACIONES — Scroll Reveal
+══════════════════════════════════════ */
+@keyframes fadeUp {
+	from {
+		opacity: 0;
+		transform: translateY(28px);
+	}
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
+@keyframes fadeIn {
+	from {
+		opacity: 0;
+	}
+	to {
+		opacity: 1;
+	}
+}
+@keyframes slideRight {
+	from {
+		opacity: 0;
+		transform: translateX(-24px);
+	}
+	to {
+		opacity: 1;
+		transform: translateX(0);
+	}
+}
+@keyframes slideLeft {
+	from {
+		opacity: 0;
+		transform: translateX(24px);
+	}
+	to {
+		opacity: 1;
+		transform: translateX(0);
+	}
+}
+@keyframes scaleIn {
+	from {
+		opacity: 0;
+		transform: scale(0.94);
+	}
+	to {
+		opacity: 1;
+		transform: scale(1);
+	}
+}
+
+/* Clases utilitarias de animación (aplicadas vía JS al entrar en viewport) */
+.anim-ready {
+	opacity: 0;
+}
+.anim-fade-up {
+	animation: fadeUp 0.6s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+.anim-fade-in {
+	animation: fadeIn 0.7s ease forwards;
+}
+.anim-slide-right {
+	animation: slideRight 0.6s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+.anim-slide-left {
+	animation: slideLeft 0.6s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+.anim-scale-in {
+	animation: scaleIn 0.6s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+.anim-d1 {
+	animation-delay: 0.05s;
+}
+.anim-d2 {
+	animation-delay: 0.13s;
+}
+.anim-d3 {
+	animation-delay: 0.21s;
+}
+.anim-d4 {
+	animation-delay: 0.29s;
+}
+.anim-d5 {
+	animation-delay: 0.37s;
+}
+
+/* ══════════════════════════════════════
+   HERO — más compacto
+══════════════════════════════════════ */
+.vt-hero {
+	position: relative;
+	background: linear-gradient(125deg, #0d0d0d 0%, #1a0000 40%, #5a0808 75%, #700a0a 100%);
+	color: #fff;
+	padding: 36px 48px 36px; /* reducido de 64px/60px → 36px */
+	overflow: hidden;
+}
+
+.vt-hero-lines {
+	position: absolute;
+	inset: 0;
+	background: url("../../assets/vendeTuAuto/heroVende.webp") center/cover no-repeat;
+	background-blend-mode: multiply;
+	pointer-events: none;
+	z-index: 0;
+}
+
+.vt-hero-inner {
+	position: relative;
+	z-index: 1;
+	max-width: 1160px;
+	margin: 0 auto;
+	display: grid;
+	grid-template-columns: 1fr 1.15fr; /* video ligeramente más grande */
+	gap: 40px;
+	align-items: center;
+}
+
+/* Overline */
+.vt-overline {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+	font-family: "Barlow Condensed", sans-serif;
+	font-size: 0.72rem;
+	font-weight: 700;
+	letter-spacing: 3px;
+	color: rgba(255, 255, 255, 0.55);
+	text-transform: uppercase;
+	margin-bottom: 12px;
+}
+
+.vt-overline-bar {
+	display: inline-block;
+	width: 28px;
+	height: 2px;
+	background: var(--rojo-vivo);
+	flex-shrink: 0;
+}
+
+/* Título hero */
+.vt-hero-h1 {
+	font-family: "Barlow Condensed", sans-serif;
+	font-weight: 700;
+	font-size: clamp(1.5rem, 3vw, 3rem); /* un poco más chico */
+	line-height: 0.95;
+	text-transform: uppercase;
+	color: #fff;
+	margin: 0 0 22px;
+	letter-spacing: -1px;
+}
+
+/* Botón hero — ahora "COTIZÁ TU AUTO ↓" */
+.vt-hero-btn {
+	display: inline-flex;
+	align-items: center;
+	gap: 12px;
+	background: transparent;
+	border: 1.5px solid rgba(255, 255, 255, 0.28);
+	color: #fff;
+	border-radius: 6px;
+	padding: 12px 22px;
+	font-family: "Barlow Condensed", sans-serif;
+	font-size: 0.82rem;
+	font-weight: 700;
+	letter-spacing: 2px;
+	text-transform: uppercase;
+	cursor: pointer;
+	transition:
+		border-color 0.2s,
+		background 0.2s;
+	text-decoration: none;
+}
+
+.vt-hero-btn:hover {
+	border-color: var(--rojo-vivo);
+	background: rgba(150, 0, 0, 0.18);
+}
+
+.vt-hero-btn-arrow {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 26px;
+	height: 26px;
+	border-radius: 50%;
+	background: var(--rojo-btn);
+	flex-shrink: 0;
+	transition: transform 0.25s;
+}
+
+.vt-hero-btn:hover .vt-hero-btn-arrow {
+	transform: translateY(2px);
+}
+
+/* Video placeholder — más grande */
+.vt-video-wrap {
+	border-radius: 12px;
+	overflow: hidden;
+	background: #111;
+	border: 1px solid rgba(255, 255, 255, 0.07);
+	box-shadow: 0 24px 70px rgba(0, 0, 0, 0.65);
+}
+
+.vt-video-inner {
+	position: relative;
+	aspect-ratio: 16 / 9;
+	background: linear-gradient(135deg, #1c1c1c, #0d0d0d);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+	gap: 12px;
+}
+
+.vt-video-play {
+	width: 64px;
+	height: 64px;
+	border-radius: 50%;
+	background: var(--rojo-btn);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	box-shadow: 0 0 0 10px rgba(160, 0, 0, 0.15);
+	cursor: pointer;
+	transition:
+		transform 0.2s,
+		box-shadow 0.2s;
+}
+
+.vt-video-play:hover {
+	transform: scale(1.08);
+	box-shadow: 0 0 0 14px rgba(160, 0, 0, 0.18);
+}
+
+.vt-video-bar {
+	position: absolute;
+	bottom: 32px;
+	left: 16px;
+	right: 48px;
+	height: 3px;
+	background: rgba(255, 255, 255, 0.18);
+	border-radius: 2px;
+}
+
+.vt-video-progress {
+	width: 28%;
+	height: 100%;
+	background: var(--rojo-btn);
+	border-radius: 2px;
+}
+
+.vt-video-dot {
+	position: absolute;
+	top: 50%;
+	left: 28%;
+	transform: translate(-50%, -50%);
+	width: 10px;
+	height: 10px;
+	background: var(--rojo-btn);
+	border-radius: 50%;
+}
+
+.vt-video-time {
+	position: absolute;
+	bottom: 14px;
+	left: 16px;
+	font-family: "Barlow", sans-serif;
+	font-size: 0.72rem;
+	color: rgba(255, 255, 255, 0.5);
+}
+
+.vt-video-expand {
+	position: absolute;
+	bottom: 12px;
+	right: 14px;
+	opacity: 0.45;
+}
+
+/* ══════════════════════════════════════
+   PASOS
+══════════════════════════════════════ */
+.vt-steps {
+	padding: 15px 48px 25px;
+	text-align: center;
+}
+
+.vt-steps-title {
+	font-family: "Barlow Condensed", sans-serif;
+	font-weight: 800;
+	font-size: clamp(1.4rem, 2.5vw, 1.9rem);
+	letter-spacing: 3px;
+	text-transform: uppercase;
+	color: var(--texto-oscuro);
+	margin: 0 0 10px;
+}
+
+.vt-steps-bar {
+	width: 40px;
+	height: 3px;
+	background: var(--rojo);
+	margin: 0 auto 24px;
+}
+
+.vt-steps-grid {
+	max-width: 1160px;
+	margin: 0 auto;
+	display: flex;
+	gap: 16px;
+	justify-content: center;
+	flex-wrap: wrap;
+}
+
+.vt-step-card {
+	background: #fff;
+	border: 1px solid var(--gris-medio);
+	border-radius: 12px;
+	padding: 28px 20px 22px;
+	width: 190px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 14px;
+	transition:
+		box-shadow 0.25s,
+		transform 0.25s,
+		border-color 0.25s;
+}
+
+.vt-step-card:hover {
+	box-shadow: 0 10px 32px rgba(0, 0, 0, 0.11);
+	transform: translateY(-5px);
+	border-color: rgba(168, 0, 0, 0.18);
+}
+
+.vt-step-icon {
+	color: var(--rojo);
+}
+
+.vt-step-label {
+	font-family: "Barlow Condensed", sans-serif;
+	font-size: 0.8rem;
+	font-weight: 700;
+	letter-spacing: 1.5px;
+	text-transform: uppercase;
+	color: var(--texto-oscuro);
+	line-height: 1.4;
+	margin: 0;
+	text-align: center;
+}
+
+/* ══════════════════════════════════════
+   TRUST
+══════════════════════════════════════ */
+.vt-trust {
+	position: relative;
+	padding: 40px 48px;
+	background: #f5f5f5;
+	overflow: hidden;
+}
+
+.vt-trust-card {
+	max-width: 1160px;
+	margin: 0 auto;
+	background: #fff;
+	border-radius: 20px;
+	overflow: hidden;
+	box-shadow: 0 4px 32px rgba(0, 0, 0, 0.08);
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: 0;
+	position: relative;
+}
+
+/* Imagen full-card con fade muy agresivo desde izquierda */
+.vt-trust-bg {
+	position: absolute;
+	top: 0;
+	right: 0;
+	width: 100%;
+	height: 100%;
+	background: url("../../assets/vendeTuAuto/img1Vende.webp") right center / cover no-repeat;
+	z-index: 0;
+}
+
+/* Línea divisoria vertical gris */
+.vt-trust-card::after {
+	content: "";
+	position: absolute;
+	top: 8%;
+	bottom: 8%;
+	left: 50%;
+	width: 1px;
+	background: rgba(0, 0, 0, 0.1);
+	z-index: 2;
+	pointer-events: none;
+}
+
+.vt-trust-inner {
+	position: relative;
+	z-index: 1;
+	display: contents;
+}
+
+.vt-trust-left {
+	padding: 52px 48px;
+	max-width: 100%;
+	position: relative;
+	z-index: 1;
+}
+
+.vt-trust-h3 {
+	font-family: "Barlow", sans-serif;
+	font-size: clamp(1.7rem, 2.8vw, 2.4rem);
+	font-weight: 700;
+	color: var(--texto-oscuro);
+	line-height: 1.2;
+	margin: 0 0 10px;
+}
+
+.vt-trust-bar {
+	width: 36px;
+	height: 3px;
+	background: var(--rojo);
+	margin: 0 0 22px;
+}
+
+.vt-trust-p {
+	font-size: 0.88rem;
+	color: var(--texto-medio);
+	line-height: 1.7;
+	margin: 0 0 12px;
+}
+
+.vt-trust-highlight strong {
+	color: var(--rojo-vivo);
+	font-weight: 600;
+}
+
+.vt-trust-right {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	gap: 24px;
+	padding: 52px 44px 52px 44px;
+	position: relative;
+	z-index: 1;
+}
+
+/* Items sin card — solo ícono rojo + texto */
+.vt-trust-item {
+	display: flex;
+	align-items: center;
+	gap: 16px;
+	background: transparent;
+	border: none;
+	border-radius: 0;
+	padding: 0;
+	box-shadow: none;
+	transition: transform 0.22s;
+}
+
+.vt-trust-item:hover {
+	transform: translateX(4px);
+	box-shadow: none;
+}
+
+/* Ícono: círculo rojo más vivo con sombra suave */
+.vt-trust-icon-wrap {
+	width: 44px;
+	height: 44px;
+	border-radius: 50%;
+	background: #c0000a;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	color: #fff;
+	flex-shrink: 0;
+	box-shadow: 0 2px 10px rgba(180, 0, 10, 0.28);
+}
+
+.vt-trust-item-text {
+	font-family: "Barlow", sans-serif;
+	font-size: 0.95rem;
+	font-weight: 500;
+	color: var(--texto-oscuro);
+}
+
+/* ══════════════════════════════════════
+   FORMULARIO
+   Degradé oscuro más hacia el final (de izquierda a centro oscuro tardío)
+══════════════════════════════════════ */
+.vt-form-section {
+	position: relative;
+	overflow: hidden;
+	padding: 64px 48px;
+	color: #fff;
+}
+
+.vt-form-bg {
+	position: absolute;
+	inset: 0;
+	background:
+		linear-gradient(
+			125deg,
+			rgba(80, 8, 8, 0.45) 0%,
+			rgba(90, 10, 10, 0.55) 20%,
+			rgba(50, 6, 6, 0.8) 50%,
+			rgb(12, 2, 2) 80% /* oscurece mucho más tarde */
+		),
+		url("../../assets/img2_nosotros.webp") center/cover no-repeat;
+	background-blend-mode: multiply;
+	z-index: 0;
+}
+
+.vt-form-section::after {
+	content: "";
+	position: absolute;
+	inset: 0;
+	background-image: repeating-linear-gradient(
+		-55deg,
+		transparent,
+		transparent 38px,
+		rgba(255, 255, 255, 0.015) 38px,
+		rgba(255, 255, 255, 0.015) 39px
+	);
+	z-index: 0;
+	pointer-events: none;
+}
+
+.vt-form-inner {
+	position: relative;
+	z-index: 1;
+	max-width: 1160px;
+	margin: 0 auto;
+	display: grid;
+	grid-template-columns: 300px 1fr;
+	gap: 56px;
+	align-items: start;
+}
+
+.vt-form-h2 {
+	font-family: "Barlow Condensed", sans-serif;
+	font-weight: 900;
+	font-size: clamp(2rem, 3.5vw, 3rem);
+	text-transform: uppercase;
+	line-height: 1;
+	margin: 0 0 10px;
+	letter-spacing: 1px;
+}
+
+.vt-form-bar {
+	width: 36px;
+	height: 3px;
+	background: var(--rojo-vivo);
+	margin: 0 0 18px;
+}
+
+.vt-form-sub {
+	font-size: 0.88rem;
+	color: rgba(255, 255, 255, 0.6);
+	line-height: 1.6;
+	margin: 0;
+}
+
+/* Form */
+.vt-form {
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+}
+
+.vt-form-row {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: 10px;
+}
+
+.vt-input {
+	width: 100%;
+	background: rgba(255, 255, 255, 0.9);
+	border: 1px solid rgba(255, 255, 255, 0.12);
+	border-radius: 6px;
+	padding: 14px 16px;
+	font-family: "Barlow", sans-serif;
+	font-size: 0.92rem;
+	color: #1a1a1a;
+	outline: none;
+	box-sizing: border-box;
+	transition:
+		background 0.2s,
+		border-color 0.2s;
+}
+
+.vt-input::placeholder {
+	color: rgba(0, 0, 0, 0.38);
+}
+
+.vt-input:focus {
+	background: #fff;
+	border-color: rgba(168, 0, 0, 0.45);
+}
+
+.vt-input-full {
+	grid-column: span 2;
+}
+
+/* Botón submit — rojo más oscuro/apagado */
+.vt-submit-btn {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 10px;
+	background: #8c0000; /* más oscuro que antes */
+	color: #fff;
+	border: none;
+	border-radius: 6px;
+	padding: 17px;
+	font-family: "Barlow Condensed", sans-serif;
+	font-size: 0.92rem;
+	font-weight: 700;
+	letter-spacing: 2.5px;
+	text-transform: uppercase;
+	cursor: pointer;
+	width: 100%;
+	margin-top: 4px;
+	transition:
+		background 0.2s,
+		transform 0.15s;
+	box-shadow: 0 4px 18px rgba(130, 0, 0, 0.3);
+}
+
+.vt-submit-btn:hover {
+	background: #700000;
+	transform: translateY(-1px);
+}
+
+.vt-submit-btn:active {
+	transform: translateY(0);
+}
+
+.vt-submit-btn:disabled {
+	opacity: 0.6;
+	cursor: not-allowed;
+	transform: none;
+}
+/* ====== DESKTOP ====== */
+@media (min-width: 1100px) {
+	.vt-hero {
+		height: 82vh;
+		display: flex;
+		align-items: center;
+	}
+
+	.vt-hero-inner {
+		width: 100%;
+	}
+}
+
+/* ══════════════════════════════════════
+   TABLET  769px – 1100px
+══════════════════════════════════════ */
+@media (min-width: 769px) and (max-width: 1100px) {
+	.vt-hero {
+		padding: 30px 36px 30px;
+	}
+	.vt-hero-inner {
+		gap: 28px;
+	}
+	.vt-steps {
+		padding: 52px 36px;
+	}
+	.vt-trust-inner {
+		padding: 52px 36px;
+		gap: 36px;
+	}
+	.vt-form-section {
+		padding: 52px 36px;
+	}
+	.vt-form-inner {
+		grid-template-columns: 260px 1fr;
+		gap: 36px;
+	}
+}
+
+/* ══════════════════════════════════════
+   MOBILE  ≤ 768px
+══════════════════════════════════════ */
+@media (max-width: 768px) {
+	/* HERO */
+	.vt-hero {
+		padding: 28px 20px 28px;
+	}
+
+	.vt-hero-inner {
+		grid-template-columns: 1fr;
+		gap: 24px;
+	}
+
+	.vt-hero-h1 {
+		font-size: clamp(2.4rem, 10vw, 3.2rem);
+		margin-bottom: 18px;
+	}
+
+	/* PASOS */
+	.vt-steps {
+		padding: 48px 20px;
+	}
+
+	.vt-steps-grid {
+		gap: 12px;
+	}
+
+	.vt-step-card {
+		width: calc(50% - 8px);
+		padding: 22px 14px 18px;
+	}
+
+	/* TRUST */
+	.vt-trust {
+		padding: 24px 16px;
+	}
+
+	.vt-trust-card {
+		grid-template-columns: 1fr;
+		border-radius: 14px;
+	}
+
+	.vt-trust-card::after {
+		display: none;
+	}
+
+	.vt-trust-bg {
+		display: none;
+	}
+
+	.vt-trust-left {
+		padding: 32px 24px 20px;
+	}
+
+	.vt-trust-right {
+		padding: 0 24px 32px;
+		gap: 20px;
+	}
+
+	/* FORM */
+	.vt-form-section {
+		padding: 48px 20px;
+	}
+
+	.vt-form-inner {
+		grid-template-columns: 1fr;
+		gap: 28px;
+	}
+
+	.vt-form-row {
+		grid-template-columns: 1fr;
+	}
+}

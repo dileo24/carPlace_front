@@ -1,0 +1,262 @@
+/* components/CRM/Stock/StockFilters/StockFilters.css */
+
+.stock-filters {
+	padding: 12px 24px 0;
+	border-bottom: 1px solid #1a1a1a;
+	background: #0a0a0a;
+	flex-shrink: 0;
+}
+
+/* ── Top row ── */
+.stock-filters__top {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+	flex-wrap: wrap;
+	padding-bottom: 12px;
+}
+
+/* Búsqueda */
+.stock-filters__search {
+	position: relative;
+	display: flex;
+	align-items: center;
+	flex: 1;
+	min-width: 160px;
+	max-width: 280px;
+	margin-top: 1rem;
+}
+
+.stock-filters__search-icon {
+	position: absolute;
+	left: 10px;
+	color: #444;
+	pointer-events: none;
+}
+
+.stock-filters__search-input {
+	width: 100%;
+	background: #0d0d0d;
+	border: 1px solid #1e1e1e;
+	border-radius: 7px;
+	padding: 7px 10px 7px 32px;
+	font-family: "Barlow", sans-serif;
+	font-size: 13px;
+	color: #ccc;
+	outline: none;
+	transition: border-color 0.15s;
+}
+
+.stock-filters__search-input:focus {
+	border-color: #333;
+}
+
+.stock-filters__search-input::placeholder {
+	color: #333;
+}
+
+.stock-filters__search-clear {
+	position: absolute;
+	right: 8px;
+	background: none;
+	border: none;
+	color: #444;
+	cursor: pointer;
+	display: flex;
+	padding: 2px;
+	transition: color 0.15s;
+}
+
+.stock-filters__search-clear:hover {
+	color: #888;
+}
+
+/* Botón alistaje */
+.stock-filters__alistaje-btn {
+	display: flex;
+	align-items: center;
+	gap: 6px;
+	padding: 6px 14px;
+	background: #111;
+	border: 1px solid #1e1e1e;
+	border-radius: 7px;
+	color: rgba(255, 255, 255, 0.45);
+	font-family: "Barlow Condensed", sans-serif;
+	font-size: 13px;
+	font-weight: 700;
+	letter-spacing: 0.6px;
+	text-transform: uppercase;
+	cursor: pointer;
+	transition: all 0.15s;
+	white-space: nowrap;
+	margin-top: 1rem;
+}
+
+.stock-filters__alistaje-btn:hover {
+	border-color: rgba(100, 149, 237, 0.3);
+	color: #6495ed;
+}
+
+.stock-filters__alistaje-btn--active {
+	background: rgba(100, 149, 237, 0.1);
+	border-color: rgba(100, 149, 237, 0.35);
+	color: #6495ed;
+}
+
+/* ── Bottom row ── */
+.stock-filters__bottom {
+	display: flex;
+	align-items: center;
+	padding-bottom: 10px;
+	gap: 8px;
+	flex-wrap: wrap;
+}
+
+.stock-filters__estados {
+	display: flex;
+	gap: 6px;
+	flex-wrap: wrap;
+}
+
+.stock-filters__estado-pill {
+	display: flex;
+	align-items: center;
+	gap: 5px;
+	padding: 4px 11px;
+	background: #111;
+	border: 1px solid #1e1e1e;
+	border-radius: 20px;
+	color: rgba(255, 255, 255, 0.4);
+	font-family: "Barlow", sans-serif;
+	font-size: 13px;
+	font-weight: 500;
+	cursor: pointer;
+	transition: all 0.15s;
+	white-space: nowrap;
+}
+
+.stock-filters__estado-pill:hover {
+	border-color: #2a2a2a;
+	color: rgba(255, 255, 255, 0.65);
+}
+
+.stock-filters__estado-pill--active {
+	background: color-mix(in srgb, var(--pill-color, #cc0000) 12%, #111);
+	border-color: color-mix(in srgb, var(--pill-color, #cc0000) 35%, transparent);
+	color: #fff;
+}
+
+.stock-filters__estado-dot {
+	width: 6px;
+	height: 6px;
+	border-radius: 50%;
+	flex-shrink: 0;
+}
+
+.stock-filters__count {
+	font-family: "Barlow Condensed", sans-serif;
+	font-size: 13px;
+	font-weight: 700;
+	color: #4b4b4b;
+	text-transform: uppercase;
+	letter-spacing: 0.8px;
+	white-space: nowrap;
+}
+
+/* ── Responsive ── */
+@media (max-width: 700px) {
+	.stock-filters {
+		padding: 10px 16px 0;
+	}
+
+	.stock-filters__search {
+		max-width: 100%;
+		flex: 1 1 100%;
+		order: -1;
+	}
+}
+
+/* Toggle deshabilitado (cuando está en vista alistaje) */
+.stock-filters__toggle:disabled {
+	opacity: 0.3;
+	cursor: default;
+}
+
+/* ── Botón Nuevo auto ── */
+.stock-filters__nuevo-btn {
+	display: flex;
+	align-items: center;
+	gap: 6px;
+	padding: 6px 14px;
+	background: #cc0000;
+	border: none;
+	border-radius: 7px;
+	color: #fff;
+	font-family: "Barlow Condensed", sans-serif;
+	font-size: 13px;
+	font-weight: 700;
+	letter-spacing: 0.6px;
+	text-transform: uppercase;
+	cursor: pointer;
+	white-space: nowrap;
+	margin-left: auto;
+}
+
+.stock-filters__nuevo-btn:hover {
+	background: #e60000;
+}
+.stock-filters__select {
+	background: #111;
+	border: 1px solid #1e1e1e;
+	border-radius: 7px;
+	padding: 6px 28px 6px 10px;
+	font-family: "Barlow Condensed", sans-serif;
+	font-size: 13px;
+	font-weight: 700;
+	letter-spacing: 0.6px;
+	text-transform: uppercase;
+	color: rgba(255, 255, 255, 0.45);
+	cursor: pointer;
+	outline: none;
+	appearance: none;
+	background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%23444' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+	background-repeat: no-repeat;
+	background-position: right 8px center;
+	transition:
+		border-color 0.15s,
+		color 0.15s;
+	white-space: nowrap;
+}
+
+.stock-filters__select:hover {
+	border-color: #333;
+	color: rgba(255, 255, 255, 0.7);
+}
+
+.stock-filters__select option {
+	background: #111;
+	color: #fff;
+	text-transform: none;
+}
+
+.stock-filters__select-group {
+	display: flex;
+	flex-direction: column;
+	gap: 2px;
+}
+
+.stock-filters__select-label {
+	font-family: "Barlow Condensed", sans-serif;
+	font-size: 10px;
+	font-weight: 700;
+	text-transform: uppercase;
+	letter-spacing: 0.8px;
+	color: #333;
+}
+.stock-filters__separator {
+	width: 1px;
+	height: 18px;
+	background: rgba(255, 255, 255, 0.1);
+	margin: 0 8px;
+	flex-shrink: 0;
+}

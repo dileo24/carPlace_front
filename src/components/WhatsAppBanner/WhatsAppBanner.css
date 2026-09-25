@@ -1,0 +1,380 @@
+/* WhatsAppBanner.css */
+
+/* ====== OUTER SECTION ====== */
+.wa-section {
+	background: #f5f5f5;
+	padding: 32px 16px;
+	font-family: "Barlow", sans-serif;
+}
+
+/* ====== CARD ====== */
+.wa-card {
+	background: #fff;
+	border-radius: 24px;
+	overflow: visible;
+	max-width: 900px;
+	margin: 0 auto;
+	box-shadow: 0 4px 32px rgba(0, 0, 0, 0.1);
+	display: flex;
+	flex-direction: column;
+	position: relative; /* necesario para posicionar .wa-phone-mobile */
+}
+
+/* ====== BODY ROW ====== */
+.wa-body-row {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	padding: 24px 16px 16px;
+	gap: 12px;
+	position: relative;
+}
+
+/* ====== TEXTO ====== */
+.wa-text {
+	flex: 1;
+	min-width: 0;
+	z-index: 2;
+}
+
+.wa-label {
+	font-family: "Barlow Condensed", sans-serif;
+	font-size: 0.9rem;
+	font-weight: 700;
+	letter-spacing: 2px;
+	text-transform: uppercase;
+	color: #1a7a3f;
+	margin-bottom: 8px;
+}
+
+.wa-title {
+	font-family: "Barlow Condensed", sans-serif;
+	font-size: clamp(1.5rem, 6vw, 3rem);
+	font-weight: 800;
+	color: #111;
+	line-height: 1.1;
+	margin-bottom: 6px;
+}
+
+.wa-title em {
+	color: #25d366;
+	font-style: normal;
+}
+
+.wa-divider {
+	width: 36px;
+	height: 3px;
+	background: #1a7a3f;
+	border-radius: 2px;
+	margin: 10px 0 12px;
+}
+
+.wa-desc {
+	font-size: 0.82rem;
+	color: #444;
+	line-height: 1.5;
+	margin-bottom: 1.25rem;
+}
+
+.wa-desc strong {
+	color: #111;
+}
+
+/* ====== FEATURES ====== */
+.wa-features {
+	list-style: none;
+	display: flex;
+	flex-direction: column;
+	gap: 8px;
+	padding: 0;
+	margin: 0;
+}
+
+.wa-feat {
+	display: flex;
+	align-items: flex-start;
+	align-items: center;
+	gap: 8px;
+}
+
+.wa-feat-icon {
+	width: 30px;
+	height: 30px;
+	border-radius: 8px;
+	background: #e8f7ef;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-shrink: 0;
+}
+
+.wa-feat-icon svg {
+	width: 15px;
+	height: 15px;
+}
+
+.wa-feat-title {
+	font-size: 0.8rem;
+	font-weight: 700;
+	color: #111;
+}
+
+.wa-feat-sub {
+	font-size: 0.72rem;
+	color: #666;
+}
+
+/* ====== TELEFONO DESKTOP ====== */
+.wa-phone-col {
+	flex: 0 0 280px;
+	display: flex;
+	justify-content: center;
+	align-items: flex-end;
+	position: relative;
+	z-index: 5;
+}
+
+.wa-phone-img {
+	width: clamp(300px, 34vw, 300px);
+	height: auto;
+	object-fit: contain;
+	display: block;
+	transform: translateY(60px) translateX(16px);
+}
+
+/* ====== TELEFONO MOBILE ====== */
+/* Por defecto oculto; solo activo en <=639px */
+.wa-phone-mobile {
+	display: none;
+}
+
+/* ====== FOOTER ====== */
+.wa-footer {
+	background: #1a1a1a;
+	padding: 10px 16px;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 10px;
+	flex-wrap: nowrap;
+	border-radius: 0 0 24px 24px;
+	position: relative;
+	z-index: 2;
+	overflow: visible;
+}
+
+.wa-footer-left {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+	min-width: 0;
+}
+
+.wa-footer-icon {
+	width: 34px;
+	height: 34px;
+	border-radius: 50%;
+	background: #25d366;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-shrink: 0;
+}
+
+.wa-icon {
+	width: 19px;
+	height: 19px;
+	fill: #fff;
+}
+
+.wa-footer-main {
+	font-family: "Barlow Condensed", sans-serif;
+	font-size: 0.9rem;
+	font-weight: 800;
+	letter-spacing: 1px;
+	text-transform: uppercase;
+	color: #fff;
+	white-space: nowrap;
+}
+
+.wa-cta-btn {
+	display: inline-flex;
+	align-items: center;
+	gap: 6px;
+	background: #25d366;
+	color: #fff;
+	text-decoration: none;
+	font-family: "Barlow Condensed", sans-serif;
+	font-size: 0.8rem;
+	font-weight: 800;
+	letter-spacing: 1.2px;
+	text-transform: uppercase;
+	padding: 9px 16px;
+	border-radius: 50px;
+	white-space: nowrap;
+	transition: 0.2s;
+}
+
+.wa-cta-btn:hover {
+	background: #1ebe5c;
+	transform: translateY(-2px);
+}
+
+.wa-chevron {
+	width: 14px;
+	height: 14px;
+}
+
+/* ====== ANIMACIONES ====== */
+.wa-anim-left {
+	opacity: 0;
+	transform: translateX(-60px);
+	transition: 1s;
+}
+
+.wa-anim-right {
+	opacity: 0;
+	transform: translateX(60px);
+	transition: 1s 0.15s;
+}
+
+.wa-footer-anim {
+	opacity: 0;
+	transform: translateY(24px);
+	transition: 0.75s 0.75s;
+}
+
+.wa-card.is-visible .wa-anim-left,
+.wa-card.is-visible .wa-anim-right,
+.wa-card.is-visible .wa-footer-anim {
+	opacity: 1;
+	transform: none;
+}
+
+/* ====== DESKTOP (>=640px) ====== */
+.wa-feat-sub--desktop {
+	display: none;
+}
+.wa-feat-sub--mobile {
+	display: inline;
+}
+
+@media (min-width: 640px) {
+	.wa-feat-sub--desktop {
+		display: inline;
+	}
+	.wa-feat-sub--mobile {
+		display: none;
+	}
+
+	.wa-section {
+		padding: 0px 24px;
+	}
+
+	.wa-body-row {
+		padding: 0px 48px 72px;
+		gap: 40px;
+		height: 70vh;
+	}
+
+	.wa-footer {
+		padding: 12px 24px;
+	}
+
+	.wa-footer-main {
+		font-size: 1.1rem;
+	}
+
+	.wa-cta-btn {
+		font-size: 0.9rem;
+		padding: 11px 22px;
+	}
+
+	/* Asegurar que el celular mobile no aparezca en desktop */
+	.wa-phone-mobile {
+		display: none !important;
+	}
+	.wa-feat-title {
+		font-size: 0.95rem; /* era 0.8rem */
+	}
+
+	.wa-feat-sub {
+		font-size: 0.85rem; /* era 0.72rem */
+	}
+
+	.wa-feat-icon {
+		width: 36px; /* era 30px */
+		height: 36px;
+	}
+
+	.wa-feat-icon svg {
+		width: 18px; /* era 15px */
+		height: 18px;
+	}
+}
+
+/* ====== MOBILE (<=639px) ====== */
+@media (max-width: 639px) {
+	.wa-section {
+		padding: 24px 10px;
+	}
+
+	.wa-body-row {
+		/* Reservamos espacio a la derecha para el celular flotante */
+		padding: 22px 16px 16px 18px;
+	}
+
+	/* Ocultamos columna de celular desktop */
+	.wa-phone-col {
+		display: none;
+	}
+
+	/* ──────────────────────────────────────────────
+     CELULAR MOBILE
+     position: absolute dentro de .wa-footer (relative)
+     bottom: 100% = siempre pegado al borde superior del footer,
+     sin importar el ancho de pantalla.
+  ────────────────────────────────────────────── */
+	.wa-phone-mobile {
+		display: block;
+		position: absolute;
+		right: 0;
+		bottom: 100%; /* siempre pegado al tope del footer */
+		width: 145px;
+		height: auto;
+		object-fit: contain;
+		pointer-events: none;
+		z-index: 20;
+		filter: drop-shadow(-6px 0 18px rgba(0, 0, 0, 0.2));
+	}
+
+	/* Footer: relative para anclar el celular */
+	.wa-footer {
+		position: relative;
+		padding: 10px 14px;
+		overflow: visible;
+	}
+
+	/* Ocultamos "Hablá con un asesor" en mobile; queda ícono + botón */
+	.wa-footer-main {
+		display: none;
+	}
+
+	.wa-footer-icon {
+		flex-shrink: 0;
+	}
+
+	.wa-cta-btn {
+		padding: 9px 14px;
+		font-size: 0.78rem;
+	}
+
+	.wa-card {
+    overflow: hidden; /* 👈 */
+  }
+  
+  /* Pero el footer necesita overflow visible para el celular flotante */
+  .wa-footer {
+    overflow: visible;
+  }
+}

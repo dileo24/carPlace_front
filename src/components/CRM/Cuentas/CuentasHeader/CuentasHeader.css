@@ -74,16 +74,17 @@
   border: 1px solid #222;
 }
 
+/* Convención pedida por el cliente: rojo = debe, verde = le deben. */
 .cuentas-header__saldo--debo {
-  background: rgba(46, 204, 113, 0.12);
-  color: #2ecc71;
-  border: 1px solid rgba(46, 204, 113, 0.3);
-}
-
-.cuentas-header__saldo--me-deben {
   background: rgba(204, 0, 0, 0.12);
   color: #ff4d4d;
   border: 1px solid rgba(204, 0, 0, 0.3);
+}
+
+.cuentas-header__saldo--me-deben {
+  background: rgba(46, 204, 113, 0.12);
+  color: #2ecc71;
+  border: 1px solid rgba(46, 204, 113, 0.3);
 }
 
 .cuentas-header__btn-nuevo {

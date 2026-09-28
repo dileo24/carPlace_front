@@ -43,7 +43,6 @@
 
 .cuentas-table__row {
   border-bottom: 1px solid #161616;
-  border-left: 3px solid transparent;
   animation: cuentasRowFadeIn 0.22s ease both;
 }
 
@@ -54,15 +53,6 @@
 
 .cuentas-table__row:hover {
   background: #111;
-}
-
-/* Convención pedida por el cliente: verde = yo debo, rojo = me deben. */
-.cuentas-table__row--debo {
-  border-left-color: #2ecc71;
-}
-
-.cuentas-table__row--me-deben {
-  border-left-color: #cc0000;
 }
 
 .cuentas-table__td {
@@ -82,20 +72,20 @@
 
 .cuentas-table__td--detalle {
   white-space: nowrap;
-  color: #999;
 }
 
-.cuentas-table__row--debo .cuentas-table__td--detalle {
-  color: #2ecc71;
-}
-
-.cuentas-table__row--me-deben .cuentas-table__td--detalle {
+/* Convención pedida por el cliente: rojo = quien debe, verde = a quien le deben. */
+.cuentas-table__nombre-debe {
   color: #ff4d4d;
+}
+
+.cuentas-table__nombre-recibe {
+  color: #2ecc71;
 }
 
 .cuentas-table__flecha {
   color: #444;
-  margin: 0 2px;
+  margin: 0 6px;
 }
 
 .cuentas-table__td--monto {

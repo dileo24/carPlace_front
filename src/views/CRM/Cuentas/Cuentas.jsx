@@ -58,7 +58,6 @@ const Cuentas = () => {
 				deudas={deudas}
 				loading={loading}
 				error={error}
-				currentAdminId={user?.id}
 				confirmDeleteId={confirmDeleteId}
 				onDeleteRequest={handleDeleteRequest}
 				onDeleteConfirm={handleDeleteConfirm}

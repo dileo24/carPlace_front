@@ -3,6 +3,10 @@ import Drawer from "@mui/material/Drawer";
 import { createDeuda } from "../../../../services/cuentas.service";
 import "./NuevaDeudaDrawer.css";
 
+const OTRO = "otro";
+
+const formatMonto = (digitos) => digitos.replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+
 /**
  * Props:
  *  - open: boolean
@@ -12,41 +16,76 @@ import "./NuevaDeudaDrawer.css";
  *  - onCreated: () => void
  */
 const NuevaDeudaDrawer = ({ open, admins, currentAdminId, onClose, onCreated }) => {
-	const [monto, setMonto] = useState("");
+	const [montoDigitos, setMontoDigitos] = useState("");
 	const [moneda, setMoneda] = useState("ARS");
 	const [motivo, setMotivo] = useState("");
+
 	const [deudorId, setDeudorId] = useState("");
+	const [deudorNombreOtro, setDeudorNombreOtro] = useState("");
+	const [deudorTelefonoOtro, setDeudorTelefonoOtro] = useState("");
+
 	const [acreedorId, setAcreedorId] = useState("");
+	const [acreedorNombreOtro, setAcreedorNombreOtro] = useState("");
+	const [acreedorTelefonoOtro, setAcreedorTelefonoOtro] = useState("");
+
 	const [loading, setLoading] = useState(false);
 	const [error, setError] = useState("");
 
 	useEffect(() => {
 		if (open) {
-			setMonto("");
+			setMontoDigitos("");
 			setMoneda("ARS");
 			setMotivo("");
 			const otro = admins.find((a) => a.id !== currentAdminId);
 			setDeudorId(currentAdminId ? String(currentAdminId) : "");
+			setDeudorNombreOtro("");
+			setDeudorTelefonoOtro("");
 			setAcreedorId(otro ? String(otro.id) : "");
+			setAcreedorNombreOtro("");
+			setAcreedorTelefonoOtro("");
 			setError("");
 		}
 	}, [open, admins, currentAdminId]);
 
+	const handleMontoChange = (e) => {
+		const digitos = e.target.value.replace(/\D/g, "");
+		setMontoDigitos(digitos);
+	};
+
 	const handleSubmit = async () => {
 		setError("");
-		if (!monto || Number(monto) <= 0) return setError("El monto debe ser mayor a 0.");
+
+		const monto = Number(montoDigitos);
+		if (!montoDigitos || monto <= 0) return setError("El monto debe ser mayor a 0.");
 		if (!motivo.trim()) return setError("El motivo es requerido.");
-		if (!deudorId || !acreedorId) return setError("Elegí quién le debe a quién.");
-		if (deudorId === acreedorId) return setError("El deudor y el acreedor no pueden ser el mismo.");
+		if (!deudorId) return setError("Elegí quién debe.");
+		if (!acreedorId) return setError("Elegí a quién le debe.");
+
+		const esOtroDeudor = deudorId === OTRO;
+		const esOtroAcreedor = acreedorId === OTRO;
+
+		if (esOtroDeudor && (!deudorNombreOtro.trim() || !deudorTelefonoOtro.trim())) {
+			return setError("Completá el nombre y teléfono de quién debe.");
+		}
+		if (esOtroAcreedor && (!acreedorNombreOtro.trim() || !acreedorTelefonoOtro.trim())) {
+			return setError("Completá el nombre y teléfono de a quién le debe.");
+		}
+		if (!esOtroDeudor && !esOtroAcreedor && deudorId === acreedorId) {
+			return setError("El deudor y el acreedor no pueden ser el mismo.");
+		}
 
 		setLoading(true);
 		try {
 			await createDeuda({
-				monto: Number(monto),
+				monto,
 				moneda,
 				motivo: motivo.trim(),
-				deudorId: Number(deudorId),
-				acreedorId: Number(acreedorId),
+				deudorId: esOtroDeudor ? null : Number(deudorId),
+				deudorNombre: esOtroDeudor ? deudorNombreOtro.trim() : undefined,
+				deudorTelefono: esOtroDeudor ? deudorTelefonoOtro.trim() : undefined,
+				acreedorId: esOtroAcreedor ? null : Number(acreedorId),
+				acreedorNombre: esOtroAcreedor ? acreedorNombreOtro.trim() : undefined,
+				acreedorTelefono: esOtroAcreedor ? acreedorTelefonoOtro.trim() : undefined,
 			});
 			onCreated();
 		} catch (err) {
@@ -79,8 +118,32 @@ const NuevaDeudaDrawer = ({ open, admins, currentAdminId, onClose, onCreated }) 
 									{a.name || a.email}
 								</option>
 							))}
+							<option value={OTRO}>Otro…</option>
 						</select>
 					</div>
+
+					{deudorId === OTRO && (
+						<div className="deuda-drawer__row">
+							<div className="deuda-drawer__field deuda-drawer__field--grow">
+								<label className="deuda-drawer__label">Nombre completo</label>
+								<input
+									className="deuda-drawer__input"
+									value={deudorNombreOtro}
+									onChange={(e) => setDeudorNombreOtro(e.target.value)}
+									placeholder="ej: Juan Pérez"
+								/>
+							</div>
+							<div className="deuda-drawer__field">
+								<label className="deuda-drawer__label">Teléfono</label>
+								<input
+									className="deuda-drawer__input"
+									value={deudorTelefonoOtro}
+									onChange={(e) => setDeudorTelefonoOtro(e.target.value)}
+									placeholder="ej: 3511234567"
+								/>
+							</div>
+						</div>
+					)}
 
 					<div className="deuda-drawer__field">
 						<label className="deuda-drawer__label">A quién le debe</label>
@@ -91,18 +154,42 @@ const NuevaDeudaDrawer = ({ open, admins, currentAdminId, onClose, onCreated }) 
 									{a.name || a.email}
 								</option>
 							))}
+							<option value={OTRO}>Otro…</option>
 						</select>
 					</div>
+
+					{acreedorId === OTRO && (
+						<div className="deuda-drawer__row">
+							<div className="deuda-drawer__field deuda-drawer__field--grow">
+								<label className="deuda-drawer__label">Nombre completo</label>
+								<input
+									className="deuda-drawer__input"
+									value={acreedorNombreOtro}
+									onChange={(e) => setAcreedorNombreOtro(e.target.value)}
+									placeholder="ej: Juan Pérez"
+								/>
+							</div>
+							<div className="deuda-drawer__field">
+								<label className="deuda-drawer__label">Teléfono</label>
+								<input
+									className="deuda-drawer__input"
+									value={acreedorTelefonoOtro}
+									onChange={(e) => setAcreedorTelefonoOtro(e.target.value)}
+									placeholder="ej: 3511234567"
+								/>
+							</div>
+						</div>
+					)}
 
 					<div className="deuda-drawer__row">
 						<div className="deuda-drawer__field deuda-drawer__field--grow">
 							<label className="deuda-drawer__label">Monto</label>
 							<input
 								className="deuda-drawer__input"
-								type="number"
-								min="0"
-								value={monto}
-								onChange={(e) => setMonto(e.target.value)}
+								type="text"
+								inputMode="numeric"
+								value={formatMonto(montoDigitos)}
+								onChange={handleMontoChange}
 								placeholder="0"
 								autoFocus
 							/>

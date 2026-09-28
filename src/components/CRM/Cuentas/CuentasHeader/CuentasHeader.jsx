@@ -3,7 +3,7 @@ import "./CuentasHeader.css";
 
 const formatMonto = (n) => Math.abs(n).toLocaleString("es-AR");
 
-// Convención pedida por el cliente: verde = yo debo, rojo = me deben.
+// Convención pedida por el cliente: rojo = debe, verde = le deben.
 const CuentasHeader = ({ total, miSaldo, onNuevo }) => {
 	const monedas = ["ARS", "USD"].filter((m) => (miSaldo?.[m] ?? 0) !== 0);
 

@@ -9,7 +9,7 @@ const formatFecha = (f) => {
 	return `${d}/${m}/${y}`;
 };
 
-const CuentasTable = ({ deudas, loading, error, currentAdminId, confirmDeleteId, onDeleteRequest, onDeleteConfirm, onDeleteCancel }) => {
+const CuentasTable = ({ deudas, loading, error, confirmDeleteId, onDeleteRequest, onDeleteConfirm, onDeleteCancel }) => {
 	if (loading) {
 		return (
 			<div className="cuentas-table__state">
@@ -52,44 +52,40 @@ const CuentasTable = ({ deudas, loading, error, currentAdminId, confirmDeleteId,
 					</tr>
 				</thead>
 				<tbody>
-					{deudas.map((d, i) => {
-						// Convención pedida por el cliente: verde = yo debo, rojo = me deben.
-						const yoDebo = currentAdminId === d.deudorId;
-						const meDeben = currentAdminId === d.acreedorId;
-						const colorClass = yoDebo ? "cuentas-table__row--debo" : meDeben ? "cuentas-table__row--me-deben" : "";
-
-						return (
-							<tr key={d.id} className={`cuentas-table__row ${colorClass}`} style={{ animationDelay: `${i * 35}ms` }}>
-								<td className="cuentas-table__td">{formatFecha(d.fecha)}</td>
-								<td className="cuentas-table__td cuentas-table__td--motivo">{d.motivo}</td>
-								<td className="cuentas-table__td cuentas-table__td--detalle">
-									{d.deudorNombre} <span className="cuentas-table__flecha">→</span> {d.acreedorNombre}
-								</td>
-								<td className="cuentas-table__td cuentas-table__td--monto">
-									{d.moneda} {formatMonto(d.monto)}
-								</td>
+					{deudas.map((d, i) => (
+						<tr key={d.id} className="cuentas-table__row" style={{ animationDelay: `${i * 35}ms` }}>
+							<td className="cuentas-table__td">{formatFecha(d.fecha)}</td>
+							<td className="cuentas-table__td cuentas-table__td--motivo">{d.motivo}</td>
+							<td className="cuentas-table__td cuentas-table__td--detalle">
+								{/* Convención pedida por el cliente: rojo = quien debe, verde = a quien le deben. */}
+								<span className="cuentas-table__nombre-debe">{d.deudorNombre}</span>
+								<span className="cuentas-table__flecha">→</span>
+								<span className="cuentas-table__nombre-recibe">{d.acreedorNombre}</span>
+							</td>
+							<td className="cuentas-table__td cuentas-table__td--monto">
+								{d.moneda} {formatMonto(d.monto)}
+							</td>
 								<td className="cuentas-table__td cuentas-table__td--actions">
-									{confirmDeleteId === d.id ? (
-										<div className="cuentas-table__confirm">
-											<span className="cuentas-table__confirm-label">¿Eliminar?</span>
-											<button className="cuentas-table__btn cuentas-table__btn--confirm" onClick={() => onDeleteConfirm(d.id)}>
-												Sí
-											</button>
-											<button className="cuentas-table__btn cuentas-table__btn--cancel" onClick={onDeleteCancel}>
-												No
-											</button>
-										</div>
-									) : (
-										<div className="cuentas-table__actions">
-											<button className="cuentas-table__btn cuentas-table__btn--delete" onClick={() => onDeleteRequest(d.id)}>
-												Eliminar
-											</button>
-										</div>
-									)}
-								</td>
-							</tr>
-						);
-					})}
+								{confirmDeleteId === d.id ? (
+									<div className="cuentas-table__confirm">
+										<span className="cuentas-table__confirm-label">¿Eliminar?</span>
+										<button className="cuentas-table__btn cuentas-table__btn--confirm" onClick={() => onDeleteConfirm(d.id)}>
+											Sí
+										</button>
+										<button className="cuentas-table__btn cuentas-table__btn--cancel" onClick={onDeleteCancel}>
+											No
+										</button>
+									</div>
+								) : (
+									<div className="cuentas-table__actions">
+										<button className="cuentas-table__btn cuentas-table__btn--delete" onClick={() => onDeleteRequest(d.id)}>
+											Eliminar
+										</button>
+									</div>
+								)}
+							</td>
+						</tr>
+					))}
 				</tbody>
 			</table>
 		</div>

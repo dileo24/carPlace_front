@@ -179,12 +179,25 @@ const BOTTOM_ITEMS = [
 	{
 		label: "Cuentas",
 		path: "/crm/cuentas",
-		descripcion: "Cuenta corriente entre socios: deudas y saldos a favor entre Carlos y Joaco.",
+		descripcion: "Cuenta corriente: deudas y saldos a favor entre los admins (o con terceros).",
 		roles: [ROLES.ADMIN],
 		icon: (
 			<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
 				<line x1="12" y1="1" x2="12" y2="23" />
 				<path d="M17 5.5c0-1.66-2.24-3-5-3s-5 1.34-5 3 2.24 3 5 3 5 1.34 5 3-2.24 3-5 3-5-1.34-5-3" />
+			</svg>
+		),
+	},
+	{
+		label: "Facturación",
+		path: "/crm/facturacion",
+		descripcion: "Gastos del negocio, resumen de cuentas y ganancia por auto vendido, con el balance mensual.",
+		roles: [ROLES.ADMIN],
+		icon: (
+			<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+				<rect x="2" y="5" width="20" height="14" rx="2" />
+				<line x1="2" y1="10" x2="22" y2="10" />
+				<line x1="6" y1="14" x2="10" y2="14" />
 			</svg>
 		),
 	},

@@ -1,0 +1,354 @@
+@import url("https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600&family=Barlow+Condensed:wght@600;700;800&display=swap");
+
+.fact-view {
+	background: #0a0a0a;
+	font-family: "Barlow", sans-serif;
+	padding: 28px 32px 48px;
+	min-height: 100%;
+	overflow-y: auto;
+}
+
+.fact-header {
+	padding-bottom: 20px;
+	border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+	margin-bottom: 24px;
+}
+
+.fact-title {
+	font-family: "Barlow Condensed", sans-serif;
+	font-size: 28px;
+	font-weight: 800;
+	color: #fff;
+	text-transform: uppercase;
+	letter-spacing: 1px;
+	margin: 0 0 4px;
+}
+
+.fact-subtitle {
+	font-size: 13px;
+	color: rgba(255, 255, 255, 0.3);
+	margin: 0;
+}
+
+.fact-grid {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: 16px;
+}
+
+@media (max-width: 900px) {
+	.fact-grid {
+		grid-template-columns: 1fr;
+	}
+}
+
+.fact-panel {
+	background: #111;
+	border: 1px solid rgba(255, 255, 255, 0.06);
+	border-radius: 10px;
+	padding: 18px 20px;
+}
+
+.fact-panel--full {
+	grid-column: 1 / -1;
+}
+
+.fact-panel__head {
+	display: flex;
+	align-items: flex-start;
+	justify-content: space-between;
+	margin-bottom: 16px;
+	gap: 12px;
+	flex-wrap: wrap;
+}
+
+.fact-panel__title {
+	display: block;
+	font-family: "Barlow Condensed", sans-serif;
+	font-size: 16px;
+	font-weight: 700;
+	text-transform: uppercase;
+	letter-spacing: 1.2px;
+	color: #fff;
+}
+
+.fact-panel__sub {
+	display: block;
+	font-size: 12px;
+	color: rgba(255, 255, 255, 0.3);
+	font-family: "Barlow", sans-serif;
+	margin-top: 2px;
+}
+
+/* ── Balance ── */
+.fact-balance-row {
+	display: flex;
+	gap: 32px;
+	flex-wrap: wrap;
+}
+
+.fact-balance-moneda {
+	display: block;
+	font-family: "Barlow Condensed", sans-serif;
+	font-size: 12px;
+	font-weight: 700;
+	color: #555;
+	letter-spacing: 1px;
+	margin-bottom: 8px;
+}
+
+.fact-stats-row {
+	display: flex;
+	gap: 24px;
+	flex-wrap: wrap;
+}
+
+.fact-stat {
+	display: flex;
+	flex-direction: column;
+	gap: 2px;
+}
+
+.fact-stat__val {
+	font-family: "Barlow Condensed", sans-serif;
+	font-size: 24px;
+	font-weight: 700;
+	color: #e0e0e0;
+	line-height: 1;
+}
+
+.fact-stat__label {
+	font-size: 11px;
+	color: rgba(255, 255, 255, 0.3);
+	text-transform: uppercase;
+	letter-spacing: 0.6px;
+	font-family: "Barlow Condensed", sans-serif;
+}
+
+/* ── Cuentas resumen ── */
+.fact-cuentas-list {
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+}
+
+.fact-cuenta-row {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 12px;
+	flex-wrap: wrap;
+}
+
+.fact-cuenta-nombre {
+	font-size: 14px;
+	color: #e0e0e0;
+	font-weight: 600;
+}
+
+.fact-cuenta-saldos {
+	display: flex;
+	gap: 6px;
+	flex-wrap: wrap;
+}
+
+.fact-cuenta-chip {
+	font-family: "Barlow Condensed", sans-serif;
+	font-size: 11px;
+	font-weight: 700;
+	letter-spacing: 0.3px;
+	text-transform: uppercase;
+	border-radius: 5px;
+	padding: 4px 8px;
+	white-space: nowrap;
+}
+
+.fact-cuenta-chip--neutral {
+	background: #151515;
+	color: #555;
+	border: 1px solid #222;
+}
+
+/* Misma convención que Cuentas: rojo = debe, verde = le deben. */
+.fact-cuenta-chip--debe {
+	background: rgba(204, 0, 0, 0.12);
+	color: #ff4d4d;
+	border: 1px solid rgba(204, 0, 0, 0.3);
+}
+
+.fact-cuenta-chip--recibe {
+	background: rgba(46, 204, 113, 0.12);
+	color: #2ecc71;
+	border: 1px solid rgba(46, 204, 113, 0.3);
+}
+
+.fact-link-btn {
+	background: none;
+	border: none;
+	color: #cc0000;
+	font-family: "Barlow Condensed", sans-serif;
+	font-size: 12px;
+	font-weight: 700;
+	text-transform: uppercase;
+	letter-spacing: 0.4px;
+	cursor: pointer;
+	white-space: nowrap;
+	padding: 4px 0;
+}
+
+.fact-link-btn:hover {
+	color: #ff4444;
+}
+
+/* ── Botón nuevo gasto ── */
+.fact-btn-nuevo {
+	display: flex;
+	align-items: center;
+	gap: 7px;
+	background: #cc0000;
+	border: none;
+	border-radius: 6px;
+	font-family: "Barlow Condensed", sans-serif;
+	font-size: 13px;
+	font-weight: 700;
+	letter-spacing: 0.5px;
+	text-transform: uppercase;
+	color: #fff;
+	padding: 8px 14px;
+	cursor: pointer;
+	white-space: nowrap;
+}
+
+.fact-btn-nuevo:hover {
+	background: #aa0000;
+}
+
+.fact-btn-nuevo-icon {
+	width: 14px;
+	height: 14px;
+	flex-shrink: 0;
+}
+
+/* ── Tablas ── */
+.fact-table__scroll {
+	overflow-x: auto;
+}
+
+.fact-table {
+	width: 100%;
+	min-width: 480px;
+	border-collapse: collapse;
+}
+
+.fact-table th {
+	font-family: "Barlow Condensed", sans-serif;
+	font-size: 11px;
+	font-weight: 700;
+	color: #333;
+	text-transform: uppercase;
+	letter-spacing: 1px;
+	padding: 8px 12px;
+	text-align: left;
+	white-space: nowrap;
+	border-bottom: 1px solid #1a1a1a;
+}
+
+.fact-table__th--monto,
+.fact-table__th--actions {
+	text-align: right;
+}
+
+.fact-table td {
+	font-family: "Barlow", sans-serif;
+	font-size: 13px;
+	color: #ccc;
+	padding: 8px 12px;
+	border-bottom: 1px solid #161616;
+	vertical-align: middle;
+}
+
+.fact-table tr:hover td {
+	background: #151515;
+}
+
+.fact-table__td--desc {
+	color: #999;
+	max-width: 280px;
+	white-space: normal;
+}
+
+.fact-table__td--monto {
+	text-align: right;
+	white-space: nowrap;
+	font-weight: 700;
+	color: #e8e8e8;
+}
+
+.fact-table__td--ganancia {
+	color: #2ecc71;
+}
+
+.fact-table__td--actions {
+	text-align: right;
+	white-space: nowrap;
+}
+
+.fact-table__btn {
+	font-family: "Barlow Condensed", sans-serif;
+	font-size: 11px;
+	font-weight: 700;
+	letter-spacing: 0.4px;
+	text-transform: uppercase;
+	border-radius: 5px;
+	border: none;
+	padding: 4px 10px;
+	cursor: pointer;
+}
+
+.fact-table__btn--delete {
+	background: rgba(204, 0, 0, 0.1);
+	color: #cc0000;
+	border: 1px solid rgba(204, 0, 0, 0.2);
+}
+
+.fact-table__btn--delete:hover {
+	background: rgba(204, 0, 0, 0.2);
+}
+
+.fact-confirm {
+	display: flex;
+	align-items: center;
+	gap: 6px;
+	justify-content: flex-end;
+	font-size: 12px;
+	color: #999;
+}
+
+.fact-table__btn--confirm {
+	background: #cc0000;
+	color: #fff;
+}
+
+.fact-table__btn--confirm:hover {
+	background: #aa0000;
+}
+
+.fact-table__btn--cancel {
+	background: #1a1a1a;
+	color: #777;
+	border: 1px solid #252525;
+}
+
+.fact-table__btn--cancel:hover {
+	color: #bbb;
+	background: #222;
+}
+
+.fact-vacio {
+	font-size: 13px;
+	color: rgba(255, 255, 255, 0.2);
+	font-style: italic;
+	padding: 16px 0;
+	text-align: center;
+	margin: 0;
+}

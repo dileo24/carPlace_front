@@ -32,7 +32,6 @@ const Ventas = lazy(() => import("./views/CRM/Ventas/Ventas"));
 const Usuarios = lazy(() => import("./views/CRM/Usuarios/Usuarios"));
 const Cuentas = lazy(() => import("./views/CRM/Cuentas/Cuentas"));
 const Marcas = lazy(() => import("./views/CRM/Marcas/Marcas"));
-const Integraciones = lazy(() => import("./views/CRM/Integraciones/Integraciones"));
 const Publicaciones = lazy(() => import("./views/CRM/Publicaciones/Publicaciones"));
 const Reportes = lazy(() => import("./views/CRM/Reportes/Reportes"));
 
@@ -208,14 +207,6 @@ function AppContent() {
 							element={
 								<ProtectedRoute roles={[ROLES.ADMIN]}>
 									<Marcas />
-								</ProtectedRoute>
-							}
-						/>
-						<Route
-							path="integraciones"
-							element={
-								<ProtectedRoute roles={[ROLES.ADMIN]}>
-									<Integraciones />
 								</ProtectedRoute>
 							}
 						/>

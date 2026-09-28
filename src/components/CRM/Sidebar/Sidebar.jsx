@@ -201,17 +201,6 @@ const BOTTOM_ITEMS = [
 		),
 	},
 	{
-		label: "Integraciones",
-		path: "/crm/integraciones",
-		descripcion: "Conexión con cuentas externas, como MercadoLibre, para publicar el stock de vehículos.",
-		roles: [ROLES.ADMIN],
-		icon: (
-			<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-				<path d="M4 9h4V6a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v3h4v6h-4v3a2 2 0 0 1-2 2h-4a2 2 0 0 1-2-2v-3H4z" />
-			</svg>
-		),
-	},
-	{
 		label: "Publicaciones",
 		path: "/crm/publicaciones",
 		descripcion: "Publicar y gestionar el stock de vehículos en MercadoLibre.",

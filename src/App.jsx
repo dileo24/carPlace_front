@@ -114,7 +114,7 @@ function AppContent() {
 							</ProtectedRoute>
 						}
 					/>
-					<Route path="/loginAdminP" element={<Login />} />
+					<Route path="/loginCyJUsers" element={<Login />} />
 					<Route path="/nosotros" element={<Nosotros />} />
 					<Route path="/vende_tu_auto" element={<VendeTuAuto />} />
 

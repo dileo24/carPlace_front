@@ -10,7 +10,7 @@ import { ROLES } from "../../constants/roles";
 export default function ProtectedRoute({ children, roles, redirectTo = "/crm" }) {
   const { isAuthenticated, userRol } = useAuth();
 
-  if (!isAuthenticated) return <Navigate to="/loginAdminP" replace />;
+  if (!isAuthenticated) return <Navigate to="/loginCyJUsers" replace />;
 
   if (roles && !roles.includes(userRol)) {
     return <Navigate to={redirectTo} replace />;

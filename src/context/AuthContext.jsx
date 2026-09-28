@@ -31,9 +31,9 @@ axios.interceptors.response.use(
 		// el backend responde 401 en cualquier ruta protegida. Sin esto, el
 		// usuario se queda viendo errores crípticos ("No autenticado o sesión
 		// inválida") sin entender que tiene que volver a loguearse.
-		if (error.response?.status === 401 && window.location.pathname !== "/loginAdminP") {
+		if (error.response?.status === 401 && window.location.pathname !== "/loginCyJUsers") {
 			localStorage.clear();
-			window.location.href = "/loginAdminP?sesionExpirada=1";
+			window.location.href = "/loginCyJUsers?sesionExpirada=1";
 		}
 		return Promise.reject(error);
 	},

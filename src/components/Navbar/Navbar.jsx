@@ -38,7 +38,7 @@ export default function Navbar() {
 	const handleLogout = () => {
 		handleClose();
 		logout();
-		navigate("/loginAdminP");
+		navigate("/loginCyJUsers");
 	};
 
 	const isRestrictedUser = user?.email === "clodersona@gmail.com" || user?.name === "Cloder Sona";

@@ -40,6 +40,7 @@ import { useDragSensors } from "../../hooks/useDragSensors";
 import DraggableImage from "../../components/DraggableImage/DraggableImage";
 import { useMarcas } from "../../hooks/useMarcas";
 import { TAREAS_ALISTAJE_TEMPLATES, generateTareaId } from "../../constants/crmStock";
+import { normalizarPatente, validarPatente } from "../../utils/patente";
 
 const MotionCard = motion(Card);
 const MAX_IMAGES = 20;
@@ -78,6 +79,7 @@ export default function NuevoAuto() {
 		motor: "",
 		anio: "",
 		km: "",
+		patente: "",
 		transmision: "",
 		combustible: "",
 		traccion: "",
@@ -116,6 +118,7 @@ export default function NuevoAuto() {
 	const [imageError, setImageError] = useState("");
 	const [isSubmitting, setIsSubmitting] = useState(false);
 	const [submitError, setSubmitError] = useState(null);
+	const [patenteError, setPatenteError] = useState("");
 	const dragSensors = useDragSensors();
 
 	// Auto recién creado, esperando que el admin decida si lo publica en
@@ -248,6 +251,11 @@ export default function NuevoAuto() {
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
+		const errPatente = validarPatente(formData.patente);
+		if (errPatente) {
+			setPatenteError(errPatente);
+			return;
+		}
 		setIsSubmitting(true);
 		setSubmitError(null);
 
@@ -260,7 +268,7 @@ export default function NuevoAuto() {
 		try {
 			// Calcular en_alistaje según tareas pendientes
 			const en_alistaje = tareas.length > 0 && tareas.some((t) => !t.hecha);
-			const autoResponse = await postAuto({ ...formData, en_alistaje });
+			const autoResponse = await postAuto({ ...formData, patente: normalizarPatente(formData.patente) || null, en_alistaje });
 			const autoId = autoResponse.data.id;
 			const autoModelo = `${formData.marca}-${formData.modelo}`;
 
@@ -405,6 +413,27 @@ export default function NuevoAuto() {
 
 									<Grid item xs={12} md={2}>
 										<TextField autoComplete="off" label="Kilometraje" name="km" value={formData.km} onChange={handleChange} fullWidth />
+									</Grid>
+
+									<Grid item xs={12} md={3}>
+										<TextField
+											autoComplete="off"
+											label="Patente (opcional)"
+											name="patente"
+											value={formData.patente}
+											onChange={(e) => {
+												setFormData((prev) => ({ ...prev, patente: e.target.value.toUpperCase() }));
+												if (patenteError) setPatenteError("");
+											}}
+											onBlur={() => {
+												setFormData((prev) => ({ ...prev, patente: normalizarPatente(prev.patente) }));
+												setPatenteError(validarPatente(formData.patente));
+											}}
+											error={!!patenteError}
+											helperText={patenteError || "Solo uso interno, no se muestra en el sitio"}
+											inputProps={{ maxLength: 10 }}
+											fullWidth
+										/>
 									</Grid>
 
 									<Grid item xs={12} md={3}>

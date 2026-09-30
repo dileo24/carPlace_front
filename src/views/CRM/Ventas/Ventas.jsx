@@ -7,7 +7,7 @@ import VentasMonthNav from "../../../components/CRM/Ventas/VentasMonthNav/Ventas
 import { getVentas, createVenta, updateVenta, deleteVenta } from "../../../services/ventas.service";
 import { LoadingState, ErrorState } from "../../../components/CRM/PageState/PageState";
 import { getAutos } from "../../../services/autos.service";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useRoles } from "../../../hooks/useRoles";
 
 function getMesActualDefault() {
@@ -32,6 +32,8 @@ export default function Ventas() {
 	const [mesActual, setMesActual] = useState(getMesActualDefault);
 	const location = useLocation();
 	const [error, setError] = useState(null);
+	const [prestamoAviso, setPrestamoAviso] = useState(false);
+	const navigate = useNavigate();
 
 	useEffect(() => {
 		async function cargar() {
@@ -88,6 +90,11 @@ export default function Ventas() {
 		});
 	}, [ventas, mesActual]);
 
+	const handleVerVenta = useCallback((venta) => {
+		setVentaEditar(venta);
+		setModo("ver");
+	}, []);
+
 	function handleNuevaVenta() {
 		setVentaEditar(null);
 		setModo("nueva");
@@ -118,7 +125,13 @@ export default function Ventas() {
 
 	async function handleGuardar(datosForm) {
 		try {
-			if (modo === "nueva") {
+			if (modo === "nueva" && datosForm.esPrestamo) {
+				// Préstamo: el backend crea una deuda en Cuentas, no una venta ni toca el stock.
+				const resp = await createVenta(datosForm);
+				if (resp?.prestamo) {
+					setPrestamoAviso(true);
+				}
+			} else if (modo === "nueva") {
 				const resp = await createVenta(datosForm);
 				setVentas((prev) => [resp.resp, ...prev]);
 				if (resp.advertencia) {
@@ -136,6 +149,9 @@ export default function Ventas() {
 			setVentaEditar(null);
 		} catch (err) {
 			console.error("Error al guardar venta:", err);
+			if (datosForm?.esPrestamo) {
+				window.alert(err?.response?.data?.resp || "No se pudo registrar el préstamo.");
+			}
 		}
 	}
 
@@ -162,7 +178,21 @@ export default function Ventas() {
 
 			<VentasMonthNav ventas={ventas} mesActual={mesActual} onMesChange={setMesActual} />
 
-			<VentasTable ventas={ventasFiltradas} onEditar={handleEditarVenta} onEliminar={handleEliminarVenta} esSupervisor={soloLectura} />
+			{prestamoAviso && (
+				<div className="ventas-prestamo-aviso" role="status">
+					<span>Préstamo registrado en Cuentas</span>
+					<div className="ventas-prestamo-aviso__acciones">
+						<button className="ventas-prestamo-aviso__btn" onClick={() => navigate("/crm/cuentas")}>
+							Ir a Cuentas
+						</button>
+						<button className="ventas-prestamo-aviso__cerrar" onClick={() => setPrestamoAviso(false)} aria-label="Cerrar aviso">
+							✕
+						</button>
+					</div>
+				</div>
+			)}
+
+			<VentasTable ventas={ventasFiltradas} onVer={handleVerVenta} onEditar={handleEditarVenta} onEliminar={handleEliminarVenta} esSupervisor={soloLectura} />
 
 			<VentaDrawer
 				modo={modo}

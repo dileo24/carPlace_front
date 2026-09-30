@@ -20,7 +20,7 @@
 	width: 130px;
 } /* Teléfono */
 .ventas-table colgroup col:nth-child(3) {
-	width: 180px;
+	width: 210px;
 } /* Vehículo */
 .ventas-table colgroup col:nth-child(4) {
 	width: 90px;
@@ -37,6 +37,14 @@
 .ventas-table colgroup col:nth-child(8) {
 	width: 160px;
 } /* Acciones */
+
+.ventas-td__sub {
+	font-size: 11px;
+	color: var(--muted, #888);
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
 
 .ventas-td__ganancia-split,
 .ventas-td__propietario {

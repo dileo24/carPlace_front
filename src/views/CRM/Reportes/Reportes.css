@@ -24,6 +24,11 @@
 
 /* ── HEADER ── */
 .rep-header {
+	display: flex;
+	align-items: flex-end;
+	justify-content: space-between;
+	gap: 16px;
+	flex-wrap: wrap;
 	padding-bottom: 20px;
 	border-bottom: 1px solid var(--rep-border);
 	margin-bottom: 24px;
@@ -523,86 +528,44 @@
 	gap: 32px;
 }
 
-/* ── PATRIMONIO ── */
-.rep-patrimonio-composicion {
-	display: flex;
-	flex-direction: column;
-	gap: 16px;
-	margin-top: 4px;
+/* ── SELECTOR DE PERÍODO (Semana | Mes) ── */
+.rep-periodo {
+	display: inline-flex;
+	padding: 3px;
+	gap: 2px;
+	background: #111;
+	border: 1px solid var(--rep-border);
+	border-radius: 8px;
 }
 
-.rep-patrimonio-tipo {
-	display: flex;
-	flex-direction: column;
-	gap: 5px;
-}
-
-.rep-patrimonio-tipo__header {
-	display: flex;
-	align-items: center;
-	gap: 7px;
-}
-
-.rep-patrimonio-tipo__dot {
-	width: 8px;
-	height: 8px;
-	border-radius: 50%;
-	flex-shrink: 0;
-}
-
-.rep-patrimonio-tipo__label {
+.rep-periodo__btn {
 	font-family: "Barlow Condensed", sans-serif;
-	font-size: 12px;
+	font-size: 13px;
 	font-weight: 700;
 	text-transform: uppercase;
 	letter-spacing: 0.6px;
 	color: #666;
-	flex: 1;
-}
-
-.rep-patrimonio-tipo__count {
-	font-family: "Barlow Condensed", sans-serif;
-	font-size: 13px;
-	font-weight: 700;
-}
-
-.rep-patrimonio-tipo__bar-track {
-	height: 4px;
-	background: #1a1a1a;
-	border-radius: 2px;
-	overflow: hidden;
-}
-
-.rep-patrimonio-tipo__bar-fill {
-	height: 100%;
-	border-radius: 2px;
-	transition: width 0.6s ease;
-	min-width: 2px;
-}
-
-.rep-patrimonio-tipo__monto {
-	font-family: "Barlow Condensed", sans-serif;
-	font-size: 18px;
-	font-weight: 700;
-	color: #e0e0e0;
-}
-
-.rep-anio-nav {
-	display: flex;
-	align-items: center;
-	flex-direction: row;
-}
-.rep-anio-nav__btn {
-	color: #555;
-	background: #111;
+	background: transparent;
 	border: none;
+	border-radius: 6px;
+	padding: 6px 16px;
 	cursor: pointer;
+	transition:
+		color 0.15s ease,
+		background 0.15s ease;
 }
 
-.rep-anio-nav__btn:hover:not(:disabled) {
+.rep-periodo__btn:hover:not(.rep-periodo__btn--activo) {
 	color: #ccc;
 }
 
-.rep-anio-nav__anio {
-	padding-bottom: 3px;
+.rep-periodo__btn--activo {
+	color: #fff;
+	background: #cc0000;
+}
+
+.rep-view--loading .rep-grid {
+	opacity: 0.5;
+	pointer-events: none;
+	transition: opacity 0.2s ease;
 }

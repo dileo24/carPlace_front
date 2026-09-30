@@ -6,93 +6,11 @@ import { useAuth } from "../../../context/AuthContext";
 import { ROLES, ROL_LABELS } from "../../../constants/roles";
 import "./Sidebar.css";
 
-// window.open() manda la request sin el header Authorization (no hay forma de
-// setearlo en una navegación de browser), así que el backend siempre la
-// rechazaba con 401 aunque la sesión del admin fuera válida. Pedimos el
-// archivo por axios (que sí lleva el JWT vía el interceptor global) y
-// disparamos la descarga nosotros mismos a partir del blob recibido.
-async function descargarBackup() {
-	try {
-		const response = await axios.get(`${import.meta.env.VITE_API_URL}/backup`, {
-			responseType: "blob",
-		});
-		const disposition = response.headers?.["content-disposition"] || "";
-		const match = disposition.match(/filename="?([^"]+)"?/);
-		const filename = match?.[1] || `backup_${new Date().toISOString().slice(0, 10)}.sql`;
-
-		const url = window.URL.createObjectURL(response.data);
-		const link = document.createElement("a");
-		link.href = url;
-		link.download = filename;
-		document.body.appendChild(link);
-		link.click();
-		link.remove();
-		window.URL.revokeObjectURL(url);
-	} catch (err) {
-		console.error("Error al descargar el backup:", err);
-		alert("No se pudo descargar el backup. Probá de nuevo en unos segundos.");
-	}
-}
-
 const NAV_ITEMS = [
-	{
-		label: "Resumen",
-		path: "/crm",
-		exact: true,
-		descripcion: "Vista general del negocio: métricas, proceso de ventas, recordatorios y actividad reciente.",
-		roles: [ROLES.ADMIN, ROLES.SUPERVISOR],
-		icon: (
-			<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-				<rect x="3" y="3" width="7" height="7" />
-				<rect x="14" y="3" width="7" height="7" />
-				<rect x="14" y="14" width="7" height="7" />
-				<rect x="3" y="14" width="7" height="7" />
-			</svg>
-		),
-	},
-	{
-		label: "Consultas",
-		path: "/crm/consultas",
-		descripcion: "Interesados generados por el bot y cargados manualmente, organizados por etapas hasta el cierre de la venta.",
-		roles: [ROLES.ADMIN, ROLES.SUPERVISOR, ROLES.VENDEDOR, ROLES.PUBLICADOR_VENDEDOR],
-		icon: (
-			<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-				<path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
-				<circle cx="9" cy="7" r="4" />
-				<path d="M23 21v-2a4 4 0 0 0-3-3.87" />
-				<path d="M16 3.13a4 4 0 0 1 0 7.75" />
-			</svg>
-		),
-	},
-	{
-		label: "Conversaciones",
-		path: "/crm/conversaciones",
-		descripcion: "Bandeja de chats interactuando con el bot. Podés tomar el control de la conversación cuando sea necesario.",
-		roles: [ROLES.ADMIN, ROLES.SUPERVISOR, ROLES.VENDEDOR, ROLES.PUBLICADOR_VENDEDOR],
-		icon: (
-			<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-				<path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
-			</svg>
-		),
-	},
-	{
-		label: "Calendario",
-		path: "/crm/calendario",
-		descripcion:
-			"Agenda de visitas, llamadas y reuniones. El bot carga citas automáticamente y envía recordatorios a los clientes el día de la cita.",
-		icon: (
-			<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-				<rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
-				<line x1="16" y1="2" x2="16" y2="6" />
-				<line x1="8" y1="2" x2="8" y2="6" />
-				<line x1="3" y1="10" x2="21" y2="10" />
-			</svg>
-		),
-	},
 	{
 		label: "Stock",
 		path: "/crm/stock",
-		descripcion: "Inventario de vehículos con estado (Disponible, Señado, Consignación), patrimonio y acceso al alistaje de cada auto.",
+		descripcion: "Inventario de vehículos con patente, estado (Disponible, Señado, Consignación), marcas y acceso al alistaje de cada auto.",
 		icon: (
 			<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
 				<rect x="1" y="3" width="15" height="13" rx="2" />
@@ -119,6 +37,45 @@ const NAV_ITEMS = [
 		),
 	},
 	{
+		label: "Conversaciones",
+		path: "/crm/conversaciones",
+		descripcion: "Bandeja de chats interactuando con el bot. Podés tomar el control de la conversación cuando sea necesario.",
+		roles: [ROLES.ADMIN, ROLES.SUPERVISOR, ROLES.VENDEDOR, ROLES.PUBLICADOR_VENDEDOR],
+		icon: (
+			<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+				<path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
+			</svg>
+		),
+	},
+	{
+		label: "Consultas",
+		path: "/crm/consultas",
+		descripcion: "Interesados generados por el bot y cargados manualmente, organizados por etapas hasta el cierre de la venta.",
+		roles: [ROLES.ADMIN, ROLES.SUPERVISOR, ROLES.VENDEDOR, ROLES.PUBLICADOR_VENDEDOR],
+		icon: (
+			<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+				<path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+				<circle cx="9" cy="7" r="4" />
+				<path d="M23 21v-2a4 4 0 0 0-3-3.87" />
+				<path d="M16 3.13a4 4 0 0 1 0 7.75" />
+			</svg>
+		),
+	},
+	{
+		label: "Calendario",
+		path: "/crm/calendario",
+		descripcion:
+			"Agenda de visitas, llamadas y reuniones. El bot carga citas automáticamente y envía recordatorios a los clientes el día de la cita.",
+		icon: (
+			<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+				<rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
+				<line x1="16" y1="2" x2="16" y2="6" />
+				<line x1="8" y1="2" x2="8" y2="6" />
+				<line x1="3" y1="10" x2="21" y2="10" />
+			</svg>
+		),
+	},
+	{
 		label: "Ventas",
 		path: "/crm/ventas",
 		descripcion: "Historial de ventas cerradas con todos los detalles: cliente, vehículo, precio, vehículo tomado, teléfono y fecha.",
@@ -133,8 +90,7 @@ const NAV_ITEMS = [
 	{
 		label: "Reportes",
 		path: "/crm/reportes",
-		descripcion:
-			"Métricas avanzadas: ventas anuales, monto bruto mensual, patrimonio y rendimiento del equipo. Solo visible para administradores.",
+		descripcion: "Métricas por semana o mes: ventas, ganancia, origen de consultas, toma de usados y actividad del bot.",
 		roles: [ROLES.ADMIN, ROLES.SUPERVISOR, ROLES.SOCIO],
 		icon: (
 			<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
@@ -147,35 +103,6 @@ const NAV_ITEMS = [
 ];
 
 const BOTTOM_ITEMS = [
-	{
-		label: "Backup",
-		path: null,
-		descripcion: "Descargá una copia completa de la base de datos.",
-		roles: [ROLES.ADMIN, ROLES.SUPERVISOR],
-		isAction: true,
-		action: descargarBackup,
-		icon: (
-			<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-				<path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
-				<polyline points="7 10 12 15 17 10" />
-				<line x1="12" y1="15" x2="12" y2="3" />
-			</svg>
-		),
-	},
-	{
-		label: "Usuarios",
-		path: "/crm/usuarios",
-		descripcion: "Gestión de usuarios del sistema: roles, permisos y accesos.",
-		roles: [ROLES.ADMIN],
-		icon: (
-			<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-				<path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
-				<circle cx="12" cy="7" r="4" />
-				<line x1="19" y1="8" x2="23" y2="8" />
-				<line x1="21" y1="6" x2="21" y2="10" />
-			</svg>
-		),
-	},
 	{
 		label: "Cuentas",
 		path: "/crm/cuentas",
@@ -191,25 +118,13 @@ const BOTTOM_ITEMS = [
 	{
 		label: "Facturación",
 		path: "/crm/facturacion",
-		descripcion: "Gastos del negocio, resumen de cuentas y ganancia por auto vendido, con el balance mensual.",
+		descripcion: "Gastos del negocio, patrimonio en stock y ganancia por auto vendido, con el balance mensual.",
 		roles: [ROLES.ADMIN],
 		icon: (
 			<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
 				<rect x="2" y="5" width="20" height="14" rx="2" />
 				<line x1="2" y1="10" x2="22" y2="10" />
 				<line x1="6" y1="14" x2="10" y2="14" />
-			</svg>
-		),
-	},
-	{
-		label: "Marcas",
-		path: "/crm/marcas",
-		descripcion: "Gestión de las marcas de vehículos: nombre, foto, y qué autos del stock tiene cada una.",
-		roles: [ROLES.ADMIN],
-		icon: (
-			<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-				<path d="M20.59 13.41L13.41 20.59a2 2 0 0 1-2.82 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z" />
-				<line x1="7" y1="7" x2="7" y2="7" />
 			</svg>
 		),
 	},
@@ -261,32 +176,20 @@ function SidebarItem({ item, onClick }) {
 
 	const handleMouseLeave = () => setTooltipPos(null);
 
-	const handleClick = () => {
-		if (item.isAction) item.action();
-		onClick();
-	};
-
 	const itemClass = "crm-sidebar__item";
 
 	return (
 		<div ref={wrapRef} className="crm-sidebar__item-wrap" onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
-			{item.isAction ? (
-				<button className={itemClass} onClick={handleClick}>
-					<span className="crm-sidebar__item-icon">{item.icon}</span>
-					<span className="crm-sidebar__item-label">{item.label}</span>
-				</button>
-			) : (
-				<NavLink
-					to={item.path}
-					end={item.exact}
-					className={({ isActive }) => `${itemClass} ${isActive ? "crm-sidebar__item--active" : ""}`}
-					onClick={onClick}
-				>
-					<span className="crm-sidebar__item-icon">{item.icon}</span>
-					<span className="crm-sidebar__item-label">{item.label}</span>
-					{item.badge && <span className="crm-sidebar__badge">{item.badge}</span>}
-				</NavLink>
-			)}
+			<NavLink
+				to={item.path}
+				end={item.exact}
+				className={({ isActive }) => `${itemClass} ${isActive ? "crm-sidebar__item--active" : ""}`}
+				onClick={onClick}
+			>
+				<span className="crm-sidebar__item-icon">{item.icon}</span>
+				<span className="crm-sidebar__item-label">{item.label}</span>
+				{item.badge && <span className="crm-sidebar__badge">{item.badge}</span>}
+			</NavLink>
 
 			{tooltipPos && (
 				<div
@@ -306,6 +209,7 @@ export default function Sidebar() {
 	const [mobileOpen, setMobileOpen] = useState(false);
 	const [badges, setBadges] = useState({ conversaciones: 0, calendario: 0 });
 	const { userRol, user } = useAuth();
+	const esAdmin = userRol === ROLES.ADMIN && !isRestrictedUser(user);
 	const socketRef = useRef(null);
 	const location = useLocation();
 
@@ -425,6 +329,22 @@ export default function Sidebar() {
 							<span className="crm-sidebar__user-name">{getDisplayName(user)}</span>
 							<span className="crm-sidebar__user-role">{ROL_LABELS[userRol] ?? userRol}</span>
 						</div>
+						{esAdmin && (
+							<NavLink
+								to="/crm/usuarios"
+								className={({ isActive }) => `crm-sidebar__user-settings ${isActive ? "crm-sidebar__user-settings--active" : ""}`}
+								onClick={() => setMobileOpen(false)}
+								aria-label="Usuarios"
+								title="Usuarios"
+							>
+								<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+									<path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+									<circle cx="9" cy="7" r="4" />
+									<path d="M23 21v-2a4 4 0 0 0-3-3.87" />
+									<path d="M16 3.13a4 4 0 0 1 0 7.75" />
+								</svg>
+							</NavLink>
+						)}
 					</div>
 				</div>
 			</aside>

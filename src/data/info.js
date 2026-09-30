@@ -20,7 +20,7 @@ export const socialLinks = [
 	{
 		icon: faWhatsapp,
 		color: "#25D366",
-		href: "https://api.whatsapp.com/send?phone=&text=Hola!%20Estuve%20en%20la%20web%20de%20Charly%20y%20Joaco%2C%20quisiera%20realizar%20una%20consulta.",
+		href: "https://api.whatsapp.com/send?phone=&text=Hola!%20Estuve%20en%20la%20web%20de%20Car%20Place%2C%20quisiera%20realizar%20una%20consulta.",
 	},
 	{
 		icon: faInstagram,

@@ -9,7 +9,7 @@
 
 .cuentas-table {
   width: 100%;
-  min-width: 560px;
+  min-width: 860px;
   border-collapse: collapse;
 }
 
@@ -122,48 +122,119 @@
   white-space: nowrap;
 }
 
-.cuentas-table__btn--delete {
-  background: rgba(204, 0, 0, 0.1);
-  color: #cc0000;
-  border: 1px solid rgba(204, 0, 0, 0.2);
+.cuentas-table__btn--saldar {
+  background: rgba(245, 197, 24, 0.14);
+  color: #f5c518;
+  border: 1px solid rgba(245, 197, 24, 0.35);
 }
 
-.cuentas-table__btn--delete:hover {
-  background: rgba(204, 0, 0, 0.2);
+.cuentas-table__btn--saldar:hover {
+  background: rgba(245, 197, 24, 0.26);
 }
 
-.cuentas-table__confirm {
+.cuentas-table__row--saldada .cuentas-table__td {
+  text-decoration: line-through;
+  opacity: 0.5;
+}
+
+.cuentas-table__row--saldada .cuentas-table__td--actions {
+  opacity: 1;
+  text-decoration: none;
+}
+
+.cuentas-table__badge-saldada {
+  display: inline-block;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: #2ecc71;
+  background: rgba(46, 204, 113, 0.12);
+  border: 1px solid rgba(46, 204, 113, 0.3);
+  border-radius: 5px;
+  padding: 4px 10px;
+}
+
+.cuentas-table__motivo-line {
   display: flex;
   align-items: center;
   gap: 8px;
-  justify-content: flex-end;
+  flex-wrap: wrap;
 }
 
-.cuentas-table__confirm-label {
-  font-family: 'Barlow', sans-serif;
-  font-size: 13px;
-  color: #999;
-  white-space: nowrap;
-}
-
-.cuentas-table__btn--confirm {
-  background: #cc0000;
-  color: #fff;
-}
-
-.cuentas-table__btn--confirm:hover {
-  background: #aa0000;
-}
-
-.cuentas-table__btn--cancel {
+.cuentas-table__tipo {
+  display: inline-block;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  border-radius: 4px;
+  padding: 2px 7px;
   background: #1a1a1a;
-  color: #777;
+  color: #888;
   border: 1px solid #252525;
 }
 
-.cuentas-table__btn--cancel:hover {
-  color: #bbb;
-  background: #222;
+.cuentas-table__tipo--empresa {
+  color: #6aa9ff;
+  background: rgba(106, 169, 255, 0.1);
+  border-color: rgba(106, 169, 255, 0.3);
+}
+
+.cuentas-table__tipo--prestamo {
+  color: #c792ea;
+  background: rgba(199, 146, 234, 0.1);
+  border-color: rgba(199, 146, 234, 0.3);
+}
+
+.cuentas-table__pagos {
+  list-style: none;
+  margin: 6px 0 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.cuentas-table__pago {
+  font-size: 12px;
+  color: #777;
+  font-weight: 400;
+}
+
+.cuentas-table__chip {
+  display: inline-block;
+  margin-left: 8px;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.4px;
+  text-transform: uppercase;
+  border-radius: 4px;
+  padding: 2px 7px;
+  text-decoration: none;
+}
+
+.cuentas-table__chip--debo {
+  color: #ff4d4d;
+  background: rgba(204, 0, 0, 0.12);
+  border: 1px solid rgba(204, 0, 0, 0.3);
+}
+
+.cuentas-table__chip--me-deben {
+  color: #2ecc71;
+  background: rgba(46, 204, 113, 0.12);
+  border: 1px solid rgba(46, 204, 113, 0.3);
+}
+
+.cuentas-table__pendiente {
+  font-size: 12px;
+  font-weight: 600;
+  color: #f5c518;
+  margin-top: 2px;
 }
 
 /* ── Estados ── */

@@ -33,7 +33,7 @@ export default function Wpp() {
 				</div>
 			)}
 			<a
-				href="https://api.whatsapp.com/send?phone=5493512147804&text=Hola!%20Estuve%20en%20la%20web%20de%20SportQuatro%2C%20quisiera%20realizar%20una%20consulta."
+				href="https://api.whatsapp.com/send?phone=5493512147804&text=Hola!%20Estuve%20en%20la%20web%20de%20Car%20Place%2C%20quisiera%20realizar%20una%20consulta."
 				target="_blank"
 				rel="noopener noreferrer"
 				className="float"

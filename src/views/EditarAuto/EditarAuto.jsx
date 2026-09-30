@@ -49,6 +49,7 @@ export default function EditarAuto() {
 		moneda,
 		years,
 		submitError,
+		patenteError,
 		refs,
 		setSelectedImageIndex,
 		setMoneda,
@@ -290,6 +291,7 @@ export default function EditarAuto() {
 									years={years}
 									onChange={handleChange}
 									onCategoryChange={handleCategoryChange}
+									patenteError={patenteError}
 								/>
 
 								{/* Errores */}

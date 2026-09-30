@@ -18,7 +18,7 @@ const filteredColor = tiposColor.filter((opt) => opt.value !== "");
 const filteredTransmision = tiposTransmision.filter((opt) => opt.value !== "");
 const filteredTraccion = tiposTraccion.filter((opt) => opt.value !== "");
 
-export default function EditSpecsGrid({ editedAuto, refs, years, onChange, onCategoryChange }) {
+export default function EditSpecsGrid({ editedAuto, refs, years, onChange, onCategoryChange, patenteError = "" }) {
 	const { yearRef, motorRef, kmRef, transmisionRef, combustibleRef, colorRef } = refs;
 
 	return (
@@ -43,6 +43,22 @@ export default function EditSpecsGrid({ editedAuto, refs, years, onChange, onCat
 			<Grid item xs={6}>
 				<Paper elevation={3} sx={{ p: 2, borderRadius: 2 }}>
 					<TextField inputRef={kmRef} label="Km" name="km" value={editedAuto.km} onChange={(e) => onChange(e, "km")} fullWidth />
+				</Paper>
+			</Grid>
+
+			{/* Patente (solo uso interno, no se muestra en el sitio público) */}
+			<Grid item xs={12}>
+				<Paper elevation={3} sx={{ p: 2, borderRadius: 2 }}>
+					<TextField
+						label="Patente (opcional)"
+						name="patente"
+						value={editedAuto.patente || ""}
+						onChange={(e) => onChange(e, "patente")}
+						error={!!patenteError}
+						helperText={patenteError || "Solo uso interno, no se muestra en el sitio"}
+						inputProps={{ maxLength: 10 }}
+						fullWidth
+					/>
 				</Paper>
 			</Grid>
 

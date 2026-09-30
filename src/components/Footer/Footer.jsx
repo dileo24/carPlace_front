@@ -33,7 +33,7 @@ export default function Footer() {
 
         {/* Logo + marca */}
         <div className="footer-brand footer-anim">
-          <img src={imgLogo} alt="SportQuatro" />
+          <img src={imgLogo} alt="Car Place" />
           <p>Tu próximo auto, nuestra prioridad.</p>
         </div>
 
@@ -61,7 +61,7 @@ export default function Footer() {
 
       {/* Bottom */}
       <div className="footer-bottom">
-        © {new Date().getFullYear()} SportQuatro — Desarrollado por{" "}
+        © {new Date().getFullYear()} Car Place — Desarrollado por{" "}
         <a href="https://www.linkedin.com/in/joaquindileo/" target="_blank" rel="noreferrer">
           Joaquín Di Leo
         </a>

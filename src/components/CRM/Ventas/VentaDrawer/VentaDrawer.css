@@ -224,6 +224,94 @@
 	margin-top: 4px;
 }
 
+/* ── Detalle (sin fotos) ── */
+.venta-drawer__sec-titulo {
+	font-family: "Barlow Condensed", sans-serif;
+	font-size: 13px;
+	font-weight: 700;
+	color: #555;
+	text-transform: uppercase;
+	letter-spacing: 1px;
+	margin: 0 0 10px;
+	padding-bottom: 6px;
+	border-bottom: 1px solid #1a1a1a;
+}
+
+.venta-drawer__veh-titulo {
+	font-family: "Barlow Condensed", sans-serif;
+	font-size: 22px;
+	font-weight: 700;
+	color: #fff;
+	text-transform: uppercase;
+	margin-bottom: 10px;
+}
+
+.venta-drawer__nota {
+	font-family: "Barlow", sans-serif;
+	font-size: 13px;
+	color: #666;
+	margin: 0 0 10px;
+}
+
+.venta-drawer__specs {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: 10px 14px;
+}
+
+.venta-drawer__spec {
+	display: flex;
+	flex-direction: column;
+	gap: 2px;
+	min-width: 0;
+}
+
+.venta-drawer__spec-label {
+	font-family: "Barlow Condensed", sans-serif;
+	font-size: 11px;
+	font-weight: 700;
+	color: #555;
+	text-transform: uppercase;
+	letter-spacing: 1px;
+}
+
+.venta-drawer__spec-value {
+	font-family: "Barlow", sans-serif;
+	font-size: 15px;
+	color: #ddd;
+	overflow-wrap: anywhere;
+}
+
+.venta-drawer__notas p {
+	font-family: "Barlow", sans-serif;
+	font-size: 14px;
+	color: #aaa;
+	margin: 4px 0 0;
+	white-space: pre-wrap;
+}
+
+.venta-drawer__notas {
+	margin-top: 12px;
+}
+
+.venta-drawer__gastos {
+	list-style: none;
+	margin: 12px 0 0;
+	padding: 0;
+	display: flex;
+	flex-direction: column;
+	gap: 4px;
+	font-family: "Barlow", sans-serif;
+	font-size: 13px;
+	color: #999;
+}
+
+.venta-drawer__gastos li {
+	display: flex;
+	justify-content: space-between;
+	gap: 10px;
+}
+
 @media (max-width: 600px) {
 	.venta-drawer__header {
 		padding: 16px 14px 12px;

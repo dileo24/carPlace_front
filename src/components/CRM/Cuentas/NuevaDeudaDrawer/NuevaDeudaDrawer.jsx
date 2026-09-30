@@ -4,6 +4,7 @@ import { createDeuda } from "../../../../services/cuentas.service";
 import "./NuevaDeudaDrawer.css";
 
 const OTRO = "otro";
+const EMPRESA = "empresa";
 
 const formatMonto = (digitos) => digitos.replace(/\B(?=(\d{3})+(?!\d))/g, ".");
 
@@ -63,12 +64,17 @@ const NuevaDeudaDrawer = ({ open, admins, currentAdminId, onClose, onCreated }) 
 
 		const esOtroDeudor = deudorId === OTRO;
 		const esOtroAcreedor = acreedorId === OTRO;
+		const esEmpresaDeudor = deudorId === EMPRESA;
+		const esEmpresaAcreedor = acreedorId === EMPRESA;
 
 		if (esOtroDeudor && (!deudorNombreOtro.trim() || !deudorTelefonoOtro.trim())) {
 			return setError("Completá el nombre y teléfono de quién debe.");
 		}
 		if (esOtroAcreedor && (!acreedorNombreOtro.trim() || !acreedorTelefonoOtro.trim())) {
 			return setError("Completá el nombre y teléfono de a quién le debe.");
+		}
+		if (deudorId === EMPRESA && acreedorId === EMPRESA) {
+			return setError("La empresa no puede ser deudora y acreedora a la vez.");
 		}
 		if (!esOtroDeudor && !esOtroAcreedor && deudorId === acreedorId) {
 			return setError("El deudor y el acreedor no pueden ser el mismo.");
@@ -80,10 +86,12 @@ const NuevaDeudaDrawer = ({ open, admins, currentAdminId, onClose, onCreated }) 
 				monto,
 				moneda,
 				motivo: motivo.trim(),
-				deudorId: esOtroDeudor ? null : Number(deudorId),
+				deudorId: esOtroDeudor || esEmpresaDeudor ? null : Number(deudorId),
+				deudorEmpresa: esEmpresaDeudor ? true : undefined,
 				deudorNombre: esOtroDeudor ? deudorNombreOtro.trim() : undefined,
 				deudorTelefono: esOtroDeudor ? deudorTelefonoOtro.trim() : undefined,
-				acreedorId: esOtroAcreedor ? null : Number(acreedorId),
+				acreedorId: esOtroAcreedor || esEmpresaAcreedor ? null : Number(acreedorId),
+				acreedorEmpresa: esEmpresaAcreedor ? true : undefined,
 				acreedorNombre: esOtroAcreedor ? acreedorNombreOtro.trim() : undefined,
 				acreedorTelefono: esOtroAcreedor ? acreedorTelefonoOtro.trim() : undefined,
 			});
@@ -118,6 +126,7 @@ const NuevaDeudaDrawer = ({ open, admins, currentAdminId, onClose, onCreated }) 
 									{a.name || a.email}
 								</option>
 							))}
+							<option value={EMPRESA}>Empresa (Car Place)</option>
 							<option value={OTRO}>Otro…</option>
 						</select>
 					</div>
@@ -154,6 +163,7 @@ const NuevaDeudaDrawer = ({ open, admins, currentAdminId, onClose, onCreated }) 
 									{a.name || a.email}
 								</option>
 							))}
+							<option value={EMPRESA}>Empresa (Car Place)</option>
 							<option value={OTRO}>Otro…</option>
 						</select>
 					</div>

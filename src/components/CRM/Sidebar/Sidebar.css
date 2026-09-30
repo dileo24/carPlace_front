@@ -296,3 +296,33 @@ button.crm-sidebar__item {
 	cursor: pointer;
 	text-align: left;
 }
+
+/* ── Acceso a Usuarios (solo admin) ── */
+.crm-sidebar__user-settings {
+	margin-left: auto;
+	flex-shrink: 0;
+	width: 32px;
+	height: 32px;
+	border-radius: 8px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	color: rgba(255, 255, 255, 0.5);
+	text-decoration: none;
+	transition: background 0.15s, color 0.15s;
+}
+
+.crm-sidebar__user-settings svg {
+	width: 17px;
+	height: 17px;
+}
+
+.crm-sidebar__user-settings:hover {
+	background: rgba(255, 255, 255, 0.08);
+	color: #fff;
+}
+
+.crm-sidebar__user-settings--active {
+	background: rgba(204, 0, 0, 0.15);
+	color: #cc0000;
+}

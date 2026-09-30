@@ -20,12 +20,12 @@ const DESCRIPCION_DEFAULT = `~ OPCIONES DE PAGO ~
 
 ~ SOBRE NOSOTROS ~
 
-En Sportquatro Automotores nos especializamos en la comercialización de vehículos usados seleccionados y 0km multimarcas.
+En Car Place nos dedicamos a la compra y venta de vehículos usados seleccionados.
 
-Contamos con un stock permanente de más de 70 unidades y más de 20 años de trayectoria en el rubro automotor, brindando atención personalizada, transparencia y asesoramiento profesional en cada operación.
+Brindamos atención personalizada, transparencia y asesoramiento profesional en cada operación.
 
 Córdoba Capital
-SPORTQUATRO AUTOMOTORES`;
+CAR PLACE`;
 
 /**
  * Props:

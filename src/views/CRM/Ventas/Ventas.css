@@ -6,3 +6,48 @@
   min-width: 0;
   overflow: hidden;
 }
+/* ── Aviso de préstamo registrado ── */
+.ventas-prestamo-aviso {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 12px;
+	flex-wrap: wrap;
+	margin: 8px 16px;
+	padding: 10px 14px;
+	background: #0d0d0d;
+	border: 1px solid #1f3d1f;
+	border-left: 3px solid #2e9b2e;
+	border-radius: 6px;
+	font-family: "Barlow", sans-serif;
+	font-size: 15px;
+	color: #cfe8cf;
+}
+
+.ventas-prestamo-aviso__acciones {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+}
+
+.ventas-prestamo-aviso__btn {
+	background: #cc0000;
+	border: 1px solid #cc0000;
+	border-radius: 6px;
+	color: #fff;
+	font-family: "Barlow Condensed", sans-serif;
+	font-size: 13px;
+	font-weight: 700;
+	text-transform: uppercase;
+	letter-spacing: 0.5px;
+	padding: 6px 12px;
+	cursor: pointer;
+}
+
+.ventas-prestamo-aviso__cerrar {
+	background: none;
+	border: none;
+	color: #666;
+	cursor: pointer;
+	font-size: 16px;
+}

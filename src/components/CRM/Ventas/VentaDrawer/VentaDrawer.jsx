@@ -1,6 +1,102 @@
 import React, { useState, useEffect } from "react";
 import Drawer from "@mui/material/Drawer";
 import "./VentaDrawer.css";
+import { DASH, cap, formatMonto, getAutoDatos, tituloVehiculo, valorOGuion, listaOGuion } from "../ventaVehiculo";
+
+const PROPIETARIO_LABELS = { agencia: "Agencia", socio: "Socio", compartido: "Compartido 50/50" };
+const TIPO_LABELS = { patrimonio: "Patrimonio propio", consignacion: "Consignación", consignacion_online: "Consignación online" };
+
+function formatFechaCorta(iso) {
+	if (!iso) return DASH;
+	const [y, m, d] = String(iso).split("T")[0].split("-");
+	return `${d}/${m}/${y}`;
+}
+
+function Spec({ label, value }) {
+	return (
+		<div className="venta-drawer__spec">
+			<span className="venta-drawer__spec-label">{label}</span>
+			<span className="venta-drawer__spec-value">{value}</span>
+		</div>
+	);
+}
+
+function VentaDetalle({ venta }) {
+	const d = getAutoDatos(venta);
+	const moneda = d?.moneda || venta.moneda || "ARS";
+	const categorias = Array.isArray(d?.categorias) && d.categorias.length ? d.categorias.map(cap).join(", ") : DASH;
+	const precioLista = d?.precio ? `${d.moneda || ""} ${d.precio}`.trim() : DASH;
+	const precioOferta = d?.precio_oferta ? `${d.moneda || ""} ${d.precio_oferta}`.trim() : DASH;
+	const detalleGastos = Array.isArray(venta.gastosDetalle) ? venta.gastosDetalle : [];
+	const mostrarFinanzas = venta.ganancia != null || venta.precioCompra != null || venta.gastos != null || venta.propietarioAuto;
+
+	return (
+		<>
+			<div className="venta-drawer__section">
+				<h3 className="venta-drawer__sec-titulo">Vehículo</h3>
+				<div className="venta-drawer__veh-titulo">{tituloVehiculo(venta)}</div>
+				{!d && <p className="venta-drawer__nota">Venta anterior: sin ficha técnica guardada del vehículo.</p>}
+				<div className="venta-drawer__specs">
+					<Spec label="Marca" value={d?.marca ? cap(d.marca) : DASH} />
+					<Spec label="Modelo" value={valorOGuion(d?.modelo)} />
+					<Spec label="Año" value={valorOGuion(d?.anio)} />
+					<Spec label="Kilómetros" value={d?.km != null && d?.km !== "" ? `${d.km} km` : DASH} />
+					<Spec label="Patente" value={d?.patente ? String(d.patente).toUpperCase() : DASH} />
+					<Spec label="Color" value={d?.color ? cap(d.color) : DASH} />
+					<Spec label="Motor" value={valorOGuion(d?.motor)} />
+					<Spec label="Transmisión" value={listaOGuion(d?.transmision)} />
+					<Spec label="Combustible" value={listaOGuion(d?.combustible)} />
+					<Spec label="Tracción" value={listaOGuion(d?.traccion)} />
+					<Spec label="Tipo" value={d?.tipo ? TIPO_LABELS[d.tipo] || cap(d.tipo) : DASH} />
+					<Spec label="Categorías" value={categorias} />
+					<Spec label="Moneda" value={d ? moneda : DASH} />
+					<Spec label="Precio de lista" value={precioLista} />
+					<Spec label="Precio de oferta" value={precioOferta} />
+				</div>
+				{d?.notas && (
+					<div className="venta-drawer__notas">
+						<span className="venta-drawer__spec-label">Notas</span>
+						<p>{d.notas}</p>
+					</div>
+				)}
+			</div>
+
+			<div className="venta-drawer__section">
+				<h3 className="venta-drawer__sec-titulo">Venta</h3>
+				<div className="venta-drawer__specs">
+					<Spec label="Fecha" value={formatFechaCorta(venta.fechaVenta)} />
+					<Spec label="Precio de venta" value={venta.precioVendido ? `${venta.moneda || "ARS"} ${venta.precioVendido}` : DASH} />
+					<Spec label="Cliente" value={`${venta.nombre || ""} ${venta.apellido || ""}`.trim() || DASH} />
+					<Spec label="Teléfono" value={valorOGuion(venta.telefono)} />
+					<Spec label="Auto recibido" value={venta.recibioPago ? valorOGuion(venta.autoRecibido) : "No"} />
+				</div>
+			</div>
+
+			{mostrarFinanzas && (
+				<div className="venta-drawer__section">
+					<h3 className="venta-drawer__sec-titulo">Compra y ganancia</h3>
+					<div className="venta-drawer__specs">
+						<Spec label="Propietario" value={venta.propietarioAuto ? PROPIETARIO_LABELS[venta.propietarioAuto] || venta.propietarioAuto : DASH} />
+						<Spec label="Fecha de compra" value={formatFechaCorta(venta.fechaCompra)} />
+						<Spec label="Precio de compra" value={venta.precioCompra != null ? formatMonto(venta.precioCompra) : DASH} />
+						<Spec label="Gastos" value={venta.gastos != null ? formatMonto(venta.gastos) : DASH} />
+						<Spec label="Ganancia" value={venta.ganancia != null ? formatMonto(venta.ganancia) : DASH} />
+					</div>
+					{detalleGastos.length > 0 && (
+						<ul className="venta-drawer__gastos">
+							{detalleGastos.map((g, i) => (
+								<li key={i}>
+									<span>{g.texto}</span>
+									<span>{g.precio ? formatMonto(g.precio) : DASH}</span>
+								</li>
+							))}
+						</ul>
+					)}
+				</div>
+			)}
+		</>
+	);
+}
 
 const MESES = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
 
@@ -58,6 +154,7 @@ function buscarAutoCoincidente(texto, autos) {
 function formVacio() {
 	const hoy = new Date();
 	return {
+		esPrestamo: false,
 		estaEnCatalogo: false,
 		autoId: "",
 		vehiculoVendido: "",
@@ -170,8 +267,15 @@ export default function VentaDrawer({ modo, venta, onClose, onGuardar, autos, au
 		}
 	}, [modo, venta]);
 
-	const abierto = modo === "nueva" || modo === "editar";
-	const titulo = modo === "nueva" ? "Nueva venta" : "Editar venta";
+	const abierto = modo === "nueva" || modo === "editar" || (modo === "ver" && !!venta);
+	const esPrestamo = modo === "nueva" && form.esPrestamo;
+	const titulo = modo === "ver" ? "Detalle de venta" : modo === "nueva" ? (esPrestamo ? "Nuevo préstamo" : "Nueva venta") : "Editar venta";
+
+	function handleMonto(e, campo) {
+		const raw = e.target.value.replace(/\./g, "");
+		if (raw && isNaN(Number(raw))) return;
+		set(campo, raw.replace(/\B(?=(\d{3})+(?!\d))/g, "."));
+	}
 
 	function set(campo, valor) {
 		setForm((prev) => ({ ...prev, [campo]: valor }));
@@ -207,7 +311,34 @@ export default function VentaDrawer({ modo, venta, onClose, onGuardar, autos, au
 		setError("");
 	}
 
+	async function handleGuardarPrestamo() {
+		if (!form.nombre.trim()) return setError("Ingresá el nombre de la persona.");
+		if (!form.apellido.trim()) return setError("Ingresá el apellido de la persona.");
+		if (!form.telefono.trim()) return setError("Ingresá el teléfono.");
+		if (!form.fechaVenta) return setError("Seleccioná la fecha del préstamo.");
+		if (!form.precioVendido.trim()) return setError("Ingresá el monto prestado.");
+		setGuardando(true);
+		try {
+			await onGuardar({
+				esPrestamo: true,
+				vehiculoVendido: form.vehiculoVendido.trim() || "Préstamo",
+				fechaVenta: form.fechaVenta,
+				nombre: form.nombre.trim(),
+				apellido: form.apellido.trim(),
+				telefono: form.telefono.trim(),
+				recibioPago: false,
+				precioVendido: form.precioVendido.trim(),
+				moneda: form.moneda,
+				autoRecibido: null,
+				autoId: null,
+			});
+		} finally {
+			setGuardando(false);
+		}
+	}
+
 	async function handleGuardar() {
+		if (esPrestamo) return handleGuardarPrestamo();
 		if (modo === "nueva" && form.estaEnCatalogo && !form.autoId) {
 			setError("Seleccioná el vehículo del catálogo.");
 			return;
@@ -285,10 +416,33 @@ export default function VentaDrawer({ modo, venta, onClose, onGuardar, autos, au
 				</div>
 
 				<div className="venta-drawer__scroll">
+					{modo === "ver" && venta && (
+						<>
+							<VentaDetalle venta={venta} />
+							<div className="venta-drawer__form-actions">
+								<button className="venta-drawer__btn-cancelar" onClick={onClose}>
+									Cerrar
+								</button>
+							</div>
+						</>
+					)}
+
+					{modo !== "ver" && (
+					<>
 					<div className="venta-drawer__section">
 						<div className="venta-drawer__form">
+							{/* ── Préstamo (solo alta) ── */}
+							{modo === "nueva" && !autoPreseleccionado && (
+								<div className="venta-drawer__form-group">
+									<label className="venta-drawer__checkbox-row">
+										<input type="checkbox" checked={form.esPrestamo} onChange={(e) => set("esPrestamo", e.target.checked)} />
+										<span className="venta-drawer__checkbox-label">Es un préstamo (la empresa le presta dinero a alguien)</span>
+									</label>
+								</div>
+							)}
+
 							{/* ── Paso 1: ¿estaba en el catálogo? ── */}
-							{modo === "nueva" && (
+							{modo === "nueva" && !esPrestamo && (
 								<div className="venta-drawer__form-group">
 									<label className="venta-drawer__checkbox-row">
 										<input type="checkbox" checked={form.estaEnCatalogo} onChange={(e) => handleToggleCatalogo(e.target.checked)} />
@@ -298,6 +452,7 @@ export default function VentaDrawer({ modo, venta, onClose, onGuardar, autos, au
 							)}
 
 							{/* ── Vehículo: selector o input según el check ── */}
+							{!esPrestamo && (
 							<div className="venta-drawer__form-group">
 								<label className="venta-drawer__form-label">Vehículo vendido *</label>
 
@@ -324,10 +479,11 @@ export default function VentaDrawer({ modo, venta, onClose, onGuardar, autos, au
 									/>
 								)}
 							</div>
+							)}
 
 							{/* Fecha */}
 							<div className="venta-drawer__form-group">
-								<label className="venta-drawer__form-label">Fecha de venta *</label>
+								<label className="venta-drawer__form-label">{esPrestamo ? "Fecha del préstamo *" : "Fecha de venta *"}</label>
 								<FechaSelector value={form.fechaVenta} onChange={(iso) => set("fechaVenta", iso)} />
 							</div>
 
@@ -369,7 +525,7 @@ export default function VentaDrawer({ modo, venta, onClose, onGuardar, autos, au
 
 							{/* Precio vendido */}
 							<div className="venta-drawer__form-group">
-								<label className="venta-drawer__form-label">Precio de venta *</label>
+								<label className="venta-drawer__form-label">{esPrestamo ? "Monto prestado *" : "Precio de venta *"}</label>
 								<div style={{ display: "flex", gap: 6 }}>
 									<select
 										className="venta-drawer__form-select"
@@ -387,25 +543,35 @@ export default function VentaDrawer({ modo, venta, onClose, onGuardar, autos, au
 										placeholder="Ej: 15.000.000"
 										value={form.precioVendido}
 										style={{ flex: 1 }}
-										onChange={(e) => {
-											const raw = e.target.value.replace(/\./g, "");
-											if (raw && isNaN(Number(raw))) return;
-											const formatted = raw.replace(/\B(?=(\d{3})+(?!\d))/g, ".");
-											set("precioVendido", formatted);
-										}}
+										onChange={(e) => handleMonto(e, "precioVendido")}
 									/>
 								</div>
 							</div>
 
+							{esPrestamo && (
+								<div className="venta-drawer__form-group">
+									<label className="venta-drawer__form-label">Motivo / detalle (opcional)</label>
+									<textarea
+										className="venta-drawer__form-input"
+										rows={3}
+										placeholder="Ej: Adelanto para compra de repuestos"
+										value={form.vehiculoVendido}
+										onChange={(e) => set("vehiculoVendido", e.target.value)}
+									/>
+								</div>
+							)}
+
 							{/* Parte de pago */}
+							{!esPrestamo && (
 							<div className="venta-drawer__form-group">
 								<label className="venta-drawer__checkbox-row">
 									<input type="checkbox" checked={form.recibioPago} onChange={(e) => set("recibioPago", e.target.checked)} />
 									<span className="venta-drawer__checkbox-label">Se recibió un vehículo como parte de pago</span>
 								</label>
 							</div>
+							)}
 
-							{form.recibioPago && (
+							{!esPrestamo && form.recibioPago && (
 								<div className="venta-drawer__form-group">
 									<label className="venta-drawer__form-label">Vehículo recibido</label>
 									<input
@@ -425,12 +591,14 @@ export default function VentaDrawer({ modo, venta, onClose, onGuardar, autos, au
 
 					<div className="venta-drawer__form-actions">
 						<button className="venta-drawer__btn-guardar" onClick={handleGuardar} disabled={guardando}>
-							{guardando ? "Guardando…" : modo === "nueva" ? "Registrar venta" : "Guardar cambios"}
+							{guardando ? "Guardando…" : esPrestamo ? "Registrar préstamo" : modo === "nueva" ? "Registrar venta" : "Guardar cambios"}
 						</button>
 						<button className="venta-drawer__btn-cancelar" onClick={onClose} disabled={guardando}>
 							Cancelar
 						</button>
 					</div>
+					</>
+					)}
 				</div>
 			</div>
 		</Drawer>

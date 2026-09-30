@@ -1,0 +1,64 @@
+.cuentas-filters {
+	display: flex;
+	align-items: flex-end;
+	gap: 14px;
+	flex-wrap: wrap;
+	padding: 12px 28px;
+	border-bottom: 1px solid #161616;
+	background: #0a0a0a;
+	flex-shrink: 0;
+}
+
+.cuentas-filters__group {
+	display: flex;
+	flex-direction: column;
+	gap: 2px;
+}
+
+.cuentas-filters__label {
+	font-family: "Barlow Condensed", sans-serif;
+	font-size: 10px;
+	font-weight: 700;
+	text-transform: uppercase;
+	letter-spacing: 0.8px;
+	color: #555;
+}
+
+.cuentas-filters__select {
+	background: #111;
+	border: 1px solid #1e1e1e;
+	border-radius: 7px;
+	padding: 6px 28px 6px 10px;
+	font-family: "Barlow Condensed", sans-serif;
+	font-size: 13px;
+	font-weight: 700;
+	letter-spacing: 0.6px;
+	text-transform: uppercase;
+	color: rgba(255, 255, 255, 0.45);
+	cursor: pointer;
+	outline: none;
+	appearance: none;
+	background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%23444' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+	background-repeat: no-repeat;
+	background-position: right 8px center;
+	transition: border-color 0.15s, color 0.15s;
+	white-space: nowrap;
+}
+
+.cuentas-filters__select:hover {
+	border-color: #333;
+	color: rgba(255, 255, 255, 0.7);
+}
+
+.cuentas-filters__select option {
+	background: #111;
+	color: #fff;
+	text-transform: none;
+}
+
+@media (max-width: 640px) {
+	.cuentas-filters {
+		padding: 10px 16px;
+		gap: 10px;
+	}
+}

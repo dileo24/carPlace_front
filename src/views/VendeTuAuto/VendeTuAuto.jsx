@@ -264,7 +264,7 @@ export default function VendeTuAuto() {
         </h3>
         <div className="vt-trust-bar" />
         <p className="vt-trust-p">
-          En SportQuatro Automotores trabajamos para que vender tu auto
+          En Car Place trabajamos para que vender tu auto
           en consignación sea un proceso simple, seguro y transparente.
         </p>
         <p className="vt-trust-p">

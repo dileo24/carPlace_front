@@ -7,6 +7,8 @@ import StockFilters from "../../../components/CRM/Stock/StockFilters/StockFilter
 import StockCard from "../../../components/CRM/Stock/StockCard/StockCard";
 import StockDrawer from "../../../components/CRM/Stock/StockDrawer/StockDrawer";
 import StockAlistaje from "../../../components/CRM/Stock/StockAlistaje/StockAlistaje";
+import StockMarcas from "../../../components/CRM/Stock/StockMarcas/StockMarcas";
+import { normalizarPatente } from "../../../utils/patente";
 import { getAutos } from "../../../services/autos.service";
 import { getAutosPublicadosIds } from "../../../services/publicaciones.service";
 import { useRoles } from "../../../hooks/useRoles";
@@ -31,6 +33,43 @@ export default function Stock() {
 	const [drawerOpen, setDrawerOpen] = useState(false);
 	const [searchParams, setSearchParams] = useSearchParams();
 	const [autosEnML, setAutosEnML] = useState(new Set());
+
+	// Vista Autos / Marcas (Marcas solo para admin), sincronizada con ?vista=marcas
+	const vistaMarcas = esAdmin && searchParams.get("vista") === "marcas";
+	function cambiarVista(vista) {
+		setSearchParams(
+			(prev) => {
+				const next = new URLSearchParams(prev);
+				if (vista === "marcas") next.set("vista", "marcas");
+				else next.delete("vista");
+				return next;
+			},
+			{ replace: true },
+		);
+	}
+
+	const vistaToggle = esAdmin ? (
+		<div className="stock-view__vista-toggle" role="tablist" aria-label="Vista de stock">
+			<button
+				type="button"
+				role="tab"
+				aria-selected={!vistaMarcas}
+				className={`stock-view__vista-btn${!vistaMarcas ? " stock-view__vista-btn--active" : ""}`}
+				onClick={() => cambiarVista("autos")}
+			>
+				Autos
+			</button>
+			<button
+				type="button"
+				role="tab"
+				aria-selected={vistaMarcas}
+				className={`stock-view__vista-btn${vistaMarcas ? " stock-view__vista-btn--active" : ""}`}
+				onClick={() => cambiarVista("marcas")}
+			>
+				Marcas
+			</button>
+		</div>
+	) : null;
 
 	useEffect(() => {
 		getAutosPublicadosIds()
@@ -78,9 +117,14 @@ export default function Stock() {
 		}
 
 		if (busqueda.trim()) {
-			const q = busqueda.toLowerCase();
+			const q = busqueda.toLowerCase().trim();
+			const qPatente = normalizarPatente(busqueda);
 			lista = lista.filter(
-				(a) => a.marca?.toLowerCase().includes(q) || a.modelo?.toLowerCase().includes(q) || a.anio?.toString().includes(q),
+				(a) =>
+					a.marca?.toLowerCase().includes(q) ||
+					a.modelo?.toLowerCase().includes(q) ||
+					a.anio?.toString().includes(q) ||
+					(qPatente && normalizarPatente(a.patente).includes(qPatente)),
 			);
 		}
 
@@ -123,12 +167,22 @@ export default function Stock() {
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [autos]);
 
+	if (vistaMarcas) {
+		return (
+			<div className="stock-view">
+				{vistaToggle}
+				<StockMarcas />
+			</div>
+		);
+	}
+
 	if (loading) return <LoadingState mensaje="Cargando stock…" />;
 
 	if (error) return <ErrorState mensaje={error} />;
 
 	return (
 		<div className="stock-view">
+			{vistaToggle}
 			<StockDashboard autos={autos} esVendedor={esVendedor || esPublicVend} />
 
 			<StockFilters

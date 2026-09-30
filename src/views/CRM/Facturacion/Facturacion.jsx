@@ -1,9 +1,8 @@
 import React, { useState, useEffect, useMemo } from "react";
-import { useNavigate } from "react-router-dom";
 import NuevoGastoDrawer from "../../../components/CRM/Facturacion/NuevoGastoDrawer/NuevoGastoDrawer";
 import { getGastos, deleteGasto } from "../../../services/gastos.service";
 import { getVentas } from "../../../services/ventas.service";
-import { getCuentas } from "../../../services/cuentas.service";
+import { getAutos } from "../../../services/autos.service";
 import { LoadingState, ErrorState } from "../../../components/CRM/PageState/PageState";
 import "./Facturacion.css";
 
@@ -43,11 +42,9 @@ const mesActualISO = () => new Date().toISOString().slice(0, 7);
 const esMesActual = (fechaISO) => fechaISO?.slice(0, 7) === mesActualISO();
 
 export default function Facturacion() {
-	const navigate = useNavigate();
 	const [gastos, setGastos] = useState([]);
 	const [ventas, setVentas] = useState([]);
-	const [admins, setAdmins] = useState([]);
-	const [saldos, setSaldos] = useState({});
+	const [autos, setAutos] = useState([]);
 	const [loading, setLoading] = useState(true);
 	const [error, setError] = useState(null);
 	const [nuevoGastoOpen, setNuevoGastoOpen] = useState(false);
@@ -57,11 +54,10 @@ export default function Facturacion() {
 		setLoading(true);
 		setError(null);
 		try {
-			const [gastosData, ventasData, cuentasData] = await Promise.all([getGastos(), getVentas(), getCuentas()]);
+			const [gastosData, ventasData, autosData] = await Promise.all([getGastos(), getVentas(), getAutos()]);
 			setGastos(Array.isArray(gastosData?.resp) ? gastosData.resp : []);
 			setVentas(Array.isArray(ventasData?.resp) ? ventasData.resp : []);
-			setAdmins(Array.isArray(cuentasData?.resp?.admins) ? cuentasData.resp.admins : []);
-			setSaldos(cuentasData?.resp?.saldos || {});
+			setAutos(Array.isArray(autosData?.resp) ? autosData.resp : []);
 		} catch (err) {
 			console.error("Error al cargar facturación:", err);
 			setError("No se pudo cargar la información de facturación.");
@@ -110,6 +106,22 @@ export default function Facturacion() {
 		return { gananciaPorMoneda: ganancia, gastosPorMoneda: gastosMes, balancePorMoneda: balance, monedasActivas: activas, ventasConGanancia: conGanancia };
 	}, [ventas, gastos]);
 
+	const patrimonio = useMemo(() => {
+		const res = { ARS: 0, USD: 0, unidades: 0, sinPrecio: 0 };
+		autos.forEach((a) => {
+			if (a.estado === "vendido" || a.estado === "no_disponible") return;
+			res.unidades += 1;
+			const precio = Number(String(a.precio ?? "").replace(/D/g, ""));
+			if (!precio) {
+				res.sinPrecio += 1;
+				return;
+			}
+			const m = String(a.moneda || "").toUpperCase();
+			res[m === "USD" || m === "U$D" ? "USD" : "ARS"] += precio;
+		});
+		return res;
+	}, [autos]);
+
 	if (loading) return <LoadingState mensaje="Cargando facturación…" />;
 	if (error) return <ErrorState mensaje={error} onRetry={cargar} />;
 
@@ -117,7 +129,7 @@ export default function Facturacion() {
 		<div className="fact-view">
 			<div className="fact-header">
 				<h1 className="fact-title">Facturación</h1>
-				<p className="fact-subtitle">Gastos del negocio, cuenta corriente entre socios y ganancia por auto vendido.</p>
+				<p className="fact-subtitle">Gastos del negocio, patrimonio en stock y ganancia por auto vendido.</p>
 			</div>
 
 			<div className="fact-grid">
@@ -141,41 +153,13 @@ export default function Facturacion() {
 					</div>
 				</Panel>
 
-				{/* ── Cuentas entre socios ── */}
-				<Panel
-					title="Cuentas entre socios"
-					subtitle="Saldo actual de cada admin"
-					actions={
-						<button className="fact-link-btn" onClick={() => navigate("/crm/cuentas")}>
-							Ver detalle →
-						</button>
-					}
-				>
-					<div className="fact-cuentas-list">
-						{admins.length === 0 && <p className="fact-vacio">Sin admins cargados.</p>}
-						{admins.map((a) => {
-							const saldo = saldos[a.id] || { ARS: 0, USD: 0 };
-							const monedas = ["ARS", "USD"].filter((m) => saldo[m] !== 0);
-							return (
-								<div className="fact-cuenta-row" key={a.id}>
-									<span className="fact-cuenta-nombre">{a.name || a.email}</span>
-									<div className="fact-cuenta-saldos">
-										{monedas.length === 0 ? (
-											<span className="fact-cuenta-chip fact-cuenta-chip--neutral">Al día</span>
-										) : (
-											monedas.map((m) => {
-												const debe = saldo[m] < 0;
-												return (
-													<span key={m} className={`fact-cuenta-chip ${debe ? "fact-cuenta-chip--debe" : "fact-cuenta-chip--recibe"}`}>
-														{debe ? "Debe" : "Le deben"} {m} {formatMonto(saldo[m])}
-													</span>
-												);
-											})
-										)}
-									</div>
-								</div>
-							);
-						})}
+				{/* ── Patrimonio en stock ── */}
+				<Panel title="Patrimonio en stock" subtitle="Valor de los autos que todavía no se vendieron" full>
+					<div className="fact-stats-row">
+						<Stat label="Valor en ARS" value={`ARS ${formatMonto(patrimonio.ARS)}`} color="#2ecc71" />
+						<Stat label="Valor en USD" value={`USD ${formatMonto(patrimonio.USD)}`} color="#2ecc71" />
+						<Stat label="Unidades en stock" value={patrimonio.unidades} />
+						{patrimonio.sinPrecio > 0 && <Stat label="Sin precio" value={patrimonio.sinPrecio} color="#f5a623" />}
 					</div>
 				</Panel>
 

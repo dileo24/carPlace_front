@@ -1,11 +1,11 @@
 import React from "react";
 import "./MarcasHeader.css";
 
-const MarcasHeader = ({ total, search, onSearchChange, onNuevo }) => {
+const MarcasHeader = ({ total, search, onSearchChange, onNuevo, titulo = "Marcas" }) => {
 	return (
 		<div className="marcas-header">
 			<div className="marcas-header__left">
-				<h1 className="marcas-header__title">Marcas</h1>
+				<h1 className="marcas-header__title">{titulo}</h1>
 				<span className="marcas-header__meta">
 					(<span className="marcas-header__metric">{total}</span>)
 				</span>

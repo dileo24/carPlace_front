@@ -94,32 +94,40 @@ export default function Reportes() {
 	const [error, setError] = useState(null);
 	const [mounted, setMounted] = useState(false);
 
-	const ANIO_ACTUAL = new Date().getFullYear();
-	const ANIO_INICIO = 2023;
-	const [anioPatrimonio, setAnioPatrimonio] = useState(ANIO_ACTUAL);
+	const [periodo, setPeriodo] = useState("mes");
 	useEffect(() => {
 		const t = setTimeout(() => setMounted(true), 60);
 		return () => clearTimeout(t);
 	}, []);
 	useEffect(() => {
+		let cancelado = false;
 		setLoading(true);
+		setError(null);
 		axios
-			.get(`${API_URL}/reportes`)
+			.get(`${API_URL}/reportes`, { params: { periodo } })
 			.then((r) => r.data)
 			.then((d) => {
+				if (cancelado) return;
 				if (d.status === 200) {
 					setData(d.resp);
 				} else setError("Error al cargar los reportes.");
 			})
-			.catch(() => setError("No se pudo conectar con el servidor."))
-			.finally(() => setLoading(false));
-	}, []);
+			.catch(() => {
+				if (!cancelado) setError("No se pudo conectar con el servidor.");
+			})
+			.finally(() => {
+				if (!cancelado) setLoading(false);
+			});
+		return () => {
+			cancelado = true;
+		};
+	}, [periodo]);
 	const origenTotales = useMemo(() => {
-		if (!data?.origenPorMes?.length) return [];
+		if (!data?.origenSerie?.length) return [];
 		const totales = {};
-		data.origenPorMes.forEach((row) => {
+		data.origenSerie.forEach((row) => {
 			Object.entries(row).forEach(([key, val]) => {
-				if (key === "mes") return;
+				if (key === "label") return;
 				totales[key] = (totales[key] || 0) + (val || 0);
 			});
 		});
@@ -127,36 +135,60 @@ export default function Reportes() {
 			.map(([canal, cantidad]) => ({ canal, cantidad }))
 			.filter((o) => o.cantidad > 0)
 			.sort((a, b) => b.cantidad - a.cantidad);
-	}, [data?.origenPorMes]);
+	}, [data?.origenSerie]);
 
-	if (loading) return <LoadingState mensaje="Cargando reportes…" />;
+	// Cambiar de período no desmonta la vista: solo el primer load muestra el loader a pantalla completa.
+	if (!data && loading) return <LoadingState mensaje="Cargando reportes…" />;
 
 	if (error) return <ErrorState mensaje={error} onRetry={() => window.location.reload()} />;
 
 	if (!data) return null;
 
+	const esSemana = periodo === "semana";
+	const T = esSemana
+		? {
+				actual: "Esta semana",
+				anterior: "Semana anterior",
+				ventasTitulo: "Ventas por semana",
+				ventasSub: "Unidades cerradas · últimas 8 semanas",
+				ventasVacio: "Todavía no hay ventas registradas en las últimas semanas.",
+				nota: "Barra punteada = semana en curso (proyección)",
+				gananciaTotal: "Total (8 semanas)",
+				evolucion: "Evolución semanal",
+				evolucionCanal: "Evolución semanal por canal",
+				usadosSerie: "Por semana",
+			}
+		: {
+				actual: "Este mes",
+				anterior: "Mes anterior",
+				ventasTitulo: "Ventas por mes",
+				ventasSub: `Unidades cerradas ${new Date().getFullYear()}`,
+				ventasVacio: "Todavía no hay ventas registradas este año.",
+				nota: "Barra punteada = mes en curso (proyección)",
+				gananciaTotal: "Total (6 meses)",
+				evolucion: "Evolución mensual",
+				evolucionCanal: "Evolución mensual por canal",
+				usadosSerie: "Por mes",
+			};
+
 	const {
 		embudoEtapas,
 		tiempoPorEtapa,
 		ventasHistoricas,
-		proyeccionMesActual,
-		mesActual,
-		mesAnterior,
-		patrimonioHistorico,
+			proyeccion,
+		periodoActual,
+		periodoAnterior,
 		gananciaTotal,
-		gananciaPorMes = [],
+		gananciaSerie = [],
 		ventasPorAsesor,
-		origenPorMes,
+		origenSerie,
 		conversionPorCanal,
 		stockItems,
 		stockResumen,
 		ventasConUsadoCount,
 		totalVentasValidas,
-		usadosPorMarca,
-		usadosPorMes,
-		tareas,
-		tareasPorAsesor,
-		botMetricasHistorico,
+			usadosSerie,
+		botSerie,
 		botActual,
 	} = data;
 
@@ -175,19 +207,6 @@ export default function Reportes() {
 		tasa: pct(a.consultasAsignadas, a.ventasCerradas),
 	}));
 
-	// Patrimonio del año seleccionado
-	const datosAnio = patrimonioHistorico[anioPatrimonio] ?? {};
-	const esAnioActual = anioPatrimonio === ANIO_ACTUAL;
-	const ventasMensualesMostrar = datosAnio.ventasMensuales ?? [];
-	const totalVendidosAnio = ventasMensualesMostrar.reduce((s, r) => s + (r.vendidos ?? 0), 0);
-	const stockMostrar = esAnioActual ? datosAnio.stockActual : (datosAnio.stockDiciembre ?? null);
-	const totalUnidadesStock = stockMostrar
-		? (stockMostrar.patrimonio?.unidades ?? 0) + (stockMostrar.consignacion?.unidades ?? 0) + (stockMostrar.sinClasificar?.unidades ?? 0)
-		: 0;
-	const totalValorStock = stockMostrar
-		? (stockMostrar.patrimonio?.valorM ?? 0) + (stockMostrar.consignacion?.valorM ?? 0) + (stockMostrar.sinClasificar?.valorM ?? 0)
-		: 0;
-
 	// Origen: totales para el donut
 	const CANAL_COLORS = {
 		WhatsApp: "#25d366",
@@ -200,20 +219,39 @@ export default function Reportes() {
 		Otro: "#aaaaaa",
 	};
 
-	const variacionVentas = (mesActual?.unidades ?? 0) - (mesAnterior?.unidades ?? 0);
+	const variacionVentas = (periodoActual?.unidades ?? 0) - (periodoAnterior?.unidades ?? 0);
 	const tasaDerivacion = pct(botActual?.iniciadas, botActual?.derivadas);
 	const tasaAbandono = pct(botActual?.iniciadas, botActual?.abandonadas);
 
-	const aniosDisponibles = Array.from({ length: ANIO_ACTUAL - ANIO_INICIO + 1 }, (_, i) => ANIO_INICIO + i);
+	// Lunes de la semana en curso, hora Argentina (UTC-3) leída con getters UTC.
+	const hoyAR = new Date(Date.now() - 3 * 3600000);
+	const lunesAR = new Date(Date.UTC(hoyAR.getUTCFullYear(), hoyAR.getUTCMonth(), hoyAR.getUTCDate() - ((hoyAR.getUTCDay() + 6) % 7)));
+	const subtitulo = esSemana
+		? `Análisis de rendimiento · semana del ${lunesAR.getUTCDate()}/${lunesAR.getUTCMonth() + 1}`
+		: `Análisis de rendimiento · ${new Date().toLocaleDateString("es-AR", { month: "long", year: "numeric" })}`;
 
 	return (
-		<div className={`rep-view${mounted ? " rep-view--mounted" : ""}`}>
+		<div className={`rep-view${mounted ? " rep-view--mounted" : ""}${loading ? " rep-view--loading" : ""}`}>
 			<div className="rep-header">
-				<div>
+					<div>
 					<h1 className="rep-title">Reportes</h1>
-					<p className="rep-subtitle">
-						Análisis de rendimiento · {new Date().toLocaleDateString("es-AR", { month: "long", year: "numeric" })}
-					</p>
+					<p className="rep-subtitle">{subtitulo}</p>
+				</div>
+				<div className="rep-periodo" role="group" aria-label="Período">
+					{[
+						{ key: "semana", label: "Semana" },
+						{ key: "mes", label: "Mes" },
+					].map((p) => (
+						<button
+							key={p.key}
+							type="button"
+							className={`rep-periodo__btn${periodo === p.key ? " rep-periodo__btn--activo" : ""}`}
+							aria-pressed={periodo === p.key}
+							onClick={() => setPeriodo(p.key)}
+						>
+							{p.label}
+						</button>
+					))}
 				</div>
 			</div>
 
@@ -264,25 +302,25 @@ export default function Reportes() {
 				)}
 
 				{/* ══ 2. VENTAS POR MES ══ */}
-				<Panel title="Ventas por mes" subtitle={`Unidades cerradas ${ANIO_ACTUAL}`}>
+				<Panel title={T.ventasTitulo} subtitle={T.ventasSub}>
 					<div className="rep-stats-row">
-						<Stat label="Este mes" value={mesActual?.unidades ?? 0} color="#cc0000" />
-						<Stat label="Mes anterior" value={mesAnterior?.unidades ?? 0} />
+<Stat label={T.actual} value={periodoActual?.unidades ?? 0} color="#cc0000" />
+					<Stat label={T.anterior} value={periodoAnterior?.unidades ?? 0} />
 						<Stat
 							label="Variación"
 							value={`${variacionVentas > 0 ? "+" : ""}${variacionVentas}`}
 							color={variacionVentas >= 0 ? "#22c55e" : "#cc0000"}
 						/>
-						<Stat label="Proyección" value={proyeccionMesActual} color="#f59e0b" />
+						<Stat label="Proyección" value={proyeccion} color="#f59e0b" />
 					</div>
 					{ventasHistoricas.length === 0 ? (
-						<Vacio texto="Todavía no hay ventas registradas este año." />
+						<Vacio texto={T.ventasVacio} />
 					) : (
 						<>
 							<ResponsiveContainer width="100%" height={160}>
-								<BarChart data={ventasHistoricas} margin={{ top: 4, right: 0, left: -20, bottom: 0 }}>
-									<XAxis
-										dataKey="mes"
+<BarChart data={ventasHistoricas} margin={{ top: 4, right: 0, left: -20, bottom: 0 }}>
+								<XAxis
+									dataKey="label"
 										tick={{ fill: "#444", fontSize: 10, fontFamily: "Barlow, sans-serif" }}
 										axisLine={false}
 										tickLine={false}
@@ -302,7 +340,7 @@ export default function Reportes() {
 									</Bar>
 								</BarChart>
 							</ResponsiveContainer>
-							<p className="rep-nota">Barra punteada = mes en curso (proyección)</p>
+							<p className="rep-nota">{T.nota}</p>
 						</>
 					)}
 				</Panel>
@@ -356,7 +394,7 @@ export default function Reportes() {
 				)}
 
 				{/* ══ 4. ORIGEN (no aplica para el socio) ══ */}
-				{origenPorMes && (
+				{origenSerie && (
 				<Panel title="Origen de consultas" subtitle="Volumen y conversión por canal" full>
 					{origenTotales.length === 0 ? (
 						<Vacio texto="Todavía no hay consultas registradas." />
@@ -427,11 +465,11 @@ export default function Reportes() {
 								</div>
 							</div>
 							<p className="rep-sub-label" style={{ marginTop: 16 }}>
-								Evolución mensual por canal
+								{T.evolucionCanal}
 							</p>
 							<ResponsiveContainer width="100%" height={120}>
-								<AreaChart data={origenPorMes} margin={{ top: 4, right: 0, left: -20, bottom: 0 }}>
-									<XAxis dataKey="mes" tick={{ fill: "#444", fontSize: 10 }} axisLine={false} tickLine={false} />
+<AreaChart data={origenSerie} margin={{ top: 4, right: 0, left: -20, bottom: 0 }}>
+								<XAxis dataKey="label" tick={{ fill: "#444", fontSize: 10 }} axisLine={false} tickLine={false} />
 									<YAxis tick={{ fill: "#333", fontSize: 10 }} axisLine={false} tickLine={false} />
 									<Tooltip content={<CustomTooltip />} />
 									{Object.entries(CANAL_COLORS).map(([canal, color]) => (
@@ -463,37 +501,17 @@ export default function Reportes() {
 					{ventasConUsadoCount === 0 ? (
 						<Vacio texto="Todavía no hay ventas con usados registradas." />
 					) : (
-						<div className="rep-dos-cols">
-							<div>
-								<p className="rep-sub-label">Por marca</p>
-								<ResponsiveContainer width="100%" height={160}>
-									<BarChart data={usadosPorMarca} layout="vertical" margin={{ top: 0, right: 10, left: 0, bottom: 0 }}>
-										<XAxis type="number" tick={{ fill: "#333", fontSize: 10 }} axisLine={false} tickLine={false} />
-										<YAxis
-											type="category"
-											dataKey="key"
-											tick={{ fill: "#888", fontSize: 11 }}
-											axisLine={false}
-											tickLine={false}
-											width={60}
-										/>
-										<Tooltip content={<CustomTooltip suffix=" unidades" />} cursor={{ fill: "rgba(255,255,255,0.03)" }} />
-										<Bar dataKey="count" name="Recibidos" fill="#f59e0b" radius={[0, 4, 4, 0]} />
-									</BarChart>
-								</ResponsiveContainer>
-							</div>
-							<div>
-								<p className="rep-sub-label">Por mes</p>
-								<ResponsiveContainer width="100%" height={160}>
-									<BarChart data={usadosPorMes} margin={{ top: 4, right: 0, left: -20, bottom: 0 }}>
-										<XAxis dataKey="mes" tick={{ fill: "#444", fontSize: 10 }} axisLine={false} tickLine={false} />
-										<YAxis tick={{ fill: "#333", fontSize: 10 }} axisLine={false} tickLine={false} />
-										<Tooltip content={<CustomTooltip suffix=" usados" />} cursor={{ fill: "rgba(255,255,255,0.03)" }} />
-										<Bar dataKey="cantidad" name="Recibidos" fill="#f59e0b" radius={[4, 4, 0, 0]} />
-									</BarChart>
-								</ResponsiveContainer>
-							</div>
-						</div>
+						<>
+							<p className="rep-sub-label">{T.usadosSerie}</p>
+							<ResponsiveContainer width="100%" height={160}>
+								<BarChart data={usadosSerie} margin={{ top: 4, right: 0, left: -20, bottom: 0 }}>
+									<XAxis dataKey="label" tick={{ fill: "#444", fontSize: 10 }} axisLine={false} tickLine={false} />
+									<YAxis tick={{ fill: "#333", fontSize: 10 }} axisLine={false} tickLine={false} />
+									<Tooltip content={<CustomTooltip suffix=" usados" />} cursor={{ fill: "rgba(255,255,255,0.03)" }} />
+									<Bar dataKey="cantidad" name="Recibidos" fill="#f59e0b" radius={[4, 4, 0, 0]} />
+								</BarChart>
+							</ResponsiveContainer>
+						</>
 					)}
 				</Panel>
 
@@ -535,129 +553,17 @@ export default function Reportes() {
 					)}
 				</Panel>
 
-				{/* ══ 7. PATRIMONIO ══ */}
-				<Panel
-					title="Patrimonio en stock"
-					subtitle={
-						<div className="rep-anio-nav">
-							<button
-								className="rep-anio-nav__btn"
-								onClick={() => setAnioPatrimonio((a) => Math.max(ANIO_INICIO, a - 1))}
-								disabled={anioPatrimonio === ANIO_INICIO}
-							>
-								<svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-									<path d="M9 2L4 7l5 5" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
-								</svg>
-							</button>
-							<span className="rep-anio-nav__anio">{anioPatrimonio}</span>
-							<button
-								className="rep-anio-nav__btn"
-								onClick={() => setAnioPatrimonio((a) => Math.min(ANIO_ACTUAL, a + 1))}
-								disabled={anioPatrimonio === ANIO_ACTUAL}
-							>
-								<svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-									<path d="M5 2l5 5-5 5" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
-								</svg>
-							</button>
-						</div>
-					}
-					full
-				>
-					<div className="rep-dos-cols" style={{ alignItems: "start" }}>
-						<div>
-							<div className="rep-stats-row" style={{ marginBottom: 12 }}>
-								<Stat label="Vendidos en el año" value={totalVendidosAnio} color="#cc0000" />
-								<Stat label="Promedio mensual" value={Math.round(totalVendidosAnio / (ventasMensualesMostrar.length || 1))} />
-							</div>
-							<p className="rep-sub-label">Ventas por mes</p>
-							{ventasMensualesMostrar.length === 0 ? (
-								<Vacio texto="Sin ventas registradas para este año." />
-							) : (
-								<ResponsiveContainer width="100%" height={180}>
-									<BarChart data={ventasMensualesMostrar} margin={{ top: 4, right: 0, left: -20, bottom: 0 }}>
-										<XAxis dataKey="mes" tick={{ fill: "#444", fontSize: 10 }} axisLine={false} tickLine={false} />
-										<YAxis tick={{ fill: "#333", fontSize: 10 }} axisLine={false} tickLine={false} />
-										<CartesianGrid stroke="#1a1a1a" vertical={false} />
-										<Tooltip
-											cursor={{ fill: "rgba(255,255,255,0.03)" }}
-											content={({ active, payload, label }) => {
-												if (!active || !payload?.length) return null;
-												return (
-													<div className="rep-tooltip">
-														<span className="rep-tooltip__label">{label}</span>
-														<span className="rep-tooltip__val" style={{ color: "#cc0000" }}>
-															{payload[0].value} vendidos
-														</span>
-													</div>
-												);
-											}}
-										/>
-										<Bar dataKey="vendidos" name="Vendidos" fill="#cc0000" radius={[4, 4, 0, 0]} />
-									</BarChart>
-								</ResponsiveContainer>
-							)}
-						</div>
-						<div>
-							<div className="rep-stats-row" style={{ marginBottom: 12 }}>
-								<Stat label={esAnioActual ? "Unidades en stock hoy" : "Stock (Dic)"} value={totalUnidadesStock} />
-								<Stat
-									label="Valor bruto total"
-									value={totalValorStock ? `$${totalValorStock.toLocaleString("es-AR")}M` : "—"}
-									color="#cc0000"
-								/>
-							</div>
-							<p className="rep-sub-label">{esAnioActual ? "Composición actual" : "Composición al cierre de diciembre"}</p>
-							{stockMostrar ? (
-								<div className="rep-patrimonio-composicion">
-									{[
-										{ key: "patrimonio", label: "Patrimonio propio", color: "#22c55e", data: stockMostrar.patrimonio },
-										{ key: "consignacion", label: "Consignación", color: "#f59e0b", data: stockMostrar.consignacion },
-										{ key: "sinClasificar", label: "Sin clasificar", color: "#555", data: stockMostrar.sinClasificar },
-									].map(
-										({ key, label, color, data }) =>
-											data && (
-												<div key={key} className="rep-patrimonio-tipo">
-													<div className="rep-patrimonio-tipo__header">
-														<span className="rep-patrimonio-tipo__dot" style={{ background: color }} />
-														<span className="rep-patrimonio-tipo__label">{label}</span>
-														<span className="rep-patrimonio-tipo__count" style={{ color }}>
-															{data.unidades} u.
-														</span>
-													</div>
-													<div className="rep-patrimonio-tipo__bar-track">
-														<div
-															className="rep-patrimonio-tipo__bar-fill"
-															style={{
-																width: totalUnidadesStock ? `${(data.unidades / totalUnidadesStock) * 100}%` : "0%",
-																background: color,
-															}}
-														/>
-													</div>
-													<span className="rep-patrimonio-tipo__monto" style={{ color: data.valorM ? "#e0e0e0" : "#444" }}>
-														{data.valorM ? `$${data.valorM.toLocaleString("es-AR")}M` : "Sin clasificar"}
-													</span>
-												</div>
-											),
-									)}
-								</div>
-							) : (
-								<Vacio texto="Sin datos de stock para este año." />
-							)}
-						</div>
-					</div>
-				</Panel>
-
 				{/* ══ 7b. GANANCIA ══ */}
 				<Panel title="Ganancia" subtitle="Precio de venta − gastos − precio de compra">
 					<div className="rep-stats-row">
-						<Stat label="Total (6 meses)" value={`$${(gananciaTotal ?? 0).toLocaleString("es-AR")}`} color="#22c55e" />
+						<Stat label={T.gananciaTotal} value={`$${(gananciaTotal ?? 0).toLocaleString("es-AR")}`} color="#22c55e" />
 					</div>
-					{gananciaPorMes.every((g) => g.total === 0) ? (
+					{gananciaSerie.every((g) => g.total === 0) ? (
 						<Vacio texto="Todavía no hay ventas con ganancia calculada (falta cargar precio de compra)." />
 					) : (
 						<ResponsiveContainer width="100%" height={140}>
-							<BarChart data={gananciaPorMes} margin={{ top: 4, right: 0, left: -20, bottom: 0 }}>
-								<XAxis dataKey="mes" tick={{ fill: "#444", fontSize: 10 }} axisLine={false} tickLine={false} />
+<BarChart data={gananciaSerie} margin={{ top: 4, right: 0, left: -20, bottom: 0 }}>
+							<XAxis dataKey="label" tick={{ fill: "#444", fontSize: 10 }} axisLine={false} tickLine={false} />
 								<YAxis tick={{ fill: "#333", fontSize: 10 }} axisLine={false} tickLine={false} />
 								<Tooltip content={<CustomTooltip />} cursor={{ fill: "rgba(255,255,255,0.03)" }} />
 								<Bar dataKey="total" name="Ganancia" fill="#22c55e" radius={[4, 4, 0, 0]} />
@@ -666,36 +572,8 @@ export default function Reportes() {
 					)}
 				</Panel>
 
-				{/* ══ 8. TAREAS ══ */}
-				<Panel title="Tareas y seguimiento" subtitle="Estado actual del equipo">
-					<div className="rep-stats-row">
-						<Stat label="Total" value={tareas.total} />
-						<Stat label="Completadas" value={tareas.completadas} color="#22c55e" />
-						<Stat label="En progreso" value={tareas.enProgreso} color="#6495ed" />
-						<Stat label="Pendientes" value={tareas.pendientes} color="#ffc107" />
-					</div>
-					{tareasPorAsesor.length === 0 ? (
-						<Vacio texto="Todavía no hay tareas registradas." />
-					) : (
-						<>
-							<p className="rep-sub-label" style={{ marginTop: 12 }}>
-								Resumen
-							</p>
-							<ResponsiveContainer width="100%" height={120}>
-								<BarChart data={tareasPorAsesor} margin={{ top: 4, right: 0, left: -20, bottom: 0 }}>
-									<XAxis dataKey="nombre" tick={{ fill: "#444", fontSize: 10 }} axisLine={false} tickLine={false} />
-									<YAxis tick={{ fill: "#333", fontSize: 10 }} axisLine={false} tickLine={false} />
-									<Tooltip content={<CustomTooltip />} cursor={{ fill: "rgba(255,255,255,0.03)" }} />
-									<Bar dataKey="completadas" name="Completadas" fill="#22c55e" radius={[4, 4, 0, 0]} />
-									<Bar dataKey="pendientes" name="Pendientes" fill="#ffc107" radius={[4, 4, 0, 0]} />
-								</BarChart>
-							</ResponsiveContainer>
-						</>
-					)}
-				</Panel>
-
 				{/* ══ 9. BOT (no aplica para el socio) ══ */}
-				{botMetricasHistorico && (
+				{botSerie && (
 					<Panel title="Actividad del bot" subtitle="Conversaciones y derivaciones">
 						<div className="rep-stats-row">
 							<Stat label="Iniciadas" value={botActual?.iniciadas ?? 0} />
@@ -704,16 +582,16 @@ export default function Reportes() {
 							<Stat label="Tasa derivación" value={`${tasaDerivacion}%`} color="#3b82f6" />
 							<Stat label="Sin derivar %" value={`${tasaAbandono}%`} color="#cc0000" />
 						</div>
-						{botMetricasHistorico.every((b) => b.iniciadas === 0) ? (
+						{botSerie.every((b) => b.iniciadas === 0) ? (
 							<Vacio texto="Todavía no hay conversaciones del bot registradas." />
 						) : (
 							<>
 								<p className="rep-sub-label" style={{ marginTop: 12 }}>
-									Evolución mensual
+									{T.evolucion}
 								</p>
 								<ResponsiveContainer width="100%" height={140}>
-									<LineChart data={botMetricasHistorico} margin={{ top: 4, right: 10, left: -20, bottom: 0 }}>
-										<XAxis dataKey="mes" tick={{ fill: "#444", fontSize: 10 }} axisLine={false} tickLine={false} />
+<LineChart data={botSerie} margin={{ top: 4, right: 10, left: -20, bottom: 0 }}>
+									<XAxis dataKey="label" tick={{ fill: "#444", fontSize: 10 }} axisLine={false} tickLine={false} />
 										<YAxis tick={{ fill: "#333", fontSize: 10 }} axisLine={false} tickLine={false} />
 										<CartesianGrid stroke="#1a1a1a" vertical={false} />
 										<Tooltip content={<CustomTooltip />} />

@@ -1056,3 +1056,28 @@
 .stock-drawer__field-input--oferta:focus {
 	border-color: #22c55e;
 }
+
+.stock-drawer__patente {
+	display: inline-block;
+	margin: 4px 0 8px;
+	padding: 2px 9px;
+	font-family: "Barlow Condensed", "Barlow", sans-serif;
+	font-size: 14px;
+	font-weight: 700;
+	letter-spacing: 2px;
+	color: #ccc;
+	background: #141414;
+	border: 1px solid #2a2a2a;
+	border-radius: 4px;
+}
+
+.stock-drawer__field-input--patente {
+	text-transform: uppercase;
+	letter-spacing: 2px;
+}
+
+.stock-drawer__field-error {
+	font-family: "Barlow", sans-serif;
+	font-size: 12px;
+	color: #ff6b6b;
+}

@@ -1,16 +1,16 @@
 import React, { useEffect, useRef } from "react";
 import "./Sucursales.css";
 
-import localBg from "../../assets/img2_nosotros.webp";
+import fachada from "../../assets/sucursal_carplace.webp";
 
+// TODO: la dirección y el link de Google Maps siguen siendo los de Sportquatro (clon).
+// Reemplazar por la dirección real de Car Place cuando se tenga.
 const SUCURSALES = [
 	{
 		nombre: "Local principal",
 		direccion: "Av. Emilio Caraffa 2247",
 		ciudad: "Córdoba Capital",
 		horario: "Lun a Vie: 9:30 a 13:00 · 16:00 a 20:00\nSáb: 9:30 a 13:00",
-		mapUrl:
-			"https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3405.908228088407!2d-64.2093766!3d-31.389093900000002!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x943298ee50eff00d%3A0xcecfc8516d6af07c!2sSportquatro%20Automotores!5e0!3m2!1ses-419!2sar!4v1780075663437!5m2!1ses-419!2sar",
 		mapsLink: "https://maps.app.goo.gl/oir1AdmuN38tEz8V8",
 	},
 ];
@@ -51,7 +51,7 @@ export default function Sucursales() {
 	return (
 		<div className="suc-section">
 			{SUCURSALES.map((s, i) => (
-				<div key={i} className="suc-hero" style={{ backgroundImage: `url(${localBg})` }}>
+				<div key={i} className="suc-hero">
 					<div className="suc-overlay" />
 
 					<div className="suc-inner" ref={innerRef}>
@@ -75,18 +75,9 @@ export default function Sucursales() {
 							</a>
 						</div>
 
-						{/* Mapa derecha */}
+						{/* Imagen derecha */}
 						<div className="suc-map-card suc-anim">
-							<iframe
-								title={s.nombre}
-								src={s.mapUrl}
-								width="100%"
-								height="100%"
-								style={{ border: 0 }}
-								allowFullScreen=""
-								loading="lazy"
-								referrerPolicy="no-referrer-when-downgrade"
-							/>
+							<img src={fachada} alt="Fachada del local de Car Place" className="suc-map-img" loading="lazy" />
 						</div>
 					</div>
 				</div>

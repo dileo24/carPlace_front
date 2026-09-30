@@ -48,7 +48,7 @@ export default function StockFilters({
 					<input
 						className="stock-filters__search-input"
 						type="text"
-						placeholder="Buscar marca, modelo…"
+						placeholder="Buscar marca, modelo, patente…"
 						value={busqueda}
 						onChange={(e) => onBusqueda(e.target.value)}
 					/>

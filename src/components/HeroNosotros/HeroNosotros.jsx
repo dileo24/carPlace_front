@@ -47,7 +47,7 @@ export default function HeroNosotros() {
       {/* ── HERO FULL-BLEED ── */}
       <div className="hno-hero">
         {/* Imagen de fondo full width */}
-        <img src={img1Nosotros} alt="SportQuatro local" className="hno-bg-img" />
+        <img src={img1Nosotros} alt="Car Place" className="hno-bg-img" />
 
         {/* Overlay degradado izquierda→transparente */}
         <div className="hno-overlay" />
@@ -78,7 +78,7 @@ export default function HeroNosotros() {
             <div className="hno-underline" />
 
             <p className="hno-body">
-              SportQuatro nació a principios del año 2000 como un emprendimiento pequeño, personal y secundario. Con el paso del tiempo, gracias al trabajo constante y la confianza de quienes nos eligen, fue creciendo hasta convertirse en lo que es hoy.
+              En Car Place nos dedicamos a la compra y venta de autos usados. Nuestro trabajo es acompañarte en cada paso, con atención cercana y transparencia, para que encuentres el auto que buscás.
             </p>
             <p className="hno-body">
               Ese crecimiento fue construido paso a paso, con compromiso, constancia y una visión clara: hacer las cosas bien, priorizando siempre la calidad en cada detalle y el valor de cada relación.

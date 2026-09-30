@@ -94,6 +94,7 @@ export default function StockCard({ auto, onOpen, animDelay = 0, esAdmin, enML =
 			<div className="stock-card__body" onClick={() => onOpen(auto)}>
 				<p className="stock-card__marca">{titleCase(auto.marca)}</p>
 				<p className="stock-card__modelo">{auto.modelo}</p>
+				{auto.patente && <p className="stock-card__patente">{auto.patente}</p>}
 
 				<div className="stock-card__specs">
 					<span>{auto.anio}</span>

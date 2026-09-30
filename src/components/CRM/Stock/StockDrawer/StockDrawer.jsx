@@ -7,6 +7,7 @@ import { updateAuto, syncTareasAlistaje } from "../../../../services/autos.servi
 import { getPublicaciones } from "../../../../services/publicaciones.service";
 import { useNavigate } from "react-router-dom";
 import { useRef } from "react";
+import { normalizarPatente, validarPatente } from "../../../../utils/patente";
 
 export default function StockDrawer({ auto, open, onClose, onUpdate, esAdmin, esSupervisor }) {
 	const precioInfoAnteriorRef = useRef(null);
@@ -32,6 +33,8 @@ export default function StockDrawer({ auto, open, onClose, onUpdate, esAdmin, es
 	const [guardando, setGuardando] = useState(false);
 	const [confirmandoVenta, setConfirmandoVenta] = useState(false);
 	const [precioCliente, setPrecioCliente] = useState("");
+	const [patente, setPatente] = useState("");
+	const [patenteError, setPatenteError] = useState("");
 
 	const [oferta, setOferta] = useState(false);
 	const [precioOferta, setPrecioOferta] = useState("");
@@ -81,6 +84,8 @@ export default function StockDrawer({ auto, open, onClose, onUpdate, esAdmin, es
 		setFechaCompra(auto.fecha_compra || "");
 		setPrecioCompra(auto.precio_compra ? String(auto.precio_compra).replace(/\B(?=(\d{3})+(?!\d))/g, ".") : "");
 		setPropietario(auto.propietario || "agencia");
+		setPatente(auto.patente || "");
+		setPatenteError("");
 	}, [auto?.id, open]);
 
 	if (!auto) return null;
@@ -145,9 +150,16 @@ export default function StockDrawer({ auto, open, onClose, onUpdate, esAdmin, es
 	}
 
 	async function handleGuardar() {
+		const errPatente = validarPatente(patente);
+		if (errPatente) {
+			setPatenteError(errPatente);
+			return;
+		}
+		const patenteNorm = normalizarPatente(patente) || null;
 		setGuardando(true);
 		try {
 			await updateAuto(auto.id, {
+				patente: patenteNorm,
 				estado: estadoPrincipal,
 				tipo,
 				notas,
@@ -175,6 +187,7 @@ export default function StockDrawer({ auto, open, onClose, onUpdate, esAdmin, es
 			await syncTareasAlistaje(auto.id, tareasParaSync);
 
 			onUpdate(auto.id, {
+				patente: patenteNorm,
 				estado: estadoPrincipal,
 				estados,
 				tipo,
@@ -270,6 +283,7 @@ export default function StockDrawer({ auto, open, onClose, onUpdate, esAdmin, es
 				<div className="stock-drawer__titulo">
 					<p className="stock-drawer__marca">{titleCase(auto.marca)}</p>
 					<p className="stock-drawer__modelo">{auto.modelo}</p>
+					{auto.patente && <p className="stock-drawer__patente">{auto.patente}</p>}
 					<div className="stock-drawer__specs">
 						<span>{auto.anio}</span>
 						<span>·</span>
@@ -309,6 +323,35 @@ export default function StockDrawer({ auto, open, onClose, onUpdate, esAdmin, es
 				)}
 
 				<div className="stock-drawer__divider" />
+
+				{/* ── Patente (solo CRM) ── */}
+				<div className="stock-drawer__section">
+					<div className="stock-drawer__field">
+						<label className="stock-drawer__field-label">Patente</label>
+						{esAdmin || esSupervisor ? (
+							<>
+								<input
+									className="stock-drawer__field-input stock-drawer__field-input--patente"
+									type="text"
+									value={patente}
+									maxLength={10}
+									onChange={(e) => {
+										setPatente(e.target.value.toUpperCase());
+										if (patenteError) setPatenteError("");
+									}}
+									onBlur={() => {
+										setPatenteError(validarPatente(patente));
+										setPatente((p) => normalizarPatente(p));
+									}}
+									placeholder="ej: AB123CD"
+								/>
+								{patenteError && <span className="stock-drawer__field-error">{patenteError}</span>}
+							</>
+						) : (
+							<p className="stock-drawer__field-value">{auto.patente || <span className="stock-drawer__sin-datos">Sin datos</span>}</p>
+						)}
+					</div>
+				</div>
 
 				{/* ── Estado ── */}
 				{esAdmin && (

@@ -5,11 +5,13 @@ const formatMonto = (n) => Number(n).toLocaleString("es-AR");
 
 const formatFecha = (f) => {
 	if (!f) return "—";
-	const [y, m, d] = f.split("-");
+	const [y, m, d] = String(f).slice(0, 10).split("-");
 	return `${d}/${m}/${y}`;
 };
 
-const CuentasTable = ({ deudas, loading, error, confirmDeleteId, onDeleteRequest, onDeleteConfirm, onDeleteCancel }) => {
+const TIPO_LABEL = { interna: "Interna", empresa: "Empresa", prestamo: "Préstamo" };
+
+const CuentasTable = ({ deudas, loading, error, currentUserId, onSaldar }) => {
 	if (loading) {
 		return (
 			<div className="cuentas-table__state">
@@ -34,10 +36,12 @@ const CuentasTable = ({ deudas, loading, error, confirmDeleteId, onDeleteRequest
 	if (deudas.length === 0) {
 		return (
 			<div className="cuentas-table__state">
-				<span className="cuentas-table__state-text">No hay deudas cargadas todavía.</span>
+				<span className="cuentas-table__state-text">No hay cuentas que coincidan con los filtros.</span>
 			</div>
 		);
 	}
+
+	const esMio = (id) => currentUserId != null && id != null && Number(id) === Number(currentUserId);
 
 	return (
 		<div className="cuentas-table__scroll">
@@ -46,46 +50,74 @@ const CuentasTable = ({ deudas, loading, error, confirmDeleteId, onDeleteRequest
 					<tr className="cuentas-table__head-row">
 						<th className="cuentas-table__th">Fecha</th>
 						<th className="cuentas-table__th">Motivo</th>
-						<th className="cuentas-table__th">Detalle</th>
+						<th className="cuentas-table__th">Quién debe</th>
+						<th className="cuentas-table__th">A quién le debe</th>
 						<th className="cuentas-table__th cuentas-table__th--monto">Monto</th>
 						<th className="cuentas-table__th cuentas-table__th--actions">Acciones</th>
 					</tr>
 				</thead>
 				<tbody>
-					{deudas.map((d, i) => (
-						<tr key={d.id} className="cuentas-table__row" style={{ animationDelay: `${i * 35}ms` }}>
-							<td className="cuentas-table__td">{formatFecha(d.fecha)}</td>
-							<td className="cuentas-table__td cuentas-table__td--motivo">{d.motivo}</td>
-							<td className="cuentas-table__td cuentas-table__td--detalle">
-								{/* Convención pedida por el cliente: rojo = quien debe, verde = a quien le deben. */}
-								<span className="cuentas-table__nombre-debe">{d.deudorNombre}</span>
-								<span className="cuentas-table__flecha">→</span>
-								<span className="cuentas-table__nombre-recibe">{d.acreedorNombre}</span>
-							</td>
-							<td className="cuentas-table__td cuentas-table__td--monto">
-								{d.moneda} {formatMonto(d.monto)}
-							</td>
+					{deudas.map((d, i) => {
+						const parcial = !d.saldada && Number(d.montoSaldado) > 0;
+						const pagos = Array.isArray(d.pagos) ? d.pagos : [];
+						const yoDebo = esMio(d.deudorId) && !d.deudorEmpresa;
+						const meDeben = esMio(d.acreedorId) && !d.acreedorEmpresa;
+						return (
+							<tr
+								key={d.id}
+								className={`cuentas-table__row${d.saldada ? " cuentas-table__row--saldada" : ""}`}
+								style={{ animationDelay: `${i * 35}ms` }}
+							>
+								<td className="cuentas-table__td">{formatFecha(d.fecha)}</td>
+								<td className="cuentas-table__td cuentas-table__td--motivo">
+									<div className="cuentas-table__motivo-line">
+										<span className={`cuentas-table__tipo cuentas-table__tipo--${d.tipo}`}>{TIPO_LABEL[d.tipo] || d.tipo}</span>
+										<span className="cuentas-table__motivo-text">{d.motivo}</span>
+									</div>
+									{pagos.length > 0 && (
+										<ul className="cuentas-table__pagos">
+											{pagos.map((p, idx) => (
+												<li key={idx} className="cuentas-table__pago">
+													{formatFecha(p.fecha)} · {d.moneda} {formatMonto(p.monto)}
+													{p.metodo ? ` · ${p.metodo}` : ""}
+													{p.comentario ? ` · "${p.comentario}"` : ""}
+												</li>
+											))}
+										</ul>
+									)}
+								</td>
+								<td className="cuentas-table__td cuentas-table__td--detalle">
+									<span className="cuentas-table__nombre-debe">{d.deudorNombre}</span>
+									{yoDebo && <span className="cuentas-table__chip cuentas-table__chip--debo">Vos debés</span>}
+								</td>
+								<td className="cuentas-table__td cuentas-table__td--detalle">
+									<span className="cuentas-table__nombre-recibe">{d.acreedorNombre}</span>
+									{meDeben && <span className="cuentas-table__chip cuentas-table__chip--me-deben">Te deben a vos</span>}
+								</td>
+								<td className="cuentas-table__td cuentas-table__td--monto">
+									<div>
+										{d.moneda} {formatMonto(d.monto)}
+									</div>
+									{parcial && (
+										<div className="cuentas-table__pendiente">
+											Pendiente: {d.moneda} {formatMonto(d.pendiente)}
+										</div>
+									)}
+								</td>
 								<td className="cuentas-table__td cuentas-table__td--actions">
-								{confirmDeleteId === d.id ? (
-									<div className="cuentas-table__confirm">
-										<span className="cuentas-table__confirm-label">¿Eliminar?</span>
-										<button className="cuentas-table__btn cuentas-table__btn--confirm" onClick={() => onDeleteConfirm(d.id)}>
-											Sí
-										</button>
-										<button className="cuentas-table__btn cuentas-table__btn--cancel" onClick={onDeleteCancel}>
-											No
-										</button>
-									</div>
-								) : (
-									<div className="cuentas-table__actions">
-										<button className="cuentas-table__btn cuentas-table__btn--delete" onClick={() => onDeleteRequest(d.id)}>
-											Eliminar
-										</button>
-									</div>
-								)}
-							</td>
-						</tr>
-					))}
+									{d.saldada ? (
+										<span className="cuentas-table__badge-saldada">Saldada {formatFecha(d.saldadaEn)}</span>
+									) : (
+										<div className="cuentas-table__actions">
+											<button className="cuentas-table__btn cuentas-table__btn--saldar" onClick={() => onSaldar(d)}>
+												Saldar
+											</button>
+										</div>
+									)}
+								</td>
+							</tr>
+						);
+					})}
 				</tbody>
 			</table>
 		</div>

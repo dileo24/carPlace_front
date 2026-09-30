@@ -22,7 +22,6 @@ const NuevoAuto = lazy(() => import("./views/NuevoAuto/NuevoAuto"));
 const VendeTuAuto = lazy(() => import("./views/VendeTuAuto/VendeTuAuto"));
 const Reventas = lazy(() => import("./views/Reventas/Reventas"));
 const Layout = lazy(() => import("./views/CRM/Layout/Layout"));
-const Dashboard = lazy(() => import("./views/CRM/Dashboard/Dashboard"));
 const Consultas = lazy(() => import("./views/CRM/Consultas/Consultas"));
 const Conversaciones = lazy(() => import("./views/CRM/Conversaciones/Conversaciones"));
 const Calendario = lazy(() => import("./views/CRM/Calendario/Calendario"));
@@ -32,7 +31,6 @@ const Ventas = lazy(() => import("./views/CRM/Ventas/Ventas"));
 const Usuarios = lazy(() => import("./views/CRM/Usuarios/Usuarios"));
 const Cuentas = lazy(() => import("./views/CRM/Cuentas/Cuentas"));
 const Facturacion = lazy(() => import("./views/CRM/Facturacion/Facturacion"));
-const Marcas = lazy(() => import("./views/CRM/Marcas/Marcas"));
 const Publicaciones = lazy(() => import("./views/CRM/Publicaciones/Publicaciones"));
 const Reportes = lazy(() => import("./views/CRM/Reportes/Reportes"));
 
@@ -51,7 +49,7 @@ function AppContent() {
 	const { isAuthenticated } = useAuth();
 
 	useEffect(() => {
-		const originalTitle = "Charly y Joaco Automotores";
+		const originalTitle = "Car Place";
 		const altTitle = "¡Volvé! No te vayas";
 
 		let interval = null;
@@ -138,7 +136,7 @@ function AppContent() {
 						}
 					>
 						{/* Todos los roles autenticados */}
-						<Route index element={<Dashboard />} />
+						<Route index element={<Navigate to="/crm/stock" replace />} />
 						<Route path="calendario" element={<Calendario />} />
 						<Route path="stock" element={<Stock />} />
 
@@ -211,14 +209,7 @@ function AppContent() {
 								</ProtectedRoute>
 							}
 						/>
-						<Route
-							path="marcas"
-							element={
-								<ProtectedRoute roles={[ROLES.ADMIN]}>
-									<Marcas />
-								</ProtectedRoute>
-							}
-						/>
+						<Route path="marcas" element={<Navigate to="/crm/stock?vista=marcas" replace />} />
 						<Route
 							path="publicaciones"
 							element={

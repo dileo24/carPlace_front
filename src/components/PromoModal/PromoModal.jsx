@@ -4,7 +4,7 @@ import "./PromoModal.css";
 
 // Cambiá por tu número real
 const WA_NUMBER = "5493512147804";
-const WA_MESSAGE = encodeURIComponent("¡Hola! Estuve en la web de sportquatro y quiero consultar...");
+const WA_MESSAGE = encodeURIComponent("¡Hola! Estuve en la web de Car Place y quiero consultar...");
 
 export default function PromoModal() {
 	const [visible, setVisible] = useState(false);
@@ -41,7 +41,7 @@ export default function PromoModal() {
 				</button>
 
 				{/* Imagen de promo */}
-				<img src={alertImg} alt="Promoción SportQuatro" className="pm-img" />
+				<img src={alertImg} alt="Promoción Car Place" className="pm-img" />
 
 				{/* CTA */}
 				<a

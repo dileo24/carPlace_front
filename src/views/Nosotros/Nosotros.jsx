@@ -261,7 +261,7 @@ export default function Nosotros() {
 									/>
 								</>
 							) : (
-								<img src={img2Nosotros} alt="SportQuatro" className="filosofia-imagen" />
+								<img src={img2Nosotros} alt="Car Place" className="filosofia-imagen" />
 							)}
 
 							<div className="filosofia-badge">

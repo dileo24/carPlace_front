@@ -17,23 +17,26 @@ const CuentasHeader = ({ total, miSaldo, onNuevo }) => {
 			</div>
 
 			<div className="cuentas-header__right">
-				<div className="cuentas-header__saldos">
-					{monedas.length === 0 ? (
-						<span className="cuentas-header__saldo cuentas-header__saldo--neutral">Todo saldado</span>
-					) : (
-						monedas.map((m) => {
-							const valor = miSaldo[m];
-							const debo = valor < 0;
-							return (
-								<span
-									key={m}
-									className={`cuentas-header__saldo ${debo ? "cuentas-header__saldo--debo" : "cuentas-header__saldo--me-deben"}`}
-								>
-									{debo ? "Debés" : "Te deben"} {m} {formatMonto(valor)}
-								</span>
-							);
-						})
-					)}
+				<div className="cuentas-header__saldos-wrap">
+					<div className="cuentas-header__saldos">
+						{monedas.length === 0 ? (
+							<span className="cuentas-header__saldo cuentas-header__saldo--neutral">Todo saldado</span>
+						) : (
+							monedas.map((m) => {
+								const valor = miSaldo[m];
+								const debo = valor < 0;
+								return (
+									<span
+										key={m}
+										className={`cuentas-header__saldo ${debo ? "cuentas-header__saldo--debo" : "cuentas-header__saldo--me-deben"}`}
+									>
+										{debo ? "Vos debés" : "Te deben a vos"}: {m} {formatMonto(valor)}
+									</span>
+								);
+							})
+						)}
+					</div>
+					<span className="cuentas-header__saldo-hint">Saldo neto de lo pendiente entre socios</span>
 				</div>
 
 				<button className="cuentas-header__btn-nuevo" onClick={onNuevo}>

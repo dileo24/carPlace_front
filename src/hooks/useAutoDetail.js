@@ -4,6 +4,7 @@ import axios from "axios";
 import { categoriaToCreate } from "../data/filters";
 import { deleteAuto, getAutoById, postImagen, updateAuto, updateImgInAuto } from "../services/autos.service";
 import { getMarcasCatalogo } from "../services/marcas.service";
+import { normalizarPatente, validarPatente } from "../utils/patente";
 
 const MAX_IMAGES = 20;
 
@@ -19,6 +20,8 @@ export function useAutoDetail(id) {
 	const [moneda, setMoneda] = useState("AR$");
 	const [years, setYears] = useState([]);
 	const [submitError, setSubmitError] = useState(null);
+	const [patenteError, setPatenteError] = useState("");
+	const [patenteTocada, setPatenteTocada] = useState(false);
 
 	const yearRef = useRef(null);
 	const motorRef = useRef(null);
@@ -92,6 +95,13 @@ export function useAutoDetail(id) {
 			return;
 		}
 
+		if (name === "patente") {
+			setPatenteTocada(true);
+			setPatenteError("");
+			setEditedAuto((prev) => ({ ...prev, patente: value.toUpperCase() }));
+			return;
+		}
+
 		if (["precio", "precio_oferta", "precio_contado", "km"].includes(name)) {
 			const isNumeric = /^[\d.]+$/.test(value.trim());
 			if (isNumeric) {
@@ -134,6 +144,11 @@ export function useAutoDetail(id) {
 	};
 
 	const handleSave = async () => {
+		const errPatente = patenteTocada ? validarPatente(editedAuto.patente) : "";
+		if (errPatente) {
+			setPatenteError(errPatente);
+			return false;
+		}
 		try {
 			const newImageOrder = images.map((img) => (img.startsWith("http") ? img : img.replace(`${import.meta.env.VITE_API_URL}/files/`, "")));
 
@@ -142,6 +157,9 @@ export function useAutoDetail(id) {
 			}
 
 			const payload = { ...editedAuto, moneda, img: newImageOrder };
+			// La patente no viaja al sitio público: solo se envía si se tocó, para no pisarla con vacío.
+			if (patenteTocada) payload.patente = normalizarPatente(editedAuto.patente) || null;
+			else delete payload.patente;
 			const response = await updateAuto(id, payload);
 
 			if (response.data.status === 200) {
@@ -282,6 +300,7 @@ export function useAutoDetail(id) {
 		moneda,
 		years,
 		submitError,
+		patenteError,
 		refs,
 		setSelectedImageIndex,
 		setMoneda,

@@ -1,13 +1,13 @@
 import React, { useState, useEffect, useMemo } from "react";
-import MarcasHeader from "../../../components/CRM/Marcas/MarcasHeader/MarcasHeader";
-import MarcasTable from "../../../components/CRM/Marcas/MarcasTable/MarcasTable";
-import MarcaDrawer from "../../../components/CRM/Marcas/MarcaDrawer/MarcaDrawer";
-import NuevaMarcaDrawer from "../../../components/CRM/Marcas/NuevaMarcaDrawer/NuevaMarcaDrawer";
-import ConfirmDeleteMarcaDialog from "../../../components/CRM/Marcas/ConfirmDeleteMarcaDialog/ConfirmDeleteMarcaDialog";
-import { getMarcasCatalogo, getAutosPorMarca, deleteMarca } from "../../../services/marcas.service";
-import "./Marcas.css";
+import MarcasHeader from "../../Marcas/MarcasHeader/MarcasHeader";
+import MarcasTable from "../../Marcas/MarcasTable/MarcasTable";
+import MarcaDrawer from "../../Marcas/MarcaDrawer/MarcaDrawer";
+import NuevaMarcaDrawer from "../../Marcas/NuevaMarcaDrawer/NuevaMarcaDrawer";
+import ConfirmDeleteMarcaDialog from "../../Marcas/ConfirmDeleteMarcaDialog/ConfirmDeleteMarcaDialog";
+import { getMarcasCatalogo, getAutosPorMarca, deleteMarca } from "../../../../services/marcas.service";
+import "./StockMarcas.css";
 
-const Marcas = () => {
+const StockMarcas = () => {
 	const [marcas, setMarcas] = useState([]);
 	const [loading, setLoading] = useState(true);
 	const [error, setError] = useState("");
@@ -76,8 +76,8 @@ const Marcas = () => {
 	};
 
 	return (
-		<div className="marcas-view">
-			<MarcasHeader total={marcas.length} search={search} onSearchChange={setSearch} onNuevo={() => setNuevoDrawerOpen(true)} />
+		<div className="stock-marcas">
+			<MarcasHeader titulo="Stock · Marcas" total={marcas.length} search={search} onSearchChange={setSearch} onNuevo={() => setNuevoDrawerOpen(true)} />
 
 			<MarcasTable marcas={filtered} loading={loading} error={error} onEdit={handleEdit} onDeleteRequest={handleDeleteRequest} />
 
@@ -112,4 +112,4 @@ const Marcas = () => {
 	);
 };
 
-export default Marcas;
+export default StockMarcas;

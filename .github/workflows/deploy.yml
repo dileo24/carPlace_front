@@ -2,7 +2,7 @@ name: Deploy front
 
 # Build estático + subida por SCP a Hostinger — sin usar ningún slot de Node
 # (es un sitio PHP/HTML común, servido por Apache). Ya validado con el mismo
-# mecanismo en sportquatro_front antes de aplicarlo acá directo a producción.
+# mecanismo en otro proyecto antes de aplicarlo acá directo a producción.
 on:
   push:
     branches: [main]

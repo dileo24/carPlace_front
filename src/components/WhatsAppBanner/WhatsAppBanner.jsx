@@ -1,10 +1,8 @@
 import React, { useEffect, useRef } from "react";
 import "./WhatsAppBanner.css";
-import celuDesktop from "../../assets/celu_desktop.webp";
-import celuMobile from "../../assets/celu_mobile.webp";
 
 const WA_NUMBER = "5493512147804";
-const WA_MESSAGE = encodeURIComponent("¡Hola! Estuve en la web de sportquatro y quiero consultar...");
+const WA_MESSAGE = encodeURIComponent("¡Hola! Estuve en la web de Car Place y quiero consultar...");
 
 const WaIcon = () => (
 	<svg viewBox="0 0 24 24" fill="currentColor" className="wa-icon">
@@ -48,6 +46,43 @@ const features = [
 		subDesktop: "Usados, financiados o al contado. ¡Lo que busques!",
 	},
 ];
+
+const CHAT = [
+	{ from: "them", text: "Hola! Vi una SUV en la web, ¿sigue disponible?", time: "10:24" },
+	{ from: "us", text: "¡Hola! Sí, sigue disponible. ¿Querés que te cuente el precio y las opciones de financiación?", time: "10:24" },
+	{ from: "them", text: "Sí, por favor", time: "10:25" },
+	{ from: "us", text: "Te paso los detalles. ¿Querés que coordinemos una visita para verla?", time: "10:25" },
+	{ from: "them", text: "Dale, me viene perfecto", time: "10:26" },
+];
+
+/* Mockup de celular con chat de ejemplo (JSX + CSS). Se escala con font-size. */
+function PhoneMockup({ className = "", label }) {
+	return (
+		<div className={`wa-phone ${className}`} role={label ? "img" : undefined} aria-label={label} aria-hidden={label ? undefined : true}>
+			<div className="wa-phone-notch" />
+			<div className="wa-phone-screen">
+				<div className="wa-chat-header">
+					<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="wa-chat-back">
+						<polyline points="15 18 9 12 15 6" />
+					</svg>
+					<div className="wa-chat-avatar">CP</div>
+					<div className="wa-chat-who">
+						<div className="wa-chat-name">Car Place</div>
+						<div className="wa-chat-status">en línea</div>
+					</div>
+				</div>
+				<div className="wa-chat-body">
+					{CHAT.map((m, i) => (
+						<div key={i} className={`wa-bubble wa-bubble--${m.from}`}>
+							{m.text}
+							<span className="wa-bubble-time">{m.time}</span>
+						</div>
+					))}
+				</div>
+			</div>
+		</div>
+	);
+}
 
 export default function WhatsAppBanner() {
 	const cardRef = useRef(null);
@@ -104,7 +139,7 @@ export default function WhatsAppBanner() {
 
 					{/* Celular DESKTOP — dentro del body row */}
 					<div className="wa-phone-col wa-anim-right">
-						<img src={celuDesktop} alt="Chat WhatsApp SportQuatro" className="wa-phone-img" />
+						<PhoneMockup className="wa-phone-img" label="Ejemplo de conversación de WhatsApp con Car Place" />
 					</div>
 				</div>
 
@@ -133,7 +168,7 @@ export default function WhatsAppBanner() {
 					</a>
 
 					{/* Celular MOBILE: absolute dentro del footer, sube hacia arriba */}
-					<img src={celuMobile} alt="" aria-hidden="true" className="wa-phone-mobile wa-anim-right" />
+					<PhoneMockup className="wa-phone-mobile wa-anim-right" />
 				</div>
 			</div>
 		</section>

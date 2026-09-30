@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import "./VentasTable.css";
+import { getAutoDatos, tituloVehiculo } from "../ventaVehiculo";
 
 function formatFecha(iso) {
 	if (!iso) return "—";
@@ -45,17 +46,25 @@ const COLUMNAS = [
 	{ label: "" },
 ];
 
-const VentaFila = React.memo(function VentaFila({ venta, idx, onEditar, onEliminar, esSupervisor }) {
+const VentaFila = React.memo(function VentaFila({ venta, idx, onVer, onEditar, onEliminar, esSupervisor }) {
 	const [confirmando, setConfirmando] = useState(false);
+	const datos = getAutoDatos(venta);
+	const titulo = tituloVehiculo(venta);
+	const subLinea = datos
+		? [datos.patente ? String(datos.patente).toUpperCase() : null, datos.km != null && datos.km !== "" ? `${datos.km} km` : null]
+				.filter(Boolean)
+				.join(" · ") || "—"
+		: null;
 
 	return (
-		<tr style={{ animationDelay: `${idx * 0.03}s` }}>
+		<tr style={{ animationDelay: `${idx * 0.03}s` }} onClick={() => onVer && onVer(venta)}>
 			<td className="ventas-td__nombre">
 				{venta.nombre} {venta.apellido}
 			</td>
 			<td>{venta.telefono}</td>
-			<td className="ventas-td__vehiculo" title={venta.vehiculoVendido}>
-				{venta.vehiculoVendido}
+			<td className="ventas-td__vehiculo" title={titulo}>
+				{titulo}
+					{subLinea && <div className="ventas-td__sub">{subLinea}</div>}
 			</td>
 			<td>{formatFecha(venta.fechaVenta)}</td>
 			<td className="ventas-td__auto-recibido" title={venta.autoRecibido || ""}>
@@ -119,7 +128,7 @@ const VentaFila = React.memo(function VentaFila({ venta, idx, onEditar, onElimin
 	);
 });
 
-export default function VentasTable({ ventas, onEditar, onEliminar, esSupervisor }) {
+export default function VentasTable({ ventas, onVer, onEditar, onEliminar, esSupervisor }) {
 	if (ventas.length === 0) {
 		return (
 			<div className="ventas-table-wrapper">
@@ -145,7 +154,7 @@ export default function VentasTable({ ventas, onEditar, onEliminar, esSupervisor
 				</thead>
 				<tbody>
 					{ventas.map((venta, idx) => (
-						<VentaFila key={venta.id} venta={venta} idx={idx} onEditar={onEditar} onEliminar={onEliminar} esSupervisor={esSupervisor} />
+						<VentaFila key={venta.id} venta={venta} idx={idx} onVer={onVer} onEditar={onEditar} onEliminar={onEliminar} esSupervisor={esSupervisor} />
 					))}
 				</tbody>
 			</table>

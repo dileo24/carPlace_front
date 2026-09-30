@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from "react";
-import imgLogo from "../../assets/logo_sinFondo_blanco.png";
+import imgLogo from "../../assets/carPlace.png";
 import "./Footer.css";
 
 export default function Footer() {

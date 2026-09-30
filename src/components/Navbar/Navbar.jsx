@@ -18,7 +18,7 @@ import {
 } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import AccountCircle from "@mui/icons-material/AccountCircle";
-import imgLogo from "../../assets/logo_sinFondo_blanco.png";
+import imgLogo from "../../assets/carPlace.png";
 import { ROLES } from "../../constants/roles";
 
 export default function Navbar() {

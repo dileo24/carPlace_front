@@ -222,6 +222,17 @@ export function sortByCreacion(tareas, orden = "desc") {
 	});
 }
 
+// Orden automático: prioridad alta → media → baja; a igual prioridad, la más reciente primero.
+const PESO_PRIORIDAD = { alta: 0, media: 1, baja: 2 };
+export function sortByPrioridad(tareas) {
+	return [...tareas].sort((a, b) => {
+		const pa = PESO_PRIORIDAD[a.prioridad] ?? 1;
+		const pb = PESO_PRIORIDAD[b.prioridad] ?? 1;
+		if (pa !== pb) return pa - pb;
+		return new Date(b.creadoEn).getTime() - new Date(a.creadoEn).getTime();
+	});
+}
+
 // Alias para no romper imports existentes (Tareas.jsx llama sortByVencimiento)
 export const sortByVencimiento = sortByCreacion;
 

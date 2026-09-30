@@ -5,7 +5,7 @@ import TareasHeader from "../../../components/CRM/Tareas/TareasHeader/TareasHead
 import TareasBoard from "../../../components/CRM/Tareas/TareasBoard/TareasBoard";
 import TareaDrawer from "../../../components/CRM/Tareas/TareaDrawer/TareaDrawer";
 import NuevaTareaDrawer from "../../../components/CRM/Tareas/NuevaTareaDrawer/NuevaTareaDrawer";
-import { filterTareas, sortByCreacion, getMetrics } from "../../../constants/crmTareas";
+import { filterTareas, sortByPrioridad, getMetrics } from "../../../constants/crmTareas";
 import { getTareas, createTarea, updateTarea } from "../../../services/tareas.service";
 import { LoadingState, ErrorState } from "../../../components/CRM/PageState/PageState";
 import { useLocation } from "react-router-dom";
@@ -55,7 +55,7 @@ export default function Tareas() {
 
 	const tareasFiltradas = useMemo(() => {
 		const filtradas = filterTareas(tareas, { prioridad: filtroPrioridad, tipo: filtroTipo });
-		return sortByCreacion(filtradas, "desc");
+		return sortByPrioridad(filtradas);
 	}, [tareas, filtroPrioridad, filtroTipo]);
 
 	const metrics = useMemo(() => getMetrics(tareasFiltradas), [tareasFiltradas]);
